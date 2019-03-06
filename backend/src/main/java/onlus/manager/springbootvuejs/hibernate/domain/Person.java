@@ -1,4 +1,4 @@
-package de.jonashackt.springbootvuejs.hibernate.domain;
+package onlus.manager.springbootvuejs.hibernate.domain;
 
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
