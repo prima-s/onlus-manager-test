@@ -1,4 +1,4 @@
-package de.jonashackt.springbootvuejs.hibernate.service;
+package onlus.manager.springbootvuejs.hibernate.service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import de.jonashackt.springbootvuejs.hibernate.domain.Person;
-import de.jonashackt.springbootvuejs.hibernate.repository.PersonRepository;
+import onlus.manager.springbootvuejs.hibernate.domain.Person;
+import onlus.manager.springbootvuejs.hibernate.repository.PersonRepository;
 
 @Service
 public class PersonServiceImpl implements PersonService {
