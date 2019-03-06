@@ -1,4 +1,4 @@
-package de.jonashackt.springbootvuejs;
+package onlus.manager.springbootvuejs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
