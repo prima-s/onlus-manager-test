@@ -1,7 +1,7 @@
-package de.jonashackt.springbootvuejs.repository;
+package onlus.manager.springbootvuejs.repository;
 
 
-import de.jonashackt.springbootvuejs.domain.User;
+import onlus.manager.springbootvuejs.domain.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
