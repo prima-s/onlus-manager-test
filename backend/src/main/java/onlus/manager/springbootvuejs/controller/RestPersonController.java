@@ -1,4 +1,4 @@
-package de.jonashackt.springbootvuejs.controller;
+package onlus.manager.springbootvuejs.controller;
 
 import java.util.List;
 
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.jonashackt.springbootvuejs.hibernate.domain.Person;
-import de.jonashackt.springbootvuejs.hibernate.service.PersonService;
+import onlus.manager.springbootvuejs.hibernate.domain.Person;
+import onlus.manager.springbootvuejs.hibernate.service.PersonService;
 
 @RestController()
 @RequestMapping("/rest")
