@@ -28,3 +28,7 @@ Backend - Francesco, Marco, Samu
 Infrastruttura - Daniele
 
 Con possibilità di spostamenti ruoli per appoggio e miglioramento nella costruzione del progetto.
+
+CONNESSIONE AL DB
+appendere al url (dopo la porta):
+?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
