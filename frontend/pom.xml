@@ -4,7 +4,7 @@
 	<artifactId>frontend</artifactId>
 
 	<parent>
-		<groupId>onlus.manager</groupId>
+		<groupId>de.jonashackt</groupId>
 		<artifactId>spring-boot-vuejs</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
