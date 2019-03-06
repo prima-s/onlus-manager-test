@@ -1,7 +1,7 @@
-package de.jonashackt.springbootvuejs.controller;
+package onlus.manager.springbootvuejs.controller;
 
-import de.jonashackt.springbootvuejs.domain.User;
-import de.jonashackt.springbootvuejs.repository.UserRepository;
+import onlus.manager.springbootvuejs.domain.User;
+import onlus.manager.springbootvuejs.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
