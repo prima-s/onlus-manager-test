@@ -1,0 +1,30 @@
+Specifica progetto
+
+Descrizione
+Programmare una applicazione web che gestisca le attività di una generica associazione senza fini di lucro. L’applicazione deve essere personalizzabile e utilizzabile da associazioni diverse.
+
+L’associazione è composta da soci: ogni socio ha un nome, un cognome, una via (incluso numero civico), un CAP, una città, una nazione, un codice fiscale, un telefono fisso e/o un telefono cellulare, una o due email, un numero tessera univoco pe ogni socio, una data di termine validità tessera, un campo note (anche vuoto), e un ruolo. Il significato del ruolo è quello di dare accesso a diverse funzionalità dell’applicazione. I ruoli possibili sono (in ordine decrescente di importanza): amministratore (uno o più), presidente (uno), tesoriere (uno), consigliere (uno o più), (socio) ordinario (uno o più). Ciascuno dei ruoli definiti sopra è abilitato a più o pari funzionalità rispetto al ruolo successivo nella lista. Il ruolo con meno funzioni abilitate è quello di (socio) ordinario.
+
+L’associazione mantiene anche un bilancio annuale in euro. Il bilancio è costituito da voci, dove ogni voce ha un nome, una somma associata (positiva o negativa), una data di riferimento, e un campo note. Nel bilancio è definita anche una somma totale costituita dalla somma algebrica delle somme associate alle varie voci. Le voci di bilancio di default sono: tesseramento (+), donazione (+), rimborso spese attività (-), quota mensile attività (+), assicurazione (-), affitto sedi (-), acquisto materiali (-). 
+Funzioni
+Le funzionalità dell’applicazione e i relativi ruoli abilitati sono:
+	•	Registra un nuovo socio (amministratore, presidente, tesoriere)
+	•	Invia una email ad un nuovo socio con le credenziali e l’indirizzo web della applicazione
+	•	Modifica la password (tutti i ruoli) 
+	•	Aggiorna i dati di un socio esistente (amministratore, presidente, tesoriere)
+	•	Visualizza la lista dei soci per l’anno in corso (data di validità non ancora trascorsa) a video (tutti i ruoli)
+	•	Salva la lista dei soci per l’anno in corso (data di validità non ancora trascorsa) in formato pdf (tutti i ruoli)
+	•	Visualizza il bilancio per l’anno scorso a video. La visualizzazione comprende tutte le voci di bilancio, le relative somme associate, e la somma totale (tutti i ruoli)
+	•	Salva il bilancio per l’anno scorso in formato pdf. Il file pdf comprende tutte le voci di bilancio, le relative somme associate, e la somma totale (tutti i ruoli)
+	•	Inserisci il nome di una nuova voce di bilancio ai nomi di voci di bilancio esistenti (amministratore, presidente, tesoriere)
+	•	Rimuovi il nome di una nuova voce di bilancio ai nomi di voci di bilancio esistenti (amministratore, presidente, tesoriere). La rimozione non cancella i dati passati.
+	•	Inserisci o modifica la somma associata ad un nome di bilancio esistente (amministratore, presidente, tesoriere)
+	•	Visualizzare un file di log (registro delle attività con data, socio e operazione) con tutte le operazioni effettuate (amministratore)
+	•	Manda una email all’amministratore, presidente e tesoriere nel caso di operazioni sul bilancio non effettuate da lui
+	•	Modifica opzioni dell’applicazione: durata sessioni, inserisci utente e ruolo, inserisci e sostituisci logo, immagine e descrizione (amministratore)
+
+Front-end (framework: Vue.js)
+La pagina home dell’associazione deve avere il logo dell’associazione e un form di login con campi utente e password(Inizialmente: utente= numero tessera, password= Nome.Cognome numero tessera ), immagine e descrizione. A seguito di login corretto l’utente entra nella pagina principale (menu) in sessione con un suo profilo (ruolo) che influenzerà le operazioni possibili. La sessione dura di default 10 minuti, trascorsi i quali senza attività si viene rimandati alla pagina di login.
+
+Back-end (framework SpringBoot, database MySQL)
+I dati dei soci, e le coppie utente-password valide(Inizialmente: utente= numero tessera, password= Nome.Cognome numero tessera ) e i ruoli sono salvati sul database (tabelle Soci, Utenze, VociBilancio). I ruoli sono associati agli utenti tramite il codice fiscale.
