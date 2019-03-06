@@ -1,7 +1,7 @@
-package de.jonashackt.springbootvuejs.hibernate.service;
+package onlus.manager.springbootvuejs.hibernate.service;
 import java.util.List;
 
-import de.jonashackt.springbootvuejs.hibernate.domain.Person;
+import onlus.manager.springbootvuejs.hibernate.domain.Person;
 
 public interface PersonService {
 
