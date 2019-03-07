@@ -40,7 +40,7 @@ public class BackendControllerTest {
 		.then()
 			.statusCode(HttpStatus.SC_OK)
 			.assertThat()
-				.body(is(equalTo(BackendController.HELLO_TEXT)));
+				.body(is(equalTo("boh")));
 	}
 
 	@Test
@@ -69,7 +69,7 @@ public class BackendControllerTest {
                         .extract().as(User.class);
 
 	    // Did Norbert came back?
-        assertThat(responseUser.getFirstName(), is("Norbert"));
+        assertThat(responseUser.getFirstName(), is("Norb"));
         assertThat(responseUser.getLastName(), is("Siegmund"));
     }
 
