@@ -1,0 +1,34 @@
+ORGANIZZAZIONE PROGETTO
+
+	•	Analisi della Specifica e decisione finale su eventuali modifiche.
+	•	Modellazione del Database (Schema concettuale, schema logico e fisico) basato su MySql.
+	•	Front-End (disegno dell’interfaccia utente come login, etc).
+	•	Back-End (codifica delle classi, metodi, etc).
+	•	Test (classi, metodi, etc).
+	•	Collaudo del progetto.
+	•	Preparazione della documentazione del Progetto (manuale utente, etc).
+	•	Consegna del Progetto.
+
+Ruoli:
+Costruzione Database (1 persone)
+Front-End (2 persone) - HTML, JSP, BOOTSTRAP, VUE.JS
+Back-End (3 persone) -
+Infrastruttura (1 persona) - Test e gestione dell’infrastruttura del progetto 
+
+Assegnazioni possibili:
+Database - (Jeiner) - (Francesco) - (Kevin) – (Samuele)
+Front-End - (Daniele) - (Andrei) - (Jeiner) - (Kevin)
+Back-End - (Daniele) - (Andrei) - (Jeiner) - (Marco) - (Francesco) - (Samuele)
+Infrastruttura - (Daniele) - (Jeiner) - (Samuele)
+
+Assegnazioni 
+Database - Jeiner
+Frontend - Kevin, Andrei
+Backend - Francesco, Marco, Samu
+Infrastruttura - Daniele
+
+Con possibilità di spostamenti ruoli per appoggio e miglioramento nella costruzione del progetto.
+
+CONNESSIONE AL DB
+appendere al url (dopo il nome del db):
+?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
