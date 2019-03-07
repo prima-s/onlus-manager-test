@@ -69,7 +69,7 @@ public class BackendControllerTest {
                         .extract().as(User.class);
 
 	    // Did Norbert came back?
-        assertThat(responseUser.getFirstName(), is("Norb"));
+        assertThat(responseUser.getFirstName(), is("Norbert"));
         assertThat(responseUser.getLastName(), is("Siegmund"));
     }
 
