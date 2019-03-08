@@ -21,10 +21,8 @@
 <script>
   // import axios from 'axios'
   import {AXIOS} from './http-common'
-
   export default {
     name: 'user',
-
     data () {
       return {
         response: [],
@@ -45,7 +43,6 @@
         var params = new URLSearchParams()
         params.append('firstName', this.user.firstName)
         params.append('lastName', this.user.lastName)
-
         AXIOS.post(`/user`, params)
           .then(response => {
             // JSON responses are automatically parsed.
@@ -72,7 +69,6 @@
       }
     }
   }
-
 </script>
 
 
@@ -81,17 +77,14 @@
   h1, h2 {
     font-weight: normal;
   }
-
   ul {
     list-style-type: none;
     padding: 0;
   }
-
   li {
     display: inline-block;
     margin: 0 10px;
   }
-
   a {
     color: #42b983;
   }

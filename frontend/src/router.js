@@ -29,5 +29,7 @@ export default new Router({
       name: 'User',
       component: User
     }
+    
   ]
+  
 })
