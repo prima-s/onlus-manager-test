@@ -98,7 +98,6 @@ this.numCellulare = numCellulare;
 this.numFisso = numFisso;
 this.mail1 = mail1;
 this.mail2 = mail2;
-this.numTessera = numTessera;
 this.scadenzaTessera = LocalDate.of(LocalDate.now().getDayOfYear(), 12, 31);
 this.campoNote = campoNote;
 ruoli = new ArrayList<>(ruolo);
