@@ -11,36 +11,36 @@
 
         <div style="width:100%">
 
-      <input type="" class="anagrafica" placeholder="Nome utente" name="nome" required>
-      <input type=""  class="anagrafica" placeholder="Cognome utente" name="cognome" required>
+      <input type="text" v-model="user.nome" class="anagrafica" placeholder="Nome utente" name="nome" required>
+      <input type="text" v-model="user.cognome" class="anagrafica" placeholder="Cognome utente" name="cognome" required>
         </div>
         <label for="email"><b>Codice Fiscale</b></label>
         <br>
-        <input type="text" placeholder="xxxxxxxxxxxxxxxxxx"  name="CF" required>
+        <input type="text" v-model="user.cf" placeholder="xxxxxxxxxxxxxxxxxx"  name="cf" required>
         <br>
        <label for="indirizzo"><b>Idirizzo*</b></label>
       <div style="width:100%">
-      <input type="" class="ind" placeholder="Via/Piazza, n°civico" name="indirizzo" required>
-      <input type="" style="width:20%;"  class="ind" placeholder="Nazione" name="Nazione" required>
-      <input type="" style="width:10%;"  class="ind" placeholder=" CAP" name="CAP" required>
+      <input type="text" v-model="user.indirizzo" class="ind" placeholder="Via/Piazza, n°civico" name="indirizzo" required>
+      <input type="text" v-model="user.nazione" style="width:20%;"  class="ind" placeholder="Nazione" name="nazione" required>
+      <input type="text" v-model="user.cap" style="width:10%;"  class="ind" placeholder=" CAP" name="cap" required>
   </div>
       <hr>
       <label for="email"><b>User Email*</b></label>
       <div style="width:100%">
 
-      <input type="" class="anagrafica" placeholder="firsEmail@ccc.com" name="email" required>
-      <input type=""  class="anagrafica" placeholder="secondEmail@log.com" name="email">
+      <input type="email" v-model="user.email" class="anagrafica" placeholder="firsEmail@ccc.com" name="email" required>
+      <input type="email" v-model="user.email2" class="anagrafica" placeholder="secondEmail@log.com" name="email2">
         </div>
         <label for="email"><b>Numeri di Telefono</b></label>     
   <div style="width:100%">
             
-      <input type="" class="anagrafica" placeholder="Numero Fisso" name="fisso">
-      <input type=""  class="anagrafica" placeholder="Numero cellulare*" name="cellulare" required>
+      <input type="text" v-model="user.fisso" class="anagrafica" placeholder="Numero Fisso" name="fisso">
+      <input type="text" v-model="user.cellulare" class="anagrafica" placeholder="Numero cellulare*" name="cellulare" required>
         </div>
       <hr>
       <label><b>Note</b></label>
       <br>
-     <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea"></textarea>
+     <textarea type="text" v-model="user.note" id="message" name="note" rows="2" class="form-control md-textarea"></textarea>
 
       <!--<label>
         <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
@@ -50,18 +50,73 @@
 
       <div class="clearfix">
         <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-        <button type="submit" class="signupbtn">Sign Up</button>
+        <button type="submit" class="signupbtn" @click="createSocio()">Sign Up</button>
       </div>
     </div>
+   
   </form>
+  
 </template>
 
 
 <script>
 
-export default {
-    
-}
+     // import axios from 'axios'
+  import {AXIOS} from './http-common'
+  export default {
+    name: 'person',
+    data () {
+      return {
+        response: [],
+        errors: [],
+        user: {
+          nome: '',
+          cognome: '',
+          cf: '',
+          indirizzo: '',
+          nazione: '',
+          cap: '',
+          email: '',
+          email2: '',
+          fisso: '',
+          cellulare: '',
+          note: '',
+          id: 0
+        },
+        showResponse: false,
+        retrievedUser: {},
+        showRetrievedUser: false
+      }
+    },
+    methods: {
+      // Fetches posts when the component is created.
+      createSocio () {
+        var params = new URLSearchParams()
+        params.append('nome', this.user.nome)
+        params.append('cognome', this.user.cognome)
+        params.append('cf', this.user.cf)
+        params.append('indirizzo', this.user.indirizzo)
+        params.append('nazione', this.user.nazione)
+        params.append('cap', this.user.cap)
+        params.append('email', this.user.email)
+        params.append('email2', this.user.email2)
+        params.append('fisso', this.user.fisso)
+        params.append('cellulare', this.user.cellulare)
+        params.append('note', this.user.note)
+        AXIOS.post(`/person`, params)
+          .then(response => {
+            // JSON responses are automatically parsed.
+            this.response = response.data
+            this.user.id = response.data
+            console.log(response.data)
+            this.showResponse = true
+          })
+          .catch(e => {
+            this.errors.push(e)
+          })
+      }
+    }
+  }
 </script>
 
 
