@@ -84,7 +84,7 @@ public class Socio {
 
     public Socio(String nome, String cognome, String indirizzo, String cap, String citta,
     String nazione, String codFisc, String numCellulare, String numFisso, String mail1, String mail2,
-    int numTessera, String campoNote, ArrayList<Ruolo> ruolo) {
+    String campoNote, ArrayList<Ruolo> ruolo) {
 super();
 this.isAttivo = true;
 this.nome = nome;
