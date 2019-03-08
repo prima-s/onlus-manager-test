@@ -182,7 +182,7 @@ return mail2;
 public void setMail2(String mail2) {
 this.mail2 = mail2;
 }
-public int getNumTessera() {
+public Integer getNumTessera() {
 return numTessera;
 }
 

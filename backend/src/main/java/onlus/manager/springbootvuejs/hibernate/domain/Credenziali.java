@@ -15,11 +15,31 @@ public class Credenziali{
     @Field
     private String password;
 
-    public Credenziali(Integer numTessera, String nome, String password){
+    public Credenziali(){
+
+    }
+
+    public Credenziali(String nome, String password, Integer numTessera){
         this.nomeUtente = nome;
         this.password = password;
         this.numTessera = numTessera;
     }
+
+        public Integer getNumTessera() {
+        return this.numTessera;
+        }
+        public void setNomeUtente(String nome) {
+        this.nomeUtente = nome;
+        }
+        public String getNomeUtente() {
+        return this.nomeUtente;
+        }
+        public void setPassword(String password) {
+        this.password = password;
+        }
+        public String getPassword() {
+            return this.password;
+        }
 
     
 }

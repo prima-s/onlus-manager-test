@@ -5,23 +5,33 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import onlus.manager.springbootvuejs.hibernate.domain.Credenziali;
+
 import onlus.manager.springbootvuejs.hibernate.domain.Socio;
 import onlus.manager.springbootvuejs.hibernate.repository.SocioRepository;
+import onlus.manager.springbootvuejs.hibernate.repository.CredenzialiRepository;
 
 @Service
 public class SocioServiceImpl implements SocioService {
 	
 	@Autowired
-	private SocioRepository socioRepository;
+    private SocioRepository socioRepository;
+    private CredenzialiRepository credenzialiRepository;
 
     @Autowired
     public SocioServiceImpl(SocioRepository socioRepository) {
         this.socioRepository = socioRepository;
     }
-
     @Override
     public Socio createSocio(Socio socio) {
+         
+        credenzialiRepository.save(new Credenziali(socio.getNumTessera().toString(), socio.getNome()+"."+socio.getCognome(), socio.getNumTessera()));
         return socioRepository.save(socio);
+    }
+
+    @Override
+    public Socio getSocio(Integer id) {
+        return socioRepository.getOne(id);
     }
 
     @Override
