@@ -48,7 +48,7 @@ public class Socio {
     @Field(termVector = TermVector.YES)
     private String codFisc;
 
-    
+    @NotBlank
     @Field(termVector = TermVector.YES)
     private String numCellulare;
 
@@ -60,15 +60,15 @@ public class Socio {
     @Field(termVector = TermVector.YES)
     private String mail1;
 
-    @NotBlank
+    
     @Field(termVector = TermVector.YES)
     private String mail2;
 
-    @NotBlank
+    
     @Field(termVector = TermVector.YES)
     private LocalDate scadenzaTessera;
 
-    @NotBlank
+   
     @Field(termVector = TermVector.YES)
     private String campoNote;
 
@@ -76,11 +76,6 @@ public class Socio {
     @Field(termVector = TermVector.YES)
     private ArrayList<Ruolo> ruoli;
 
-    // @NotBlank
-    // @Field(termVector = TermVector.YES)
-    // private Credenziali credenziali;
-
-    @NotBlank
     @Field(termVector = TermVector.YES)
     private boolean isAttivo;
 
@@ -89,7 +84,7 @@ public class Socio {
 
     public Socio(String nome, String cognome, String indirizzo, String cap, String citta,
     String nazione, String codFisc, String numCellulare, String numFisso, String mail1, String mail2,
-    int numTessera, LocalDate scadenzaTessera, String campoNote, ArrayList<Ruolo> ruolo) {
+    int numTessera, String campoNote, ArrayList<Ruolo> ruolo) {
 super();
 this.isAttivo = true;
 this.nome = nome;
@@ -104,11 +99,11 @@ this.numFisso = numFisso;
 this.mail1 = mail1;
 this.mail2 = mail2;
 this.numTessera = numTessera;
-this.scadenzaTessera = scadenzaTessera;
+this.scadenzaTessera = LocalDate.of(LocalDate.now().getDayOfYear(), 12, 31);
 this.campoNote = campoNote;
 ruoli = new ArrayList<>(ruolo);
 ruoli.add(Ruolo.Ordinario);
-//this.credenziali = new Credenziali(""+this.numTessera, this.nome+ "."+this.cognome+"."+ this.numTessera);
+
 }
 public Boolean getIsAttivo() {
 return isAttivo;
