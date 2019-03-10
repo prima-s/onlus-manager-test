@@ -30,11 +30,11 @@ public class Socio {
 
     @NotBlank
     @Field(termVector = TermVector.YES)
-    private String indirizzo;
+    private String codFisc;
 
     @NotBlank
     @Field(termVector = TermVector.YES)
-    private String cap;
+    private String indirizzo;
 
     @NotBlank
     @Field(termVector = TermVector.YES)
@@ -42,11 +42,11 @@ public class Socio {
 
     @NotBlank
     @Field(termVector = TermVector.YES)
-    private String nazione;
+    private String cap;
 
     @NotBlank
     @Field(termVector = TermVector.YES)
-    private String codFisc;
+    private String nazione;
 
     @NotBlank
     @Field(termVector = TermVector.YES)
@@ -60,50 +60,52 @@ public class Socio {
     @Field(termVector = TermVector.YES)
     private String mail1;
 
-    
     @Field(termVector = TermVector.YES)
     private String mail2;
 
-    
-    @Field(termVector = TermVector.YES)
-    private LocalDate scadenzaTessera;
+    // @Field(termVector = TermVector.YES)
+    // private LocalDate scadenzaTessera;
 
-   
     @Field(termVector = TermVector.YES)
     private String campoNote;
 
-    @NotBlank
-    @Field(termVector = TermVector.YES)
-    private ArrayList<Ruolo> ruoli;
+    // @NotBlank
+    // @Field(termVector = TermVector.YES)
+    // private ArrayList<Ruolo> ruoli;
 
+    // @NotBlank
+    // @Field(termVector = TermVector.YES)
+    // private Credenziali credenziali;
+
+    //@NotBlank
     @Field(termVector = TermVector.YES)
     private boolean isAttivo;
 
     public Socio() {
     }
 
-    public Socio(String nome, String cognome, String indirizzo, String cap, String citta,
-    String nazione, String codFisc, String numCellulare, String numFisso, String mail1, String mail2,
-    String campoNote, ArrayList<Ruolo> ruolo) {
-super();
-this.isAttivo = true;
+    public Socio(String nome, String cognome, String codFisc, String indirizzo, String citta, String cap,
+    String nazione, String numCellulare, String numFisso, String mail1, String mail2, String campoNote) {
+
 this.nome = nome;
 this.cognome = cognome;
-this.indirizzo = indirizzo;
-this.cap = cap;
-this.citta = citta;
-this.nazione = nazione;
 this.codFisc = codFisc;
+this.indirizzo = indirizzo;
+this.citta = citta;
+this.cap = cap;
+this.nazione = nazione;
 this.numCellulare = numCellulare;
 this.numFisso = numFisso;
 this.mail1 = mail1;
 this.mail2 = mail2;
-this.scadenzaTessera = LocalDate.of(LocalDate.now().getDayOfYear(), 12, 31);
+//this.scadenzaTessera = "";
 this.campoNote = campoNote;
-ruoli = new ArrayList<>(ruolo);
-ruoli.add(Ruolo.Ordinario);
-
+this.isAttivo = true;
+// ruoli = new ArrayList<>(ruolo);
+// ruoli.add(Ruolo.Ordinario);
+//this.credenziali = new Credenziali(""+this id, this.nome+ "."+this.cognome+"."+ this id);
 }
+
 public Boolean getIsAttivo() {
 return isAttivo;
 }
@@ -177,30 +179,34 @@ public void setMail2(String mail2) {
 this.mail2 = mail2;
 }
 public Integer getNumTessera() {
-return numTessera;
+    return numTessera;
 }
 
-public LocalDate getScadenzaTessera() {
-return scadenzaTessera;
+public void setNumTessera(Integer numTessera) {
+    this.numTessera = numTessera;
 }
-public void setScadenzaTessera(LocalDate scadenzaTessera) {
-this.scadenzaTessera = scadenzaTessera;
-}
+
+// public LocalDate getScadenzaTessera() {
+// return scadenzaTessera;
+// }
+// public void setScadenzaTessera(LocalDate scadenzaTessera) {
+// this.scadenzaTessera = scadenzaTessera;
+// }
 public String getCampoNote() {
 return campoNote;
 }
 public void setCampoNote(String campoNote) {
 this.campoNote = campoNote;
 }
-public ArrayList<Ruolo> getRuolo() {
-return ruoli;
-}
+// public ArrayList<Ruolo> getRuolo() {
+// return ruoli;
+// }
 
 @Override
 public String toString() {
 return "Socio [isAttivo=" + isAttivo + ", nome=" + nome + ", cognome=" + cognome + ", indirizzo=" + indirizzo
         + ", cap=" + cap + ", citta=" + citta + ", nazione=" + nazione + ", codFisc=" + codFisc
         + ", numCellulare=" + numCellulare + ", numFisso=" + numFisso + ", mail1=" + mail1 + ", mail2=" + mail2
-        + ", numTessera=" + numTessera + ", campoNote=" + campoNote + "]";
+        + ", id=" + numTessera + ", campoNote=" + campoNote + "]";
 }
 }
