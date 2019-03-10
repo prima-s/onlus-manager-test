@@ -1,5 +1,5 @@
 <template>
-     <form class="modal-content" action="">
+    <form class="modal-content" action="">
     <div class="container">
       <h1>Registrazione utente</h1>
       <hr>
@@ -11,36 +11,37 @@
 
         <div style="width:100%">
 
-      <input type="text" v-model="user.nome" class="anagrafica" placeholder="Nome utente" name="nome" required>
-      <input type="text" v-model="user.cognome" class="anagrafica" placeholder="Cognome utente" name="cognome" required>
+      <input type="text" v-model="socio.nome" class="anagrafica" placeholder="Nome utente" name="nome" required>
+      <input type="text" v-model="socio.cognome" class="anagrafica" placeholder="Cognome utente" name="cognome" required>
         </div>
-        <label for="email"><b>Codice Fiscale</b></label>
+        <label for="codFisc"><b>Codice Fiscale</b></label>
         <br>
-        <input type="text" v-model="user.cf" placeholder="xxxxxxxxxxxxxxxxxx"  name="cf" required>
+        <input type="text" v-model="socio.codFisc" placeholder="xxxxxxxxxxxxxxxxxx"  name="codFisc" required>
         <br>
        <label for="indirizzo"><b>Idirizzo*</b></label>
       <div style="width:100%">
-      <input type="text" v-model="user.indirizzo" class="ind" placeholder="Via/Piazza, n°civico" name="indirizzo" required>
-      <input type="text" v-model="user.nazione" style="width:20%;"  class="ind" placeholder="Nazione" name="nazione" required>
-      <input type="text" v-model="user.cap" style="width:10%;"  class="ind" placeholder=" CAP" name="cap" required>
+      <input type="text" v-model="socio.indirizzo" class="ind" placeholder="Via/Piazza, n°civico" name="indirizzo" required>
+      <input type="text" v-model="socio.citta" style="width:20%;" class="ind" placeholder="Citta" name="citta" required>
+      <input type="text" v-model="socio.nazione" style="width:20%;"  class="ind" placeholder="Nazione" name="nazione" required>
+      <input type="text" v-model="socio.cap" style="width:10%;"  class="ind" placeholder=" CAP" name="cap" required>
   </div>
       <hr>
-      <label for="email"><b>User Email*</b></label>
+      <label for="mail1"><b>User Email*</b></label>
       <div style="width:100%">
 
-      <input type="email" v-model="user.email" class="anagrafica" placeholder="firsEmail@ccc.com" name="email" required>
-      <input type="email" v-model="user.email2" class="anagrafica" placeholder="secondEmail@log.com" name="email2">
+      <input type="email" v-model="socio.mail1" class="anagrafica" placeholder="firsEmail@ccc.com" name="mail1" required>
+      <input type="email" v-model="socio.mail2" class="anagrafica" placeholder="secondEmail@log.com" name="mail2">
         </div>
-        <label for="email"><b>Numeri di Telefono</b></label>     
+        <label for="fisso"><b>Numeri di Telefono</b></label>     
   <div style="width:100%">
             
-      <input type="text" v-model="user.fisso" class="anagrafica" placeholder="Numero Fisso" name="fisso">
-      <input type="text" v-model="user.cellulare" class="anagrafica" placeholder="Numero cellulare*" name="cellulare" required>
+      <input type="text" v-model="socio.numFisso" class="anagrafica" placeholder="Numero Fisso" name="fisso">
+      <input type="text" v-model="socio.numCellulare" class="anagrafica" placeholder="Numero cellulare*" name="cellulare" required>
         </div>
       <hr>
-      <label><b>Note</b></label>
+      <label for="campoNote"><b>Note</b></label>
       <br>
-     <textarea type="text" v-model="user.note" id="message" name="note" rows="2" class="form-control md-textarea"></textarea>
+     <textarea type="text" v-model="socio.campoNote" id="message" name="campoNote" rows="2" class="form-control md-textarea"></textarea>
 
       <!--<label>
         <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
@@ -55,59 +56,58 @@
     </div>
    
   </form>
-  
 </template>
 
 
 <script>
 
-     // import axios from 'axios'
-  import {AXIOS} from './http-common'
+import { AXIOS } from "./http-common";
+
   export default {
-    name: 'person',
-    data () {
-      return {
-        response: [],
-        errors: [],
-        user: {
-          nome: '',
-          cognome: '',
-          cf: '',
-          indirizzo: '',
-          nazione: '',
-          cap: '',
-          email: '',
-          email2: '',
-          fisso: '',
-          cellulare: '',
-          note: '',
-          id: 0
-        },
-        showResponse: false,
-        retrievedUser: {},
-        showRetrievedUser: false
+  name: "socio",
+
+  data() {
+    return {
+      response: [],
+      errors: [],
+      socio: {
+        nome: '',
+        cognome: '',
+        codFisc: '',
+        indirizzo: '',
+        citta: '',
+        cap: '',
+        nazione: '',
+        mail1: '',
+        mail2: '',
+        numCellulare: '',
+        numFisso: '',
+        campoNote: '',
+        numTessera: 0
       }
-    },
-    methods: {
-      // Fetches posts when the component is created.
-      createSocio () {
+
+    };
+  },
+   methods: {
+    createSocio () {
         var params = new URLSearchParams()
-        params.append('nome', this.user.nome)
-        params.append('cognome', this.user.cognome)
-        params.append('cf', this.user.cf)
-        params.append('indirizzo', this.user.indirizzo)
-        params.append('nazione', this.user.nazione)
-        params.append('cap', this.user.cap)
-        params.append('email', this.user.email)
-        params.append('email2', this.user.email2)
-        params.append('fisso', this.user.fisso)
-        params.append('cellulare', this.user.cellulare)
-        params.append('note', this.user.note)
-        AXIOS.post(`/person`, params)
+        params.append('nome', this.socio.nome)
+        params.append('cognome', this.socio.cognome)
+        params.append('codFisc', this.socio.codFisc)
+        params.append('indirizzo', this.socio.indirizzo)
+        params.append('citta', this.socio.citta)
+        params.append('cap', this.socio.cap)
+        params.append('nazione', this.socio.nazione)
+        params.append('mail1', this.socio.mail1)
+        params.append('mail2', this.socio.mail2)
+        params.append('numCellulare', this.socio.numCellulare)
+        params.append('numFisso', this.socio.numFisso)
+        params.append('campoNote', this.socio.campoNote)
+        AXIOS.post(`/socio`, params)
           .then(response => {
             // JSON responses are automatically parsed.
             this.response = response.data
-            this.user.id = response.data
+            this.socio.numTessera = response.data
             console.log(response.data)
             this.showResponse = true
           })
@@ -115,7 +115,7 @@
             this.errors.push(e)
           })
       }
-    }
+  }
   }
 </script>
 
