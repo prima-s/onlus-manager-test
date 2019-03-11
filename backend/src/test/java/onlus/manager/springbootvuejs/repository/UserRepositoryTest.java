@@ -25,7 +25,9 @@ public class UserRepositoryTest {
     private UserRepository users;
 
 
+
     private User norbertSiegmund = new User("Norb", "Siegmund");
+
 
     private User jonasHecht = new User("Jonas", "Hecht");
 
