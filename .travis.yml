@@ -7,7 +7,7 @@ cache:
   - node_modules
   
   before_install: 
-  - chmod a+x ./mvnw
+  - chmod +x ./mvnw
   
   deploy:
   provider: heroku
