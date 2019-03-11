@@ -26,10 +26,10 @@ public class UserRepositoryTest {
 
 
 
-    private User norbertSiegmund = new User("Norb", "Siegmund");
+    private User norbertSiegmund = new User("Norbert", "Siegmund");
 
 
-    private User jonasHecht = new User("Jonas", "Hecht");
+    private User jonasHecht = new User("Jo", "Hecht");
 
     @Before
     public void fillSomeDataIntoOurDb() {
