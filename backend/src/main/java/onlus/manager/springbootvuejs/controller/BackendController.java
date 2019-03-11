@@ -1,8 +1,6 @@
 package onlus.manager.springbootvuejs.controller;
 
 import onlus.manager.springbootvuejs.domain.User;
-import onlus.manager.springbootvuejs.hibernate.domain.Socio;
-import onlus.manager.springbootvuejs.repository.SocioRepo;
 import onlus.manager.springbootvuejs.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,9 +19,6 @@ public class BackendController {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private SocioRepo socioRepository;
-
     @RequestMapping(path = "/hello")
     public @ResponseBody String sayHello() {
         LOG.info("GET called on /hello resource");
@@ -39,29 +34,6 @@ public class BackendController {
         LOG.info(user.toString() + " successfully saved into DB");
 
         return user.getId();
-    }
-
-    @RequestMapping(path = "/socio", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
-    public @ResponseBody long addNewSocio (@RequestParam String nome, 
-                                           @RequestParam String cognome, 
-                                           @RequestParam String codFisc, 
-                                           @RequestParam String indirizzo, 
-                                           @RequestParam String citta,
-                                           @RequestParam String cap, 
-                                           @RequestParam String nazione, 
-                                           @RequestParam String numCellulare, 
-                                           @RequestParam String numFisso, 
-                                           @RequestParam String mail1, 
-                                           @RequestParam String mail2, 
-                                           @RequestParam String campoNote) {
-        Socio socio = new Socio(nome, cognome, codFisc, indirizzo, citta, cap, 
-                                nazione, numCellulare, numFisso, mail1, mail2, campoNote);
-        socioRepository.save(socio);
-
-        LOG.info(socio.toString() + " successfully saved into DB");
-
-        return socio.getNumTessera();
     }
 
     @GetMapping(path="/user/{id}")

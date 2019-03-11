@@ -1,6 +1,7 @@
 package onlus.manager.springbootvuejs.hibernate.service;
 
-import onlus.manager.springbootvuejs.hibernate.domain.Ruolo;
+
+
 import onlus.manager.springbootvuejs.hibernate.domain.Socio;
 
 public interface LoginService {

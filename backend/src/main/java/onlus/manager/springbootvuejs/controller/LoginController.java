@@ -29,7 +29,7 @@ public class LoginController {
 	private LoginService service;
 
 
-    @RequestMapping(path = "/", method = RequestMethod.POST)
+    @RequestMapping(path = "/", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.CREATED)
     public @ResponseBody String accessoSocio (@RequestBody String requestNomeUtente,  String requestPassword) {
       Socio socio = service.getSocio(service.verificaUtenze(requestNomeUtente, requestPassword));

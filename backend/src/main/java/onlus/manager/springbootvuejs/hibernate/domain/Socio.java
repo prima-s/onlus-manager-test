@@ -1,11 +1,13 @@
 package onlus.manager.springbootvuejs.hibernate.domain;
 
 import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Indexed;
+
 import org.hibernate.search.annotations.TermVector;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import javax.persistence.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +15,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Indexed
+@Table
 public class Socio {
 
     @Id
@@ -30,15 +32,7 @@ public class Socio {
 
     @NotBlank
     @Field(termVector = TermVector.YES)
-    private String codFisc;
-
-    @NotBlank
-    @Field(termVector = TermVector.YES)
     private String indirizzo;
-
-    @NotBlank
-    @Field(termVector = TermVector.YES)
-    private String citta;
 
     @NotBlank
     @Field(termVector = TermVector.YES)
@@ -46,7 +40,15 @@ public class Socio {
 
     @NotBlank
     @Field(termVector = TermVector.YES)
+    private String citta;
+
+    @NotBlank
+    @Field(termVector = TermVector.YES)
     private String nazione;
+
+    @NotBlank
+    @Field(termVector = TermVector.YES)
+    private String codFisc;
 
     @NotBlank
     @Field(termVector = TermVector.YES)
@@ -60,55 +62,65 @@ public class Socio {
     @Field(termVector = TermVector.YES)
     private String mail1;
 
+    
     @Field(termVector = TermVector.YES)
     private String mail2;
 
-    // @Field(termVector = TermVector.YES)
-    // private LocalDate scadenzaTessera;
+    
+    @Field(termVector = TermVector.YES)
+    private LocalDate scadenzaTessera;
 
+   
     @Field(termVector = TermVector.YES)
     private String campoNote;
 
-    // @NotBlank
-    // @Field(termVector = TermVector.YES)
-    // private ArrayList<Ruolo> ruoli;
+   // @NotBlank
+   // @Field(termVector = TermVector.YES)
+    //private ArrayList<String> ruoli;
+    @Field(termVector = TermVector.YES)
+    private String ruoli;
 
-    // @NotBlank
-    // @Field(termVector = TermVector.YES)
-    // private Credenziali credenziali;
-
-    //@NotBlank
     @Field(termVector = TermVector.YES)
     private boolean isAttivo;
 
     public Socio() {
     }
 
-    public Socio(String nome, String cognome, String codFisc, String indirizzo, String citta, String cap,
-    String nazione, String numCellulare, String numFisso, String mail1, String mail2, String campoNote) {
-
+    public Socio(String nome, String cognome, String indirizzo, String cap, String citta,
+    String nazione, String codFisc, String numCellulare, String numFisso, String mail1, String mail2,
+    String campoNote, String[] ruolo) {
+super();
+this.isAttivo = true;
 this.nome = nome;
 this.cognome = cognome;
-this.codFisc = codFisc;
 this.indirizzo = indirizzo;
-this.citta = citta;
 this.cap = cap;
+this.citta = citta;
 this.nazione = nazione;
+this.codFisc = codFisc;
 this.numCellulare = numCellulare;
 this.numFisso = numFisso;
 this.mail1 = mail1;
 this.mail2 = mail2;
-//this.scadenzaTessera = "";
+this.scadenzaTessera = LocalDate.of(LocalDate.now().getYear(), 12, 31);
 this.campoNote = campoNote;
-this.isAttivo = true;
-// ruoli = new ArrayList<>(ruolo);
-// ruoli.add(Ruolo.Ordinario);
-//this.credenziali = new Credenziali(""+this id, this.nome+ "."+this.cognome+"."+ this id);
+ArrayList<String> r = new ArrayList<>(elaboraRuoli(ruolo));
+r.add(Ruolo.Ordinario.toString());
+this.ruoli = r.toString().replace("[", "").replace("]", "");
 }
 
 public Boolean getIsAttivo() {
 return isAttivo;
 }
+
+public ArrayList<String> elaboraRuoli(String[] ruolo){
+    ArrayList<String> ruoli = new ArrayList<>();
+for (String s : ruolo) {
+    ruoli.add(s);
+}
+ return ruoli;
+}
+
 public void setIsAttivo(Boolean isAttivo) {
 this.isAttivo = isAttivo;
 }
@@ -179,34 +191,30 @@ public void setMail2(String mail2) {
 this.mail2 = mail2;
 }
 public Integer getNumTessera() {
-    return numTessera;
+return numTessera;
 }
 
-public void setNumTessera(Integer numTessera) {
-    this.numTessera = numTessera;
+public LocalDate getScadenzaTessera() {
+return scadenzaTessera;
 }
-
-// public LocalDate getScadenzaTessera() {
-// return scadenzaTessera;
-// }
-// public void setScadenzaTessera(LocalDate scadenzaTessera) {
-// this.scadenzaTessera = scadenzaTessera;
-// }
+public void setScadenzaTessera(LocalDate scadenzaTessera) {
+this.scadenzaTessera = scadenzaTessera;
+}
 public String getCampoNote() {
 return campoNote;
 }
 public void setCampoNote(String campoNote) {
 this.campoNote = campoNote;
 }
-// public ArrayList<Ruolo> getRuolo() {
-// return ruoli;
-// }
+public String getRuolo() {
+return ruoli;
+}
 
 @Override
 public String toString() {
 return "Socio [isAttivo=" + isAttivo + ", nome=" + nome + ", cognome=" + cognome + ", indirizzo=" + indirizzo
         + ", cap=" + cap + ", citta=" + citta + ", nazione=" + nazione + ", codFisc=" + codFisc
         + ", numCellulare=" + numCellulare + ", numFisso=" + numFisso + ", mail1=" + mail1 + ", mail2=" + mail2
-        + ", id=" + numTessera + ", campoNote=" + campoNote + "]";
+        + ", numTessera=" + numTessera + ", campoNote=" + campoNote + "]";
 }
 }

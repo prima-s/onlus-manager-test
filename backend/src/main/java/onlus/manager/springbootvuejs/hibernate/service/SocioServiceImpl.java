@@ -1,32 +1,37 @@
 package onlus.manager.springbootvuejs.hibernate.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import onlus.manager.springbootvuejs.hibernate.domain.Credenziali;
-
+import onlus.manager.springbootvuejs.hibernate.domain.Ruolo;
 import onlus.manager.springbootvuejs.hibernate.domain.Socio;
 import onlus.manager.springbootvuejs.hibernate.repository.SocioRepository;
-import onlus.manager.springbootvuejs.hibernate.repository.CredenzialiRepository;
+
+import onlus.manager.springbootvuejs.hibernate.repository.LoginRepository;
 
 @Service
 public class SocioServiceImpl implements SocioService {
 	
 	@Autowired
     private SocioRepository socioRepository;
-    private CredenzialiRepository credenzialiRepository;
+    private LoginRepository loginRepository;
+
 
     @Autowired
-    public SocioServiceImpl(SocioRepository socioRepository) {
+    public SocioServiceImpl(SocioRepository socioRepository, LoginRepository loginRepository) {
         this.socioRepository = socioRepository;
+        this.loginRepository = loginRepository;
     }
     @Override
-    public Socio createSocio(Socio socio) {
-         
-        credenzialiRepository.save(new Credenziali(socio.getNumTessera().toString(), socio.getNome()+"."+socio.getCognome(), socio.getNumTessera()));
-        return socioRepository.save(socio);
+    public Socio createSocio(Socio socio) {       
+        Socio s =  socioRepository.save(socio);
+        Credenziali cd = new Credenziali(s.getNumTessera().toString(), s.getNome()+"."+s.getCognome(), s.getNumTessera());
+        loginRepository.save(cd);
+        return s;
     }
 
     @Override
@@ -80,7 +85,7 @@ public class SocioServiceImpl implements SocioService {
     }
 
     @Override
-    public void ModificaOpzioniPllicazione() {
+    public void ModificaOpzioniApplicazione() {
 
     }
  

@@ -2,10 +2,13 @@ package onlus.manager.springbootvuejs.hibernate.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+import javax.persistence.*;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 
 @Entity
+@Table
 @Indexed
 public class Credenziali{
     @Id
@@ -23,6 +26,7 @@ public class Credenziali{
         this.nomeUtente = nome;
         this.password = password;
         this.numTessera = numTessera;
+ 
     }
 
         public Integer getNumTessera() {

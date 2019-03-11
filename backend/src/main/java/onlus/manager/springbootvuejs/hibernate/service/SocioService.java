@@ -18,5 +18,5 @@ public interface SocioService {
     void visualizzaFileLog();
     Socio getSocio(Integer id);
     void inviaMailAmministratore(String indirizzoMail);
-    void ModificaOpzioniPllicazione();
+    void ModificaOpzioniApplicazione();
 }

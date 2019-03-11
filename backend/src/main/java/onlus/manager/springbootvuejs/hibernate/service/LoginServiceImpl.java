@@ -15,7 +15,7 @@ import onlus.manager.springbootvuejs.hibernate.domain.Ruolo;
 import onlus.manager.springbootvuejs.hibernate.domain.Socio;
 import onlus.manager.springbootvuejs.hibernate.repository.SocioRepository;
 import onlus.manager.springbootvuejs.hibernate.utility.HibernateUtil;
-import onlus.manager.springbootvuejs.hibernate.repository.CredenzialiRepository;
+
 import onlus.manager.springbootvuejs.hibernate.repository.LoginRepository;
 
 @Service
@@ -29,6 +29,8 @@ public class LoginServiceImpl implements LoginService {
     public LoginServiceImpl(LoginRepository loginRepository) {
         this.loginRepository = loginRepository;
     }
+    
+
 
     @Override
     public Integer verificaUtenze(String utente, String password) {
@@ -57,11 +59,11 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public String getLivelloAmministrazione(Socio socio) {
-        ArrayList<Ruolo> ruoli = socio.getRuolo();
-        if(ruoli.contains("amministratore")){
+        String ruoli = socio.getRuolo();
+        if(ruoli.equals("amministratore")){
             return "livello1"; 
         }
-        else if(ruoli.contains("presidente") || ruoli.contains("tesoriere")){
+        else if(ruoli.equals("presidente") || ruoli.equals("tesoriere")){
             return "livello2";
         }
         else{

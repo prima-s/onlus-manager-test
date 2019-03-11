@@ -5,13 +5,14 @@ import java.time.LocalDate;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.TermVector;
 
-
+import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
 @Entity
+@Table
 public class Voce {
 
 	@Id
