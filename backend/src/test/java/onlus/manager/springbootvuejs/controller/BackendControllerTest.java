@@ -74,7 +74,7 @@ public class BackendControllerTest {
         assertThat(responseUser.getFirstName(), is("Norbert"));
 
 
-        assertThat(responseUser.getLastName(), is("Siegmun"));
+        assertThat(responseUser.getLastName(), is("Siegmund"));
 
 
     }
