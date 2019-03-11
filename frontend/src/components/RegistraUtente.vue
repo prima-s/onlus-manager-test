@@ -1,128 +1,245 @@
 <template>
-    <form class="modal-content" action="">
+  <form class="modal-content" action>
+    <span
+      onclick="document.getElementById('id01').style.display='none'"
+      class="close"
+      title="Close Modal"
+    >&times;</span>
     <div class="container">
-      <h1>Registrazione utente</h1>
+      <h1>Registra utente</h1>
       <hr>
-   <div class="row">
-       <label style="margin-left:2%" for="nome"><b>Nome*</b></label>
-       
-       <label style="margin-left:43%" for="cognome"><b>Cognome*</b></label>
-       </div>
+      <div class="row">
+        <label style="margin-left:2%" for="nome">
+          <b>Nome*</b>
+        </label>
+        
+        <label style="margin-left:43%" for="cognome">
+          <b>Cognome*</b>
+        </label>
+      </div>
 
-        <div style="width:100%">
-
-      <input type="text" v-model="socio.nome" class="anagrafica" placeholder="Nome utente" name="nome" required>
-      <input type="text" v-model="socio.cognome" class="anagrafica" placeholder="Cognome utente" name="cognome" required>
-        </div>
-        <label for="codFisc"><b>Codice Fiscale</b></label>
-        <br>
-        <input type="text" v-model="socio.codFisc" placeholder="xxxxxxxxxxxxxxxxxx"  name="codFisc" required>
-        <br>
-       <label for="indirizzo"><b>Idirizzo*</b></label>
       <div style="width:100%">
-      <input type="text" v-model="socio.indirizzo" class="ind" placeholder="Via/Piazza, n°civico" name="indirizzo" required>
-      <input type="text" v-model="socio.citta" style="width:20%;" class="ind" placeholder="Citta" name="citta" required>
-      <input type="text" v-model="socio.nazione" style="width:20%;"  class="ind" placeholder="Nazione" name="nazione" required>
-      <input type="text" v-model="socio.cap" style="width:10%;"  class="ind" placeholder=" CAP" name="cap" required>
-  </div>
-      <hr>
-      <label for="mail1"><b>User Email*</b></label>
-      <div style="width:100%">
-
-      <input type="email" v-model="socio.mail1" class="anagrafica" placeholder="firsEmail@ccc.com" name="mail1" required>
-      <input type="email" v-model="socio.mail2" class="anagrafica" placeholder="secondEmail@log.com" name="mail2">
-        </div>
-        <label for="fisso"><b>Numeri di Telefono</b></label>     
-  <div style="width:100%">
-            
-      <input type="text" v-model="socio.numFisso" class="anagrafica" placeholder="Numero Fisso" name="fisso">
-      <input type="text" v-model="socio.numCellulare" class="anagrafica" placeholder="Numero cellulare*" name="cellulare" required>
-        </div>
-      <hr>
-      <label for="campoNote"><b>Note</b></label>
-      <br>
-     <textarea type="text" v-model="socio.campoNote" id="message" name="campoNote" rows="2" class="form-control md-textarea"></textarea>
-
-      <!--<label>
-        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-      </label>-->
-
+        <input
+          type="text"
+          v-model="user.name"
+          class="testo anagrafica"
+          placeholder="Nome utente"
+          name="nome"
+          required
+        >
+        <input
+          type="text"
+          v-model="user.surname"
+          class="testo anagrafica"
+          placeholder="Cognome utente"
+          name="cognome"
+          required
+        >
+      </div>
       
 
-      <div class="clearfix">
-        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-        <button type="submit" class="signupbtn" @click="createSocio()">Sign Up</button>
+        <label for="CF">
+          <b>Codice Fiscale*</b>
+        </label>
+         <label style="margin-left:43%" for="nome">
+            <b>Ruoli*</b>
+          </label>
+        <br>
+        <div class="row">
+        <input
+          type="text"
+          v-model="user.fiscalCode"
+          class="testo"
+          placeholder="xxxxxxxxxxxxxxxxxx"
+          name="CF"
+          required
+        >
+        
+        <fieldset style="padding:0 0 0 10px">
+          <br>
+          <input type="checkbox" name="html" value="html"> Amministratore
+          <input type="checkbox" name="css" value="css"> Presidente
+          <input type="checkbox" name="javascript" value="javascript"> Tesoriere
+          <input type="checkbox" name="javascript" value="javascript"> Consigliere
+        </fieldset>
       </div>
+      <br>
+      <label for="indirizzo">
+        <b>Idirizzo*</b>
+      </label>
+      <div style="width:100%">
+        <input
+          type="text"
+          v-model="user.localAddress"
+          class="ind"
+          placeholder="Via/Piazza, n°civico"
+          name="indirizzo"
+          required
+        >
+        <input
+          type="text"
+          v-model="user.citta"
+          style="width:15%;"
+          class="ind"
+          placeholder=" Citta"
+          name="Citta"
+          required
+        >
+        <input
+          type="text"
+          v-model="user.CAP"
+          style="width:10%;"
+          class="ind"
+          placeholder=" CAP"
+          name="CAP"
+          required
+        >
+        <input
+          type="text"
+          v-model="user.nation"
+          style="width:20%;"
+          class="ind"
+          placeholder="Nazione"
+          name="Nazione"
+          required
+        >
+      </div>
+      <hr>
+      <label for="email">
+        <b>User Email*</b>
+      </label>
+      <div style="width:100%">
+        <input
+          type="email"
+          v-model="user.firstEmail"
+          class="anagrafica"
+          placeholder="firsEmail@ccc.com"
+          name="email"
+          required
+        >
+        <input
+          type="email"
+          v-model="user.secondEmail"
+          class="anagrafica"
+          placeholder="secondEmail@log.com"
+          name="email"
+        >
+      </div>
+      <label for="numeri">
+        <b>Numeri di Telefono</b>
+      </label>
+      <div style="width:100%">
+        <input
+          type="text"
+          v-model="user.fixNumber"
+          class="anagrafica"
+          placeholder="Numero Fisso"
+          name="fisso"
+        >
+        <input
+          type="text"
+          v-model="user.cellularNumber"
+          class="anagrafica"
+          placeholder="Numero cellulare*"
+          name="cellulare"
+          required
+        >
+      </div>
+      <hr>
+      <label>
+        <b>Note</b>
+      </label>
+      <br>
+      <textarea
+        type="text"
+        v-model="user.Note"
+        id="message"
+        name="message"
+        rows="2"
+        class="form-control md-textarea"
+      ></textarea>
+      <div class="row">
+				
+					<div class="col-xs-6 col-sm-6 col-md-6">
+						<button onclick="document.getElementById('id01').style.display='none'" class=" cancelbtn btn-block">Cancel</button>
+					</div>
+          	<div class="col-xs-6 col-sm-6 col-md-6">
+                        <button type="submit" @click="createUser()" class=" btn-success btn-block" value="Sign In">Sign Up</button>
+					</div>
+
+				</div>
     </div>
-   
   </form>
 </template>
 
 
 <script>
-
 import { AXIOS } from "./http-common";
-
-  export default {
-  name: "socio",
+export default {
+  name: "user",
 
   data() {
     return {
       response: [],
       errors: [],
-      socio: {
-        nome: '',
-        cognome: '',
-        codFisc: '',
-        indirizzo: '',
-        citta: '',
-        cap: '',
-        nazione: '',
-        mail1: '',
-        mail2: '',
-        numCellulare: '',
-        numFisso: '',
-        campoNote: '',
-        numTessera: 0
+      user: {
+        name: "",
+        surname: "",
+        fiscalCode: "",
+        localAddress: "",
+        nation: "",
+        CAP: "",
+        citta: "",
+        firstEmail: "",
+        secondEmail: "",
+        fixNumber: "",
+        cellullarNumber: "",
+        Note: ""
       }
-
+      /*showResponse: false,
+        retrievedUser: {},
+        showRetrievedUser: false*/
     };
   },
-   methods: {
-    createSocio () {
-        var params = new URLSearchParams()
-        params.append('nome', this.socio.nome)
-        params.append('cognome', this.socio.cognome)
-        params.append('codFisc', this.socio.codFisc)
-        params.append('indirizzo', this.socio.indirizzo)
-        params.append('citta', this.socio.citta)
-        params.append('cap', this.socio.cap)
-        params.append('nazione', this.socio.nazione)
-        params.append('mail1', this.socio.mail1)
-        params.append('mail2', this.socio.mail2)
-        params.append('numCellulare', this.socio.numCellulare)
-        params.append('numFisso', this.socio.numFisso)
-        params.append('campoNote', this.socio.campoNote)
-        AXIOS.post(`/socio`, params)
-          .then(response => {
-            // JSON responses are automatically parsed.
-            this.response = response.data
-            this.socio.numTessera = response.data
-            console.log(response.data)
-            this.showResponse = true
-          })
-          .catch(e => {
-            this.errors.push(e)
-          })
-      }
+  methods: {
+    // Fetches posts when the component is created.
+    createUser() {
+      var params = new URLSearchParams();
+      params.append("name", this.user.nome);
+      params.append("surname", this.user.cognome);
+      params.append("fiscalCode", this.user.codFisc);
+      params.append("localAddress", this.user.indirizzo);
+      params.append("nation", this.user.nazione);
+      params.append("CAP", this.user.cap);
+      params.append("citta", this.user.citta);
+      params.append("firstEmail", this.user.mail1);
+      params.append("secondEmail", this.user.mail2);
+      params.append("fixNumber", this.user.numFisso);
+      params.append("cellullarNumber", this.user.numCellulare);
+      params.append("Note", this.user.campoNote);
+
+      AXIOS.post(`/user`, params);
+      //.then(response => {
+      // JSON responses are automatically parsed.
+      //  this.response = response.data
+      //  this.user.id = response.data
+      /*console.log(response.data)
+            this.showResponse = true*/
+      //})
+      //.catch(e => {
+      //  this.errors.push(e)
+      //})
+    }
   }
-  }
+};
 </script>
 
 
 <style>
 /* Full-width input fields */
-input[type=text], input[type=password], textarea[type=text] {
+.testo,
+input[type="password"],
+textarea[type="text"] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -132,14 +249,16 @@ input[type=text], input[type=password], textarea[type=text] {
 }
 
 /* Add a background color when the inputs get focus */
-input[type=text]:focus, input[type=password]:focus, textarea[type=text]:focus {
+.testo:focus,
+input[type="password"]:focus,
+textarea[type="text"]:focus {
   background-color: #ddd;
   outline: none;
 }
 
 /* Set a style for all buttons */
 button {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -150,7 +269,7 @@ button {
 }
 
 button:hover {
-  opacity:1;
+  opacity: 1;
 }
 
 /* Extra styles for the cancel button */
@@ -160,9 +279,10 @@ button:hover {
 }
 
 /* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
-  float: left;
-  width: 50%;
+.cancelbtn,
+.signupbtn {
+  
+  width: 10%;
 }
 .container {
   padding: 16px;
@@ -171,7 +291,7 @@ hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
 }
- 
+
 /* The Close Button (x) */
 .close {
   position: absolute;
@@ -197,50 +317,49 @@ hr {
 
 /* Change styles for cancel button and signup button on extra small screens */
 @media screen and (max-width: 300px) {
-  .cancelbtn, .signupbtn {
-     width: 100%;
+  .cancelbtn,
+  .signupbtn {
+    width: 100%;
   }
 }
-.ind{
+.ind {
   margin: 5px 10px 22px 0;
   width: 45%;
   padding: 15px;
   display: inline-block;
   border: none;
-  background: #f1f1f1; 
+  background: #f1f1f1;
   background-color: #ddd;
   outline: none;
 }
-.anagrafica{
+.anagrafica {
   margin: 5px 10px 22px 0;
   width: 48%;
   padding: 15px;
   display: inline-block;
   border: none;
-   border: none;
-  background: #f1f1f1;
-
-}
-.anagrafica:focus{
-  background-color: #ddd;
-  outline: none;
-}
-.numero{
-  margin: 5px 10px 22px 0;
-  width: 48%;
-  padding: 15px;
-  display: inline-block;
   border: none;
-   border: none;
   background: #f1f1f1;
-
 }
-.numero:focus{
+.anagrafica:focus {
   background-color: #ddd;
   outline: none;
 }
-input[name=CF]{
-  width: 50% !important;
+.numeri {
+  margin: 5px 10px 22px 0 !important;
+  width: 48% !important;
+  padding: 15px !important;
+  display: inline-block !important;
+  border: none !important;
+  border: none !important;
+  background: #f1f1f1 !important;
+}
+.numeri:focus {
+  background-color: #ddd;
+  outline: none;
+}
+input[name="CF"] {
+  width: 30% !important;
 }
 </style>
 
