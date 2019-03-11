@@ -45,7 +45,7 @@ public class BackendControllerTest {
 
 	@Test
     public void addNewUserAndRetrieveItBack() {
-        User norbertSiegmund = new User("Norb", "Siegmund");
+        User norbertSiegmund = new User("Norbert", "Siegmund");
 
         Long userId =
             given()
