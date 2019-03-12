@@ -4,8 +4,7 @@ dist: trusty
 jdk:
 - oraclejdk8
 script: mvn clean install 
-jacoco:report 
-coveralls:report
+
 cache:
   directories:
   - node_modules
