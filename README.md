@@ -21,6 +21,7 @@ A live deployment is available on Heroku: https://onlus-app.herokuapp.com
 * [First App run](first-app-run)
 * [Faster feedback with webpack-dev-server](#faster-feedback-with-webpack-dev-server)
 * [Browser developer tools extension](#browser-developer-tools-extension)
+* [Travis Configuration](#travis-configuration)
 
 ## Setup Vue.js & Spring Boot
 
@@ -89,6 +90,14 @@ The webpack-dev-server, which will update and build every change through all the
 npm run serve
 ```
 
+NOTE - You may need to run:
+
+```
+npm rebuild node-sass
+```
+
+from inside the frontend directory in order to make it properly run with your environment.
+
 That’s it! 
 
 
@@ -96,4 +105,6 @@ That’s it!
 
 Install vue-devtools Browser extension https://github.com/vuejs/vue-devtools and get better feedback, e.g. in Chrome:
 
+## Travis Configuration
 
+Concerning the configuration of Travis Continuous Integration tool give a look at the doc file [travis-doc-file](docs/travisCI-config.txt)
