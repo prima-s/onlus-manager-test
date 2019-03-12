@@ -29,7 +29,7 @@ public class UserRepositoryTest {
     private User norbertSiegmund = new User("Norbert", "Siegmund");
 
 
-    private User jonasHecht = new User("Jo", "Hecht");
+    private User jonasHecht = new User("Jonas", "Hecht");
 
     @Before
     public void fillSomeDataIntoOurDb() {
