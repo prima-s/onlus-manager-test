@@ -25,7 +25,7 @@ public class BackendController {
         LOG.info("GET called on /hello resource");
         return HELLO_TEXT;
     }
-    */
+    
     
     @RequestMapping(path = "/user", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
@@ -38,7 +38,6 @@ public class BackendController {
         return user.getId();
     }
 
-    /*
     @GetMapping(path="/user/{id}")
     public @ResponseBody User getUserById(@PathVariable("id") long id) {
         LOG.info("Reading user with id " + id + " from database.");
