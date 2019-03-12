@@ -96,5 +96,4 @@ That’s it!
 
 Install vue-devtools Browser extension https://github.com/vuejs/vue-devtools and get better feedback, e.g. in Chrome:
 
-![vue-devtools-chrome](screenshots/vue-devtools-chrome.png)
 
