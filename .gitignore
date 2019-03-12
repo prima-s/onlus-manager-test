@@ -11,7 +11,7 @@
 .mtj.tmp/
 
 # To conserve the maven wrapper jar
-!maven-wrapper.jar
+# !maven-wrapper.jar
 
 # Package Files #
 *.jar
