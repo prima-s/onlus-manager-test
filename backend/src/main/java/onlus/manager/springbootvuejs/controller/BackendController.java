@@ -38,10 +38,12 @@ public class BackendController {
         return user.getId();
     }
 
+    /*
     @GetMapping(path="/user/{id}")
     public @ResponseBody User getUserById(@PathVariable("id") long id) {
         LOG.info("Reading user with id " + id + " from database.");
         return userRepository.findById(id).get();
     }
+    */
 
 }
