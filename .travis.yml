@@ -5,7 +5,7 @@ script: mvn clean install jacoco:report coveralls:report
 cache:
   directories:
   - node_modules
-  sudo: true
+
   before_install: 
   - chmod +x ./mvnw
   
