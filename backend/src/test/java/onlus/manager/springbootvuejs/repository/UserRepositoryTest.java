@@ -24,7 +24,11 @@ public class UserRepositoryTest {
     @Autowired
     private UserRepository users;
 
+
+
     private User norbertSiegmund = new User("Norbert", "Siegmund");
+
+
     private User jonasHecht = new User("Jonas", "Hecht");
 
     @Before
