@@ -19,7 +19,7 @@ public class BackendController {
     @Autowired
     private UserRepository userRepository;
 
-    /*
+    
     @RequestMapping(path = "/hello")
     public @ResponseBody String sayHello() {
         LOG.info("GET called on /hello resource");
@@ -43,6 +43,6 @@ public class BackendController {
         LOG.info("Reading user with id " + id + " from database.");
         return userRepository.findById(id).get();
     }
-    */
+    
 
 }
