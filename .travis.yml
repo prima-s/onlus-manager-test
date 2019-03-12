@@ -1,9 +1,9 @@
 language: java
 sudo: true
-dist: trusty
+#dist: trusty
 jdk:
 - oraclejdk8
-script: mvn clean install 
+script: mvn clean install jacoco:report coveralls:report
 
 cache:
   directories:
