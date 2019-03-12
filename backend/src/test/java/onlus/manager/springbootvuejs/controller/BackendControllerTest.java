@@ -70,10 +70,7 @@ public class BackendControllerTest {
 
 	    // Did Norbert came back?
 
-
         assertThat(responseUser.getFirstName(), is("Norbert"));
-
-
         assertThat(responseUser.getLastName(), is("Siegmund"));
 
 

@@ -1,48 +1,201 @@
 <template>
-  <div class="hello">
-    <img src="./../assets/spring-boot-vuejs-logo.png">
-    <h1>{{ hellomsg }}</h1>
-    <h2>See the sources here: </h2>
-    <ul>
-      <li><a href="https://github.com/jonashackt/spring-boot-vuejs" target="_blank">github.com/jonashackt/spring-boot-vuejs</a></li>
-    </ul>
-    <h3>This site contains more stuff :)</h3>
-    <ul>
-      <li>HowTo call REST-Services:</li>
-      <li><router-link :to="{ name: 'Service' }" exact target="_blank">/callservice</router-link></li>
-      <li>HowTo to play around with Bootstrap UI components:</li>
-      <li><router-link :to="{ name: 'Bootstrap' }" exact target="_blank">/bootstrap</router-link></li>
-      <li>HowTo to interact with the Spring Boot database backend:</li>
-      <li><router-link :to="{ name: 'User' }" exact target="_blank">/user</router-link></li>
-    </ul>
+<body class="bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-offset-5 col-md-5 text-center ">
+        <form action method="post">
+          
+          <div class="form-login">
+            <br>
+            <h4>Accesso riservato ai soci</h4>
+            <br>
+
+            <input
+              name="nome"
+              type=" fo"
+              id="userName"
+              class="form-control input-sm chat-input"
+              placeholder="username"
+            >
+            <br>
+            <br>
+            <input
+              name="password"
+              type=" fo"
+              id="password"
+              class="form-control input-sm chat-input"
+              placeholder="password"
+            >
+            <br>
+            <br>
+            <div class="wrapper">
+              <span class="group-btn">
+                <button type="login" href class="btn btn-primary btn-md">
+                  Login
+                  <i class="fa fa-sign-in"></i>
+                </button>
+              </span>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-6 text-center ">
+        <div class="desc">
+          <br>
+          <h4>Descrizione</h4>
+          <br>
+          <h1 class="test">
+            Dudley Wrangel Clarke (Johannesburg, 27 aprile 1899 – Londra, 7 maggio 1974)
+            è stato un militare britannico,ijgiuygyguygygygygguygyggyyggygygygygygygygy
+          </h1>
+        </div>
+      </div>
+    </div>
   </div>
+</body>
 </template>
 
-<script>
-export default {
-  name: 'hello',
-  props: { hellomsg: { type: String, required: true } }
-}
 
+<script>
+// import axios from 'axios'
+import { AXIOS } from "./http-common";
+
+export default {
+  name: "service",
+
+  data() {
+    return {
+      msg: "HowTo call REST-Services:",
+      response: [],
+      errors: [],
+      value: 75,
+    };
+  }
+}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
+@media (max-width: 640px) { 
+body {font-size:1.3rem;} 
+h1{font-size: 16px;}
+h4{font-size: 18}
+} 
+@media (max-width: 767px) {
+.desc{
+margin-top:50px 
+}
+h1{font-size: 16px;}
+h4{font-size: 18px}
+.desc{width: 250px;min-height:0px!important;margin-top:50px }
+.form-login{width: 250px;}
+.container{margin-right:10px;padding: 50px!important }
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+@media (min-width: 641px) { 
+body {font-size:1.2rem;} 
+h1{font-size: 30px;}
+h4{font-size: 18px}
+
+}
+ 
+@media (min-width:960px) { 
+body {font-size:1.4rem;} 
+
+} 
+
+@media (min-width:1100px) { 
+body {font-size:1.6rem;}
+h4{font-size: 28}
+.desc{ margin-left:40px}
+} 
+
+h1.test{ word-wrap:break-word;}
+body {
+  height: 100%;
+}
+.uploading-image {
+  display: flex;
+}
+.resized {
+  width: auto;
+  height: 150px;
+}
+.bg {
+  /* The image used */
+  background-image: url(../assets/sfondo1.jpg);
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
+.container {
+  padding: 110px;
+}
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #ffffff !important;
+  opacity: 1; /* Firefox */
+  font-size: 18px !important;
+}
+.form-login {
+  background-color: rgba(0, 0, 0, 0.55);
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 15px;
+  border-color: #d2d2d2;
+  border-width: 5px;
+  color: white;
+  box-shadow: 0 1px 0 #cfcfcf;
+}
+.form-control {
+  background: transparent !important;
+  color: white !important;
+  font-size: 18px !important;
+}
+h1 {
+  color: white !important;
+}
+h4 {
+  border: 0 solid #fff;
+  border-bottom-width: 1px;
+  padding-bottom: 10px;
+  text-align: center;
 }
 
-a {
-  color: #42b983;
+.form-control {
+  border-radius: 10px;
+}
+.text-white {
+  color: white !important;
+}
+.wrapper {
+  text-align: center;
+}
+
+
+.a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+.desc{
+  background-color: rgba(0, 0, 0, 0.55);
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 15px;
+  border-color: #d2d2d2;
+  border-width: 5px;
+  color: white;
+  box-shadow: 0 1px 0 #cfcfcf;
+  min-height: 450px;
+  
 }
 </style>

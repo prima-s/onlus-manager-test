@@ -1,12 +1,10 @@
 package onlus.manager.springbootvuejs.hibernate.repository;
 
-
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import onlus.manager.springbootvuejs.hibernate.domain.Person;
+import onlus.manager.springbootvuejs.hibernate.domain.Socio;
 
 @Repository
-public interface PersonRepository extends JpaRepository<Person, Long> {
+public interface SocioRepository extends JpaRepository<Socio, Integer> {
 }
