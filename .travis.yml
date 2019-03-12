@@ -1,12 +1,12 @@
 language: java
 sudo: false
 #dist: trusty
-os: osx
+#os: osx
 jdk:
 - oraclejdk8
 
 before_install: 
-  - chmod +x mvnw
+  - chmod +x mvn
   
 script: mvn clean install jacoco:report coveralls:report
 
