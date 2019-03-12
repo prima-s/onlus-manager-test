@@ -19,12 +19,14 @@ public class BackendController {
     @Autowired
     private UserRepository userRepository;
 
+    /*
     @RequestMapping(path = "/hello")
     public @ResponseBody String sayHello() {
         LOG.info("GET called on /hello resource");
         return HELLO_TEXT;
     }
-
+    */
+    
     @RequestMapping(path = "/user", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public @ResponseBody long addNewUser (@RequestParam String firstName, @RequestParam String lastName) {
