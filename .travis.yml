@@ -1,6 +1,7 @@
 language: java
 sudo: false
 #dist: trusty
+os: osx
 jdk:
 - oraclejdk8
 script: mvn clean install jacoco:report coveralls:report
