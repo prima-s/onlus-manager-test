@@ -14,7 +14,7 @@ import onlus.manager.springbootvuejs.hibernate.domain.Credenziali;
 import onlus.manager.springbootvuejs.hibernate.domain.Ruolo;
 import onlus.manager.springbootvuejs.hibernate.domain.Socio;
 import onlus.manager.springbootvuejs.hibernate.repository.SocioRepository;
-import onlus.manager.springbootvuejs.hibernate.utility.HibernateUtil;
+
 
 import onlus.manager.springbootvuejs.hibernate.repository.LoginRepository;
 
