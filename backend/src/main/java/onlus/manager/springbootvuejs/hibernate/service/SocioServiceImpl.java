@@ -51,6 +51,7 @@ public class SocioServiceImpl implements SocioService {
 
     @Override
     public List<Socio> getAllSoci() {
+        
         return socioRepository.findAll();
     }
 
