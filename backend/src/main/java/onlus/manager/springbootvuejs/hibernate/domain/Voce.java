@@ -35,7 +35,7 @@ public class Voce {
     @Field(termVector = TermVector.YES)
 	private String note;
 	
-	int anno;
+	//int anno;
 
 	public Voce(){
 
