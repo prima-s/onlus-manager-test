@@ -10,11 +10,11 @@
       variant="outline-info btn-block"
       class="m-2 w-15"
     >
-      <b-dropdown-item onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Registra utente</b-dropdown-item>
-      <b-dropdown-item onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Modifica la password</b-dropdown-item>
-      <b-dropdown-item href="#">Aggiorna dati socio</b-dropdown-item>
-      <b-dropdown-item href="#">Visualizza lista dei soci</b-dropdown-item>
-      <b-dropdown-item href="#">Lista soci PDF</b-dropdown-item>
+      <b-dropdown-item onclick="document.getElementById('id01').style.display='block'" style="width:auto;" @click="closeAll()">Registra utente</b-dropdown-item>
+      <b-dropdown-item onclick="document.getElementById('id02').style.display='block'" style="width:auto;" @click="closeAll()">Modifica la password</b-dropdown-item>
+      <b-dropdown-item onclick="document.getElementById('id03').style.display='block'" style="width:auto;" @click="closeAll()">Aggiorna dati socio</b-dropdown-item>
+      <b-dropdown-item onclick="document.getElementById('id04').style.display='block'" style="width:auto;" @click="closeAll()">Visualizza lista dei soci</b-dropdown-item>
+      <b-dropdown-item onclick="document.getElementById('id05').style.display='block'" style="width:auto;" @click="closeAll()">Lista soci PDF</b-dropdown-item>
     </b-dropdown>
 
     <b-dropdown
@@ -24,10 +24,10 @@
       variant="outline-info btn-block"
       class="m-2 w-15"
     >
-      <b-dropdown-item href="#">Visualizza bilancio</b-dropdown-item>
-      <b-dropdown-item href="#">Bilancio in PDF</b-dropdown-item>
-      <b-dropdown-item href="#">Nuova voce di bilancio</b-dropdown-item>
-      <b-dropdown-item href="#">Rimuovi voce di bilancio</b-dropdown-item>
+      <b-dropdown-item onclick="document.getElementById('id06').style.display='block'" style="width:auto;" @click="closeAll()">Visualizza bilancio</b-dropdown-item>
+      <b-dropdown-item onclick="document.getElementById('id07').style.display='block'" style="width:auto;" @click="closeAll()">Bilancio in PDF</b-dropdown-item>
+      <b-dropdown-item onclick="document.getElementById('id08').style.display='block'" style="width:auto;" @click="closeAll()">Nuova voce di bilancio</b-dropdown-item>
+      <b-dropdown-item onclick="document.getElementById('id09').style.display='block'" style="width:auto;" @click="closeAll()">Rimuovi voce di bilancio</b-dropdown-item>
     </b-dropdown>
 
     <b-dropdown
@@ -53,9 +53,42 @@
   </div>
   </header>
   <body>
+    
     <div id="id01" class="modal">
-  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      
+  
   <RegistraUtente />
+  
+</div>
+ <div id="id02" class="modal">
+ 
+  <CambiaPassword />
+  
+</div>
+<div id="id03" class="modal">
+ 
+  <AggiornaUtente />
+  
+</div>
+<div id="id04" class="modal">
+ 
+  <ListaSoci />
+  
+</div>
+<div id="id05" class="modal">
+ 
+  <StampaPdf />
+  
+</div>
+<div id="id08" class="modal">
+ 
+  <AggiungiVoce />
+  
+</div>
+
+<div id="id09" class="modal">
+ 
+  <RimuoviVoce />
   
 </div>
   </body>
@@ -66,9 +99,14 @@
 // import axios from 'axios'
 import { AXIOS } from "./http-common";
 import RegistraUtente from './RegistraUtente';
+import CambiaPassword from './CambiaPassword';
+import AggiornaUtente from './AggiornaUtente';
+import ListaSoci from './ListaSoci';
+import StampaPdf from './StampaPdf'
+import AggiungiVoce from './AggiungiVoce';
+import RimuoviVoce from './RimuoviVoce';
 export default {
   name: "service",
-
   data() {
     return {
       msg: "HowTo call REST-Services:",
@@ -76,15 +114,32 @@ export default {
       errors: [],
       value: 75,
       modal: ('id01'),
-      modal: ('id02')
-
+      modal: ('id02'),
+      modal: ('id03'),
+      modal: ('id04'),
+      modal: ('id05'),
+      modal: ('id06'),
+      modal: ('id07'),
+      modal: ('id08'),
+      modal: ('id09'),
+      all:['id01','id02','id03','id04'],
     };
   },
    components: {
-    RegistraUtente
+    RegistraUtente,
+    CambiaPassword,
+    AggiornaUtente,
+    ListaSoci,
+    StampaPdf,
+    AggiungiVoce,
+    RimuoviVoce
   },
   methods: {
-    
+     closeAll(){
+      for(var i=0;i<document.getElementsByClassName('modal').length;i++){
+        document.getElementsByClassName('modal')[i].style.display='none';
+      }
+    },
     // Fetches posts when the component is created.
     callRestService() {
       AXIOS.get(`/hello`)
@@ -101,7 +156,7 @@ export default {
   if (event.target == modal) {
     modal.style.display = "none";
   }
-}
+},
   }
 };
 </script>
@@ -128,23 +183,19 @@ h1,
 h2 {
   font-weight: normal;
 }
-
 ul {
   list-style-type: none;
   padding: 0;
 }
-
 li {
   display: inline-block;
   margin: 0 10px;
 }
-
 a {
   color: #42b983;
 }
 body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box;}
-
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -158,7 +209,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
   background-color: #474e5d;
   padding-top: 0px;
 }
-
 /* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
@@ -166,13 +216,49 @@ body {font-family: Arial, Helvetica, sans-serif;}
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
 }
-
-
-
 /* Change styles for cancel button and signup button on extra small screens */
 @media screen and (max-width: 300px) {
   .cancelbtn, .signupbtn {
      width: 100%;
   }
+}/*
+.ind{
+  margin: 5px 10px 22px 0;
+  width: 45%;
+  padding: 15px;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1; 
+  background-color: #ddd;
+  outline: none;
 }
+.anagrafica{
+  margin: 5px 10px 22px 0;
+  width: 48%;
+  padding: 15px;
+  display: inline-block;
+  border: none;
+   border: none;
+  background: #f1f1f1;
+}
+.anagrafica:focus{
+  background-color: #ddd;
+  outline: none;
+}
+.numero{
+  margin: 5px 10px 22px 0;
+  width: 48%;
+  padding: 15px;
+  display: inline-block;
+  border: none;
+   border: none;
+  background: #f1f1f1;
+}
+.numero:focus{
+  background-color: #ddd;
+  outline: none;
+}
+input[name=CF]{
+  width: 50% !important;
+}*/
 </style>
