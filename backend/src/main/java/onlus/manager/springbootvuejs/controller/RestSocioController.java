@@ -42,13 +42,13 @@ public class RestSocioController {
     @RequestParam("cap") String cap,@RequestParam("citta") String citta,@RequestParam("nazione") String nazione,
     @RequestParam("cf") String cf,@RequestParam("cellulare") String cellulare,
     @RequestParam("fisso") String fisso,@RequestParam("email") String email,@RequestParam("email2")String email2,
-    @RequestParam("note") String note, @RequestParam("ruoli")  String[] ruoli) { 
+    @RequestParam("note") String note, @RequestParam("Ruolo")  String[] ruoli) { 
     
         Socio requestSocio = new Socio(nome,cognome,indirizzo,cap,citta,nazione,cf,cellulare,fisso,email, email2, note, ruoli);
 
         Socio persistedSocio = service.createSocio(requestSocio);
-
         LOG.info(persistedSocio.toString() + " successfully saved into DB");
+        System.out.println(service.getAllSoci().toString());
 
         return persistedSocio;
     }
@@ -68,7 +68,7 @@ public class RestSocioController {
         service.deleteSocio(numTessera);
     }
     
-    @RequestMapping(path="/persons", method = RequestMethod.GET)
+    @RequestMapping(path="/soci", method = RequestMethod.GET)
     public @ResponseBody List<Socio> getSoci() {
         return service.getAllSoci();
     }

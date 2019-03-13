@@ -34,12 +34,8 @@ public class Voce {
     @NotBlank
     @Field(termVector = TermVector.YES)
 	private String note;
-	
-	//int anno;
 
-	public Voce(){
-
-	}
+	public Voce(){}
 
 	public Voce(TipoVoce nomeVoce, BigDecimal sommaAssociata, LocalDate dataRiferimento, String note) {
 		super();
@@ -47,12 +43,11 @@ public class Voce {
 		this.sommaAssociata = sommaAssociata;
 		this.dataRiferimento = dataRiferimento;
 		this.note = note;
-		anno=dataRiferimento.getYear();
 	}
+
 	public Integer getIdVoce() {
 		return idVoce;
 	}
-
 	public TipoVoce getNomeVoce() {
 		return nomeVoce;
 	}
@@ -76,6 +71,10 @@ public class Voce {
 	}
 	public void setNote(String note) {
 		this.note = note;
+	}
+
+	public int getAnno(){
+		return dataRiferimento.getYear();
 	}
 
 	@Override
