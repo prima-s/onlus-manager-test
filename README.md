@@ -1,7 +1,7 @@
 # Onlus Manager App
 A reusable Springboot app using Vue.js as frontend
 
-[![Build Status](https://travis-ci.org/prima-s/onlus-manager-test.svg?branch=master)](https://travis-ci.org/prima-s/onlus-manager-test)
+[![Build Status](https://travis-ci.org/prima-s/onlus-manager-test.svg?branch=test)](https://travis-ci.org/prima-s/onlus-manager-test)
 [![versionspringboot](https://img.shields.io/badge/springboot-2.1.3_RELEASE-brightgreen.svg)](https://github.com/spring-projects/spring-boot)
 [![versionnodejs](https://img.shields.io/badge/nodejs-v11.8.0-brightgreen.svg)](https://nodejs.org/en/)
 [![versionvuejs](https://img.shields.io/badge/vue.js-2.6.6-brightgreen.svg)](https://vuejs.org/)
