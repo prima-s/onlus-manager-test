@@ -259,6 +259,7 @@ export default {
 <style>
 
 
+
 .funkyradio div {
   clear: both;
   overflow: hidden;
@@ -404,7 +405,7 @@ button:hover {
 .cancelbtn,
 .signupbtn {
   
-  width: 100%;
+  width: 10%;
 }
 .container {
   padding: 16px;
