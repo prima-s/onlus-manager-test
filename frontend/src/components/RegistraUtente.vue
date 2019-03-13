@@ -50,9 +50,10 @@
           v-model="user.cf"
           class=""
           placeholder="xxxxxxxxxxxxxxxxxx"
-          name="cf"
+          name="CF"
           required
         >
+	
         
       </div>
       <label for="Ruoli">
