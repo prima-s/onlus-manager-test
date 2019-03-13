@@ -1,5 +1,10 @@
 <template>
      <form class="modal-content" action="">
+     <span
+      @click="closeAll()"
+      class="close"
+      title="Close Modal"
+    >&times;</span>
     <div class="container">
       <h1>Registrazione utente</h1>
       <hr>
@@ -16,7 +21,10 @@
         </div>
         <label for="email"><b>Codice Fiscale</b></label>
         <br>
-        <input type="text" v-model="user.cf" placeholder="xxxxxxxxxxxxxxxxxx"  name="cf" required>
+        <div class="row">
+        <input type="text" v-model="user.cf" placeholder="xxxxxxxxxxxxxxxxxx" name="CF" required>
+      </div>
+        
         <br>
        <label for="indirizzo"><b>Idirizzo*</b></label>
       <div style="width:100%">
@@ -101,6 +109,11 @@
       }
     },
     methods: {
+     closeAll(){
+      for(var i=0;i<document.getElementsByClassName('modal').length;i++){
+        document.getElementsByClassName('modal')[i].style.display='none';
+      }
+    },
       // Fetches posts when the component is created.
       createSocio () {
         var params = new URLSearchParams()
