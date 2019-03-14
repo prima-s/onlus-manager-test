@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-offset-5 col-md-5 text-center ">
-        <form action method="post">
+        <form action method="">
           
           <div class="form-login">
             <br>
@@ -11,26 +11,30 @@
             <br>
 
             <input
-              name="nome"
-              type=" fo"
-              id="userName"
-              class="form-control input-sm chat-input"
+              name="utente"
+              type=" text"
+              v-model="service.utente"
+              class="form-control input-sm"
               placeholder="username"
+              required
             >
             <br>
+            
             <br>
+            
             <input
               name="password"
-              type=" fo"
-              id="password"
+              type="password"
+              v-model="service.password"
               class="form-control input-sm chat-input"
               placeholder="password"
+              required
             >
             <br>
             <br>
             <div class="wrapper">
               <span class="group-btn">
-                <button type="login" href class="btn btn-primary btn-md">
+                <button type="login" href class="btn btn-primary btn-md" @click="validator()">
                   Login
                   <i class="fa fa-sign-in"></i>
                 </button>
@@ -68,10 +72,35 @@ export default {
       msg: "HowTo call REST-Services:",
       response: [],
       errors: [],
-      value: 75,
-    };
+       service: {
+          utente: '',
+          password: ''
+    },
+        showResponse: false,
+        retrievedUser: {},
+        showRetrievedUser: false
   }
+},
+methods: {
+      // Fetches posts when the component is created.
+      validator () {
+        var params = new URLSearchParams()
+        params.append('utente', this.service.utente)
+        params.append('password', this.service.password)
+        AXIOS.post(`/restlogin`, params)
+          .then(response => {
+            // JSON responses are automatically parsed.
+            this.response = response.data
+            console.log(response.data)
+            this.showResponse = true
+          })
+          .catch(e => {
+            this.errors.push(e)
+          })
+      }
 }
+}
+
 </script>
 
 <style scoped>
@@ -175,6 +204,7 @@ h4 {
 .text-white {
   color: white !important;
 }
+
 .wrapper {
   text-align: center;
 }
