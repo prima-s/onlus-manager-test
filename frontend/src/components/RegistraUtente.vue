@@ -8,12 +8,12 @@
     <div class="container">
       <h1>Registra utente</h1>
       <hr>
-            <div class="row">
-        <label style="margin-left:2%" for="nome">
+      <div class="row">
+        <label style="margin-left:1.8%" for="nome">
           <b>Nome*</b>
         </label>
         
-        <label style="margin-left:43%" for="cognome">
+        <label style="margin-left:42.4%" for="cognome">
           <b>Cognome*</b>
         </label>
       </div>
