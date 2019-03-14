@@ -8,7 +8,7 @@
     <div class="container">
       <h1>Registra utente</h1>
       <hr>
-      <div class="row">
+            <div class="row">
         <label style="margin-left:2%" for="nome">
           <b>Nome*</b>
         </label>
@@ -353,23 +353,77 @@ export default {
 
 
 
-/* Full-width input fields */
+ 
+ body,html{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #e74c3c !important;
+    }
+
+    .searchbar{
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 60px;
+    background-color: #353b48;
+    border-radius: 30px;
+    padding: 10px;
+    }
+
+    .search_input{
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    caret-color:transparent;
+    line-height: 40px;
+    transition: width 0.4s linear;
+    }
+
+    .searchbar> .search_input{
+    padding: 0 10px;
+    width: 450px;
+    caret-color:red;
+    transition: width 0.4s linear;
+    }
+
+    .searchbar > .search_icon{
+    background: white;
+    color: #e74c3c;
+    }
+
+    .search_icon{
+    height: 40px;
+    width: 40px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color:white;
+    }
+
+
+
+
 .testo,
 input[type="password"],
 textarea[type="text"] {
-  width: 100%;
+  
   padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: none;
+ 
+  
+  
   background: #f1f1f1;
 }
 .selle{
-   width: 100%;
+  
   padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: none;
+  
+  
+  
   background: #f1f1f1;
 }
 /* Add a background color when the inputs get focus */
@@ -426,7 +480,7 @@ hr {
   top: 15px;
   font-size: 40px;
   font-weight: bold;
-  color: #f1f1f1;
+  color:black;
 }
 
 .close:hover,
