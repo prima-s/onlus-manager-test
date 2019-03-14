@@ -202,7 +202,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 0;
-  top: 85px;
+  top: 12.5%;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow:auto ; /* Enable scroll if needed */
