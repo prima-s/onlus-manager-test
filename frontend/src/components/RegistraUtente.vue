@@ -60,21 +60,25 @@
            <b>Ruoli</b>
         </label>
     <div class="funkyradio row">
-        <div class="funkyradio-danger" style="padding-left:20px;width:20%;">
-            <input type="checkbox" value="amministratore" v-model="user.Ruolo" name="checkbox" id="checkbox1" checked/>
+        <div class="funkyradio-danger" style="padding-left:20px;width:17%;">
+            <input type="checkbox" value="amministratore" v-model="user.Ruolo" name="checkbox" id="checkbox1" />
             <label for="checkbox1">Amministratore</label>
         </div>
-        <div class="funkyradio-danger" style="padding-left:20px;width:20%;">
-            <input type="checkbox" value="presidente" v-model="user.Ruolo" name="checkbox" id="checkbox2" checked/>
+        <div class="funkyradio-danger" style="padding-left:20px;width:17%;">
+            <input type="checkbox" value="presidente" v-model="user.Ruolo" name="checkbox" id="checkbox2" />
             <label for="checkbox2">Presidente</label>
         </div>
-        <div class="funkyradio-danger" style="padding-left:20px;width:20%;">
-            <input type="checkbox" value="tesoriere" v-model="user.Ruolo" name="checkbox" id="checkbox3" checked/>
+        <div class="funkyradio-danger" style="padding-left:20px;width:17%;">
+            <input type="checkbox" value="tesoriere" v-model="user.Ruolo" name="checkbox" id="checkbox3" />
             <label for="checkbox3">Tesoriere</label>
         </div>
-        <div class="funkyradio-danger" style="padding-left:20px;width:20%;">
-            <input type="checkbox" value="consigliere" v-model="user.Ruolo" name="checkbox" id="checkbox4" checked/>
+        <div class="funkyradio-danger" style="padding-left:20px;width:17%;">
+            <input type="checkbox" value="consigliere" v-model="user.Ruolo" name="checkbox" id="checkbox4" />
             <label for="checkbox4">Consigliere</label>
+        </div>
+	 <div class="funkyradio-danger" style="padding-left:20px;width:15%;">
+            <input type="checkbox" name="checkbox" id="checkbox5" disabled="true" checked/>
+            <label for="checkbox5">Socio</label>
         </div>
     </div>
       <br>
