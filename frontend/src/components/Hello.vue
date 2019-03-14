@@ -48,10 +48,13 @@
           <br>
           <h4>Descrizione</h4>
           <br>
-          <h1 class="test">
-            Dudley Wrangel Clarke (Johannesburg, 27 aprile 1899 – Londra, 7 maggio 1974)
-            è stato un militare britannico,ijgiuygyguygygygygguygyggyyggygygygygygygygy
-          </h1>
+          <h5 class="test">
+           Il "Parky Touch Rugby" ed i suoi pionieri, la squadra dei "Bradirapidi", non smettono di destare 
+           entusiasmo e interesse di singoli e di istituzioni. [...] Quella del "Parky Touch Rugby" e dei suoi
+            "Bradirapidi", ora guidati da un allenatore ex rugbista e arbitro federale, è un'esperienza senza
+             precedenti e con prospettive di grande valore, anche nel campo della ricerca clinica. E soprattutto un
+            esempio di come lo sport possa essere davvero inclusivo e abbattere tutte le barriere.
+          </h5>
         </div>
       </div>
     </div>
@@ -104,41 +107,92 @@ methods: {
 </script>
 
 <style scoped>
-@media (max-width: 640px) { 
-body {font-size:1.3rem;} 
-h1{font-size: 16px;}
-h4{font-size: 18}
-} 
+
+input { 
+	width: 100%; 
+	margin-bottom: 10px; 
+	background: rgba(0,0,0,0.3);
+	border: none;
+	outline: none;
+	padding: 10px;
+	font-size: 13px;
+	color: #fff;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+	border: 1px solid rgba(0,0,0,0.3);
+	border-radius: 4px;
+	box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
+	-webkit-transition: box-shadow .5s ease;
+	-moz-transition: box-shadow .5s ease;
+	-o-transition: box-shadow .5s ease;
+	-ms-transition: box-shadow .5s ease;
+	transition: box-shadow .5s ease;
+}
+@media (max-width: 640px) {
+  body {
+    font-size: 1.3rem;
+  }
+  h1 {
+    font-size: 16px;
+  }
+  h5 {
+    font-size: 12;
+  }
+}
 @media (max-width: 767px) {
-.desc{
-margin-top:50px 
+  .desc {
+    margin-top: 50px;
+  }
+  h5 {
+    font-size: 8px;
+  }
+  .desc {
+    width: 250px;
+    min-height: 0px !important;
+    margin-top: 50px;
+  }
+  .form-login {
+    width: 250px;
+  }
+  .container {
+    margin-right: 10px;
+    padding: 50px !important;
+  }
 }
-h1{font-size: 16px;}
-h4{font-size: 18px}
-.desc{width: 250px;min-height:0px!important;margin-top:50px }
-.form-login{width: 250px;}
-.container{margin-right:10px;padding: 50px!important }
+
+@media (min-width: 641px) {
+  body {
+    font-size: 1.2rem;
+  }
+
+  h5 {
+    font-size: 14px;
+  }
 }
 
-@media (min-width: 641px) { 
-body {font-size:1.2rem;} 
-h1{font-size: 30px;}
-h4{font-size: 18px}
-
+@media (min-width: 960px) {
+  body {
+    font-size: 1.4rem;
+  }
+   h5 {
+    font-size: 20px;
+  }
 }
- 
-@media (min-width:960px) { 
-body {font-size:1.4rem;} 
 
-} 
+@media (min-width: 1100px) {
+  body {
+    font-size: 1.6rem;
+  }
+  h5 {
+    font-size: 20px;
+  }
+  .desc {
+    margin-left: 40px;
+  }
+}
 
-@media (min-width:1100px) { 
-body {font-size:1.6rem;}
-h4{font-size: 28}
-.desc{ margin-left:40px}
-} 
-
-h1.test{ word-wrap:break-word;}
+h5.test {
+  word-wrap: break-word;
+}
 body {
   height: 100%;
 }
@@ -204,17 +258,15 @@ h4 {
 .text-white {
   color: white !important;
 }
-
 .wrapper {
   text-align: center;
 }
-
 
 .a {
   font-weight: bold;
   color: #2c3e50;
 }
-.desc{
+.desc {
   background-color: rgba(0, 0, 0, 0.55);
   padding-top: 10px;
   padding-bottom: 20px;
@@ -226,6 +278,5 @@ h4 {
   color: white;
   box-shadow: 0 1px 0 #cfcfcf;
   min-height: 450px;
-  
 }
 </style>
