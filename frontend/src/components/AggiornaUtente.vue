@@ -63,21 +63,25 @@
            <b>Ruoli*</b>
         </label>
     <div class="funkyradio row">
-        <div class="funkyradio-danger" style="padding-left:20px;width:20%;">
-            <input type="checkbox" name="checkbox" id="checkbox1" checked/>
-            <label for="checkbox1">Amministratore</label>
+        <div class="funkyradio-danger" style="padding-left:20px;width:17%;">
+            <input type="checkbox" name="checkbox" id="checkbox6"/>
+            <label for="checkbox6">Amministratore</label>
         </div>
-        <div class="funkyradio-danger" style="padding-left:20px;width:20%;">
-            <input type="checkbox" name="checkbox" id="checkbox2" checked/>
-            <label for="checkbox2">Presidente</label>
+        <div class="funkyradio-danger" style="padding-left:20px;width:17%;">
+            <input type="checkbox" name="checkbox" id="checkbox7" />
+            <label for="checkbox7">Presidente</label>
         </div>
-        <div class="funkyradio-danger" style="padding-left:20px;width:20%;">
-            <input type="checkbox" name="checkbox" id="checkbox3" checked/>
-            <label for="checkbox3">Tesoriere</label>
+        <div class="funkyradio-danger" style="padding-left:20px;width:17%;">
+            <input type="checkbox" name="checkbox" id="checkbox8" />
+            <label for="checkbox8">Tesoriere</label>
         </div>
-        <div class="funkyradio-danger" style="padding-left:20px;width:20%;">
-            <input type="checkbox" name="checkbox" id="checkbox4" checked/>
-            <label for="checkbox4">Consigliere</label>
+        <div class="funkyradio-danger" style="padding-left:20px;width:17%;">
+            <input type="checkbox" name="checkbox" id="checkbox9" />
+            <label for="checkbox9">Consigliere</label>
+        </div>
+	 <div class="funkyradio-danger" style="padding-left:20px;width:15%;">
+            <input type="checkbox" name="checkbox" id="checkbox10" disabled="true" checked/>
+            <label for="checkbox10">Socio</label>
         </div>
     </div>
      
