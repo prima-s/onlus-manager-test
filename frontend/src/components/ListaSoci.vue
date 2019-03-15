@@ -5,7 +5,7 @@
       <h1>Lista soci</h1>
       <hr> 
  <br>
- 	<div>
+ 	<div id="dubkovidze">
     <b-table striped hover :items="soci" :fields="fields" />
   </div>
     </div>     
@@ -14,8 +14,8 @@
 		
 		<br/><br/>
 		
-				
-					
+            <button @click="createPDF()" class=" cancelbtn btn-block">Download PDF</button>
+            <button @click="callRestService()" class=" cancelbtn btn-block">Retrieve table</button>
 						<button @click="closeAll()" class=" cancelbtn btn-block">Cancel</button>
 					
           
@@ -24,7 +24,7 @@
 </form>
 </template>
 <script scoped>
-
+import { AXIOS } from "./http-common";
 export default {
 
   data() {
@@ -35,31 +35,32 @@ export default {
       value: 75,
          fields: [
           {
-            key: 'last_name',
-            label:'Nome',
+            key: 'numTessera',
+            label:'Numero di tessera',
+            sortable:false
+          },
+          {
+            key: 'nome',
+            label: 'Nome',
             sortable: false
           },
           {
-            key: 'first_name',
-            label:'Cognome',
+            key: 'cognome',
+            label: 'Cognome',
             sortable: true
-          },
-          {
-            key: 'age',
-            label: 'Eta',
-            sortable: false,
-            // Variant applies to the whole column, including the header and footer
-            variant: 'danger'
           }
-        ],
-        soci: [
-          { isActive: true, age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
-          { isActive: false, age: 21, first_name: 'Larsen', last_name: 'Shaw' },
-          { isActive: false, age: 89, first_name: 'Geneva', last_name: 'Wilson' },
-          { isActive: true, age: 38, first_name: 'Jami', last_name: 'Carney' }
-        ]
+         ],
+        soci:null
     };
   },
+   mounted() {
+    let recaptchaScript = document.createElement('script');
+    recaptchaScript.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js');
+    document.head.appendChild(recaptchaScript);
+    /*var recaptchaScript2 = document.createElement('script2');
+    recaptchaScript2.setAttribute('src2', 'https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.0.13/jspdf.plugin.autotable.min.js');
+    document.head.appendChild(recaptchaScript2)*/
+    },
    
   methods: {
        closeAll(){
@@ -67,18 +68,55 @@ export default {
         document.getElementsByClassName('modal')[i].style.display='none';
       }
     },
+    createPDF () {
+    /*var pdf = new jsPDF("p", "pt", "a4");
+	  pdf.addHTML($('#dubkovidze'), 15, 15, function() {
+    pdf.save('dubkovidze.pdf');});*/
+    
+    /*let pdfName = 'test'; 
+    let tabella=document.getElementById('dubkovidze');
+    var doc = new jsPDF();
+    doc.text(tabella, 10, 10);
+    doc.save(pdfName + '.pdf');*/
+    /*let vm=this;
+      let columns=[
+        {title:'nome', dataKey:'nome'},
+        {title:'cognome',dataKey:'cognome'}
+
+
+      ],
+      var doc=new jsPDF('p','pt');
+      doc.autoTable(columns,v*/
+    let pdfName = 'test'; 
+    var doc = new jsPDF();
+    for (var i=0;i<this.soci.length;i++){
+    doc.text(this.soci[i]['nome'] + '  ' + this.soci[i]['cognome'], 10, 10 + 10*i)
+    }
+    doc.save(ListaDeiSoci + '.pdf');
+    /*doc.text(this.soci[0]['nome'], 10, 10);
+    doc.save(pdfName + '.pdf');*/
+    
+      /*let vm=this;
+      let columns=[
+        {title:'nome', dataKey:'nome'},
+        {title:'cognome',dataKey:'cognome'}
+
+
+      ],
+      var doc=new jsPDF('p','pt');
+      doc.autoTable(columns,vm.info);
+      doc.save('info.pdf');*/
+  },
     
     // Fetches posts when the component is created.
     callRestService() {
-      AXIOS.get(`/hello`)
+      AXIOS.get(`/soci`)
         .then(response => {
-          // JSON responses are automatically parsed.
-          this.response = response.data;
-          console.log(response.data);
-        })
-        .catch(e => {
-          this.errors.push(e);
-        });
+            this.soci=response.data;
+          })
+          .catch(e => {
+            this.errors.push(e)
+          })
     },
     onclick:function(event) {
   if (event.target == modal) {
