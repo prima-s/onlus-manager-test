@@ -10,7 +10,9 @@
       variant=" btn-outline-light btn-block"
       class=" m-2 w-15"
     >
+
      
+
       <b-dropdown-item onclick="document.getElementById('id01').style.display='block'" style="width:auto;" @click="closeAll()">Registra utente</b-dropdown-item>
       <b-dropdown-item onclick="document.getElementById('id02').style.display='block'" style="width:auto;" @click="closeAll()">Modifica la password</b-dropdown-item>
       <b-dropdown-item onclick="document.getElementById('id03').style.display='block'" style="width:auto;" @click="closeAll()">Aggiorna dati socio</b-dropdown-item>
@@ -60,8 +62,10 @@
       class="m-2 w-15 logout btn-danger">logout</b-button>
           
   </div>
+
  
   <body >
+
     
     <div id="id01" class="modal">
       
@@ -179,10 +183,12 @@ export default {
 <style scoped>
 
 
+
 .flex{
   display:flex;
   justify-content: center;
 }
+
 .test > .btn-group > .dropdown-menu:active {
   display: block;
   margin-bottom: 5px;
@@ -242,6 +248,8 @@ size: 100%
   border: 1px solid #888;
   width: 80%; 
 }
+
+
 
 
 

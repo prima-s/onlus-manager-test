@@ -12,7 +12,7 @@ public enum TipoVoce {
 	 },
   
 	 Donazione{
-  
+		@Override
 		public String toString() {
 		   return "donazione";
 		}

@@ -1,6 +1,8 @@
 <template>
+
   <form class="modal-content" action="">
     <span
+
       @click="closeAll()"
       class="close"
       title="Close Modal"
@@ -17,6 +19,7 @@
           <b>Cognome*</b>
         </label>
       </div>
+
 
       <div style="width:100%">
         <input
@@ -226,6 +229,7 @@ export default {
         document.getElementsByClassName('modal')[i].style.display='none';
       }
     },
+
     // Fetches posts when the component is created.
     createUser() {
       var params = new URLSearchParams();
@@ -250,6 +254,7 @@ export default {
         this.response = response.data
         this.user.id = response.data
       console.log(response.data)
+
             this.showResponse = true
       })
       .catch(e => {

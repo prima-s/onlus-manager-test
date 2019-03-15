@@ -57,37 +57,37 @@ public class SocioServiceImpl implements SocioService {
 
     @Override
     public void modificaPassword(String password) {
-
+        //TODO
     }
 
     @Override
     public void modificaUtente(String nomeUtente) {
-
+        //TODO
     }
 
     @Override
     public void inviaMailNuovoSocio(String credenziali, String mail) {
-
+        //TODO
     }
 
     @Override
     public void salvaListaSoci() {
-
+        //TODO
     }
 
     @Override
     public void visualizzaFileLog() {
-
+        //TODO
     }
 
     @Override
     public void inviaMailAmministratore(String indirizzoMail) {
-
+        //TODO
     }
 
     @Override
     public void ModificaOpzioniApplicazione() {
-
+        //TODO
     }
  
     

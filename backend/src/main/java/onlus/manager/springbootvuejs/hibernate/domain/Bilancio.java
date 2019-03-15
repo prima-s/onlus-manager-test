@@ -14,7 +14,7 @@ public class Bilancio {
 		voci =new ArrayList<>();
 	}
 	
-	public void aggiungiVoce( Voce v) {
+	public void aggiungiVoce(Voce v) {
 		voci.add(v);
 	}
 	

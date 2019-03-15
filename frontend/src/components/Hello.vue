@@ -49,11 +49,13 @@
           <h4>Descrizione</h4>
           <br>
           <h5 class="test">
+
            Il "Parky Touch Rugby" ed i suoi pionieri, la squadra dei "Bradirapidi", non smettono di destare 
            entusiasmo e interesse di singoli e di istituzioni. [...] Quella del "Parky Touch Rugby" e dei suoi
             "Bradirapidi", ora guidati da un allenatore ex rugbista e arbitro federale, è un'esperienza senza
              precedenti e con prospettive di grande valore, anche nel campo della ricerca clinica. E soprattutto un
             esempio di come lo sport possa essere davvero inclusivo e abbattere tutte le barriere.
+
           </h5>
         </div>
       </div>
@@ -107,6 +109,7 @@ methods: {
 </script>
 
 <style scoped>
+
 
 input { 
 	width: 100%; 
@@ -163,6 +166,7 @@ input {
   body {
     font-size: 1.2rem;
   }
+
 
   h5 {
     font-size: 14px;
@@ -245,7 +249,7 @@ body {
 h1 {
   color: white !important;
 }
-h4 {
+h5 {
   border: 0 solid #fff;
   border-bottom-width: 1px;
   padding-bottom: 10px;
@@ -258,6 +262,7 @@ h4 {
 .text-white {
   color: white !important;
 }
+
 .wrapper {
   text-align: center;
 }
