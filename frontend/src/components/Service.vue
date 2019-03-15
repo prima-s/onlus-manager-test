@@ -13,7 +13,7 @@
 
      
 
-      <b-dropdown-item onclick="document.getElementById('id01').style.display='block'" style="width:auto;" @click="closeAll()">Registra utente</b-dropdown-item>
+      <b-dropdown-item onclick="document.getElementById('id01').style.display='block'" style="width:auto;" @click="closeAll()">Registra nuovo socio</b-dropdown-item>
       <b-dropdown-item onclick="document.getElementById('id02').style.display='block'" style="width:auto;" @click="closeAll()">Modifica la password</b-dropdown-item>
       <b-dropdown-item onclick="document.getElementById('id03').style.display='block'" style="width:auto;" @click="closeAll()">Aggiorna dati socio</b-dropdown-item>
       <b-dropdown-item onclick="document.getElementById('id04').style.display='block'" style="width:auto;" @click="closeAll()">Visualizza lista dei soci</b-dropdown-item>
@@ -252,7 +252,7 @@ size: 100%
 
 .logout{
   
-  width: 6%
+  width: auto;
 }
 
 
