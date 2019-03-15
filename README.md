@@ -1,7 +1,7 @@
 # Onlus Manager App
 A reusable Springboot app using Vue.js as frontend
 
-[![Build Status](https://travis-ci.org/prima-s/onlus-manager-test.svg?branch=master)](https://travis-ci.org/prima-s/onlus-manager-test)
+[![Build Status](https://travis-ci.org/prima-s/onlus-manager-test.svg?branch=test)](https://travis-ci.org/prima-s/onlus-manager-test)
 [![versionspringboot](https://img.shields.io/badge/springboot-2.1.3_RELEASE-brightgreen.svg)](https://github.com/spring-projects/spring-boot)
 [![versionnodejs](https://img.shields.io/badge/nodejs-v11.8.0-brightgreen.svg)](https://nodejs.org/en/)
 [![versionvuejs](https://img.shields.io/badge/vue.js-2.6.6-brightgreen.svg)](https://vuejs.org/)
@@ -64,7 +64,8 @@ spring-boot-vuejs
 
 ## First App run
 
-Inside the root directory, do a: 
+Once downloaded the zip file (or cloned it) please change database data in [application-properties-file](backend/src/main/resources/application-properties.txt) application.properties according to yours.
+Then from the root directory, do a: 
 
 ```
 mvn clean install

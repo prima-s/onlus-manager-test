@@ -1,15 +1,18 @@
 <template>
 <div class="servicemy">
 
-<header class="navbar-nav">
-  <div id="nav" class="bg-dark">
+
+  <div id="nav"  class=" flex bg-dark ">
     <b-dropdown
       id="ddown-offset"
       offset="25"
-      text="Modifica account"
-      variant="outline-info btn-block"
-      class="m-2 w-15"
+      text="Modifica Account"
+      variant=" btn-outline-light btn-block"
+      class=" m-2 w-15"
     >
+
+     
+
       <b-dropdown-item onclick="document.getElementById('id01').style.display='block'" style="width:auto;" @click="closeAll()">Registra utente</b-dropdown-item>
       <b-dropdown-item onclick="document.getElementById('id02').style.display='block'" style="width:auto;" @click="closeAll()">Modifica la password</b-dropdown-item>
       <b-dropdown-item onclick="document.getElementById('id03').style.display='block'" style="width:auto;" @click="closeAll()">Aggiorna dati socio</b-dropdown-item>
@@ -21,7 +24,7 @@
       id="ddown-offset"
       offset="25"
       text="Gestione bilancio"
-      variant="outline-info btn-block"
+      variant=" btn-outline-light btn-block"
       class="m-2 w-15"
     >
       <b-dropdown-item onclick="document.getElementById('id06').style.display='block'" style="width:auto;" @click="closeAll()">Visualizza bilancio</b-dropdown-item>
@@ -34,7 +37,7 @@
       id="ddown-offset"
       offset="25"
       text="Modifica opzioni"
-      variant="outline-info btn-block"
+      variant=" btn-outline-light btn-block"
       class="m-2 w-15"
     >
       <b-dropdown-item href="#">Inserisci importo bilancio</b-dropdown-item>
@@ -45,14 +48,24 @@
       id="ddown-offset"
       offset="25"
       text="Visualizza file log"
-      variant="outline-info"
+      variant=" btn-outline-light"
       class="m-2 w-15"
     >
       <b-dropdown-item href="#">Registro attivita</b-dropdown-item>
     </b-dropdown>
+     
+	         <b-button
+           
+      offset="25"
+      text="Gestione bilancio"
+      variant=" btn-block"
+      class="m-2 w-15 logout btn-danger">logout</b-button>
+          
   </div>
-  </header>
-  <body>
+
+ 
+  <body >
+
     
     <div id="id01" class="modal">
       
@@ -171,16 +184,22 @@ export default {
 
 
 
+.flex{
+  display:flex;
+  justify-content: center;
+}
+
 .test > .btn-group > .dropdown-menu:active {
   display: block;
   margin-bottom: 5px;
   position: static;
+  
 }
 #ddown-offset {
   height: 50px;
 }
 body {
-  margin-top: 20px;
+  margin-top:2%;
 }
 .fa-fw {
   width: 2em;
@@ -203,7 +222,9 @@ li {
 a {
   color: #42b983;
 }
-body {font-family: Arial, Helvetica, sans-serif;}
+body {font-family: Arial, Helvetica, sans-serif;
+size: 100%
+}
 * {box-sizing: border-box;}
 
 /* The Modal (background) */
@@ -212,10 +233,10 @@ body {font-family: Arial, Helvetica, sans-serif;}
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 0;
-  top: 85px;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow:auto ; /* Enable scroll if needed */
+  top: 12.5%;
+  width: 100%; 
+  height: 100%; 
+  overflow:auto ; 
   background-color: #474e5d;
   padding-top: 0px;
 }
@@ -223,58 +244,14 @@ body {font-family: Arial, Helvetica, sans-serif;}
 /* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  margin: 5% auto 15% auto; 
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 80%; 
 }
 
 
 
-/* Change styles for cancel button and signup button on extra small screens */
-@media screen and (max-width: 300px) {
-  .cancelbtn, .signupbtn {
-     width: 100%;
-  }
-}/*
-.ind{
-  margin: 5px 10px 22px 0;
-  width: 45%;
-  padding: 15px;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1; 
-  background-color: #ddd;
-  outline: none;
-}
-.anagrafica{
-  margin: 5px 10px 22px 0;
-  width: 48%;
-  padding: 15px;
-  display: inline-block;
-  border: none;
-   border: none;
-  background: #f1f1f1;
 
-}
-.anagrafica:focus{
-  background-color: #ddd;
-  outline: none;
-}
-.numero{
-  margin: 5px 10px 22px 0;
-  width: 48%;
-  padding: 15px;
-  display: inline-block;
-  border: none;
-   border: none;
-  background: #f1f1f1;
 
-}
-.numero:focus{
-  background-color: #ddd;
-  outline: none;
-}
-input[name=CF]{
-  width: 50% !important;
-}*/
+
 </style>
