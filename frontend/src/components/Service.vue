@@ -54,13 +54,12 @@
       <b-dropdown-item href="#">Registro attivita</b-dropdown-item>
     </b-dropdown>
      
-	         <b-button
+	           <b-button
            
       offset="25"
       text="Gestione bilancio"
       variant=" btn-block"
-      class="m-2 w-15 logout btn-danger">logout</b-button>
-          
+      class="m-2 w-15 logout btn-outline-light btn-block">Logout</b-button>
   </div>
 
  
@@ -251,7 +250,10 @@ size: 100%
 
 
 
-
+.logout{
+  
+  width: 5%
+}
 
 
 </style>
