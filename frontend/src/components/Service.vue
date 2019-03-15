@@ -252,7 +252,7 @@ size: 100%
 
 .logout{
   
-  width: 5%
+  width: 6%
 }
 
 
