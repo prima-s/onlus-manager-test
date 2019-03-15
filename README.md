@@ -64,7 +64,8 @@ spring-boot-vuejs
 
 ## First App run
 
-Inside the root directory, do a: 
+Once downloaded the zip file (or cloned it) please change database data in [application-properties-file](backend/src/main/resources/application-properties.txt) application.properties according to yours.
+Then from the root directory, do a: 
 
 ```
 mvn clean install
