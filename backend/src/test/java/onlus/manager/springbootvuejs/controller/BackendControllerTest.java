@@ -1,7 +1,6 @@
 package onlus.manager.springbootvuejs.controller;
 
 import onlus.manager.springbootvuejs.SpringBootVuejsApplication;
-import onlus.manager.springbootvuejs.domain.User;
 import io.restassured.RestAssured;
 import org.apache.http.HttpStatus;
 import org.junit.Before;
@@ -17,11 +16,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
-@RunWith(SpringRunner.class)
+/*@RunWith(SpringRunner.class)
 @SpringBootTest(
 		classes = SpringBootVuejsApplication.class,
 		webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
-)
+)*/
 public class BackendControllerTest {
 
 	@LocalServerPort
@@ -33,47 +32,6 @@ public class BackendControllerTest {
         RestAssured.port = port;
     }
 
-	@Test
-	public void saysHello() {
-		when()
-			.get("/api/hello")
-		.then()
-			.statusCode(HttpStatus.SC_OK)
-			.assertThat()
-				.body(is(equalTo(BackendController.HELLO_TEXT)));
-	}
 
-	@Test
-    public void addNewUserAndRetrieveItBack() {
-        User norbertSiegmund = new User("Norbert", "Siegmund");
-
-        Long userId =
-            given()
-                .queryParam("firstName", "Norbert")
-                .queryParam("lastName", "Siegmund")
-            .when()
-                .post("/api/user")
-            .then()
-                .statusCode(is(HttpStatus.SC_CREATED))
-                .extract()
-                    .body().as(Long.class);
-
-	    User responseUser =
-            given()
-                    .pathParam("id", userId)
-                .when()
-                    .get("/api/user/{id}")
-                .then()
-                    .statusCode(HttpStatus.SC_OK)
-                    .assertThat()
-                        .extract().as(User.class);
-
-	    // Did Norbert came back?
-
-        assertThat(responseUser.getFirstName(), is("Norbert"));
-        assertThat(responseUser.getLastName(), is("Siegmund"));
-
-
-    }
 
 }
