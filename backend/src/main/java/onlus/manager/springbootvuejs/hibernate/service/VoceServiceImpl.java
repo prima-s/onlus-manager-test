@@ -2,6 +2,9 @@ package onlus.manager.springbootvuejs.hibernate.service;
 
 import java.math.BigDecimal;
 import java.util.List;
+
+import onlus.manager.springbootvuejs.hibernate.domain.TipoVoce;
+import onlus.manager.springbootvuejs.hibernate.repository.TipoVoceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import onlus.manager.springbootvuejs.hibernate.repository.VoceRepository;
@@ -13,14 +16,17 @@ public class VoceServiceImpl implements VoceService {
     @Autowired
     private VoceRepository voceRepository;
 
+    @Autowired
+    private TipoVoceRepository tipoVoceRepository;
+
 
     @Autowired
     public VoceServiceImpl(VoceRepository voceRepository) {
         this.voceRepository = voceRepository;
     }
 
-    public Voce aggiungiVoceInBilancio(Voce voce) {
-        Voce v =  voceRepository.save(voce);
+    public TipoVoce aggiungiVoceInBilancio(TipoVoce voce) {
+        TipoVoce v =  tipoVoceRepository.save(voce);
         return v;
     }
 
@@ -55,5 +61,5 @@ public class VoceServiceImpl implements VoceService {
     public Voce modificaVoceInBilancio(Voce voce) {
         return voceRepository.save(voce);
     }
-    
+
 }
