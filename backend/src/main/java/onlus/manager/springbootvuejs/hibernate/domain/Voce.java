@@ -12,15 +12,15 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table
 public class Voce {
 
 	@Id
     @GeneratedValue
     private Integer idVoce;
 
-    @NotBlank
-    @Field(termVector = TermVector.YES)
+
+	@ManyToOne
+	@JoinColumn(name = "tipoVoce")
     private TipoVoce nomeVoce;
 
     @NotBlank
@@ -46,35 +46,35 @@ public class Voce {
 	}
 
 	public Integer getIdVoce() {
-		return idVoce;
+		return this.idVoce;
 	}
 	public TipoVoce getNomeVoce() {
-		return nomeVoce;
+		return this.nomeVoce;
 	}
 	public void setNomeVoce(TipoVoce nomeVoce) {
 		this.nomeVoce = nomeVoce;
 	}
 	public BigDecimal getSommaAssociata() {
-		return sommaAssociata;
+		return this.sommaAssociata;
 	}
 	public void setSommaAssociata(BigDecimal sommaAssociata) {
 		this.sommaAssociata = sommaAssociata;
 	}
 	public LocalDate getDataRiferimento() {
-		return dataRiferimento;
+		return this.dataRiferimento;
 	}
 	public void setDataRiferimento(LocalDate dataRiferimento) {
 		this.dataRiferimento = dataRiferimento;
 	}
 	public String getNote() {
-		return note;
+		return this.note;
 	}
 	public void setNote(String note) {
 		this.note = note;
 	}
 
 	public int getAnno(){
-		return dataRiferimento.getYear();
+		return this.dataRiferimento.getYear();
 	}
 
 	@Override
