@@ -76,7 +76,7 @@ export default {
     var doc = new jsPDF();
     for (var i=0;i<this.soci.length;i++){
     doc.text(
-    this.soci[i]['numTessera']  + '\t\t - \t  ' + this.soci[i]['nome'] + ' \t\t ' + this.soci[i]['cognome'], 10, 10 + 10*i)
+    this.soci[i]['numTessera']  + '  -  ' + this.soci[i]['nome'] + '   ' + this.soci[i]['cognome'], 10, 10 + 10*i)
     }
     doc.save('ListaSoci' + '.pdf');
   },
