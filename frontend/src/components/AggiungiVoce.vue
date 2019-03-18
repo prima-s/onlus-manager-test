@@ -12,7 +12,7 @@
 <label for="voci" style="padding-right:20px;" ><b>Nuova Voce Bilancio</b></label>
     
        
-        <input type="text" class="testo" placeholder="Nome nuovo bilancio" name="NewVoce" required>
+        <input type="text" class="testo" placeholder="Nome nuovo bilancio" name="NewVoce" v-model="voce" required>
         
        
 
@@ -25,7 +25,7 @@
 						<button @click="closeAll()" class=" cancelbtn btn-block">Cancel</button>
 					</div>
           	<div class="col-xs-6 col-sm-6 col-md-6">
-                        <button type="submit" @click="createUser()" class=" btn-success btn-block" value="Sign In">Sign Up</button>
+                        <button type="submit" @click="addVoce()" class=" btn-success btn-block">Aggiungi</button>
 					</div>
 
 				</div>
@@ -33,6 +33,9 @@
 
 
 
+      </div>
+      <div v-if="success">
+        <h3><strong>{{voce}}</strong> è stata inserita tra le voci di bilancio.</h3>
       </div>
  </form>
 </template>
@@ -43,11 +46,10 @@ export default {
 
   data() {
     return {
-      msg: "HowTo call REST-Services:",
       response: [],
       errors: [],
-      value: 75,
-
+      voce: '',
+      success: false
     };
   },
    
@@ -59,15 +61,18 @@ export default {
     },
     
    
-    callRestService() {
-      AXIOS.get(`/hello`)
+    addVoce() {
+        var params = new URLSearchParams();
+         params.append("voce", this.voce);
+      AXIOS.post(`/aggiungiVoce`, params)
         .then(response => {
           // JSON responses are automatically parsed.
-          this.response = response.data;
-          console.log(response.data);
+          this.response = response.data
+          console.log(response.data)
+          this.success = true
         })
         .catch(e => {
-          this.errors.push(e);
+          this.errors.push(e)
         });
     },
     onclick:function(event) {
