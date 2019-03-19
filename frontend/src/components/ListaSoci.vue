@@ -4,7 +4,7 @@
     <div class="container">
       <h1>Lista soci</h1>
       <hr>
-
+     <a href="#" @click="createPDF()" ><i class="far fa-file-pdf"></i>Scarica Pdf lista soci </a>
  <br>
  	<div id="sociTable">
     <b-table striped hover :items="soci" :fields="fields" />
@@ -15,7 +15,6 @@
 
 		<br/><br/>
 
-            <button @click="createPDF()" class="cancelbtn btn-block">Download PDF</button>
 			<button @click="closeAll()" class="cancelbtn btn-block">Cancel</button>
 
 
