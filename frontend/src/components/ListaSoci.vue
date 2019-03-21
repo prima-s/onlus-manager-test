@@ -120,4 +120,18 @@ button:hover {
   padding-left:30;
   width: 50%;
 }
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: black;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
 </style>

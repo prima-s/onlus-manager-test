@@ -20,7 +20,7 @@
 
       <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-6">
-          <button @click="closeAll()" class="cancelbtn btn-block">Cancel</button>
+          <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6">
           <button type="submit" @click="addVoce()" class="btn-success btn-block">Aggiungi</button>
@@ -123,7 +123,7 @@ hr {
   top: 15px;
   font-size: 40px;
   font-weight: bold;
-  color: #f1f1f1;
+  color: black;
 }
 
 .close:hover,

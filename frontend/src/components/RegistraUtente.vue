@@ -4,7 +4,7 @@
     <div class="container">
       <h1>Registra nuovo socio</h1>
       <hr>
-      <h8>(*)Campi Obbligatori</h8>
+      <h6>(*)Campi Obbligatori</h6>
       <hr>
       <div class="row">
         <div class="col-md-6">
@@ -292,6 +292,10 @@ export default {
 
 
 <style scoped>
+.funkyradio {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
 .funkyradio div {
   clear: both;
   overflow: hidden;
@@ -333,6 +337,7 @@ export default {
   width: 2.5em;
   background: #d1d3d4;
   border-radius: 3px 0 0 3px;
+  color:#777;
 }
 
 .funkyradio input[type="radio"]:hover:not(:checked) ~ label,
@@ -356,7 +361,7 @@ export default {
 .funkyradio input[type="checkbox"]:checked ~ label:before {
   content: "\2714";
   text-indent: 0.9em;
-  color: #333;
+  color: white;
   background-color: #ccc;
 }
 
@@ -369,14 +374,6 @@ export default {
 .funkyradio-danger input[type="checkbox"]:checked ~ label:before {
   color: #fff;
   background-color: #1800f19b;
-}
-
-body,
-html {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
 }
 
 .testo,
@@ -472,7 +469,6 @@ hr {
   display: inline-block;
   border: none;
   background: #f1f1f1;
-  background-color: #ddd;
   outline: none;
 }
 .anagrafica {
@@ -501,7 +497,7 @@ hr {
   background-color: #ddd;
   outline: none;
 }
-input[name="CF"]:focus {
+input:focus {
   background-color: #ddd;
   outline: none;
 }
