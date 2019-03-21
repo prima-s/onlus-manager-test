@@ -56,7 +56,6 @@
             "Bradirapidi", ora guidati da un allenatore ex rugbista e arbitro federale, è un'esperienza senza
              precedenti e con prospettive di grande valore, anche nel campo della ricerca clinica. E soprattutto un
             esempio di come lo sport possa essere davvero inclusivo e abbattere tutte le barriere.
-<button @click="test1()">test</button>
           </h5>
         </div>
       </div>

@@ -40,30 +40,30 @@
         class="m-2 w-15"
       >
         <b-dropdown-item
-          onclick="document.getElementById('id06').style.display='block'"
+          onclick="document.getElementById('id05').style.display='block'"
           style="width:auto;"
           @click="closeAll()"
         >Visualizza bilancio</b-dropdown-item>
         <b-dropdown-item
-          onclick="document.getElementById('id08').style.display='block'"
+          onclick="document.getElementById('id06').style.display='block'"
           style="width:auto;"
           @click="closeAll()"
           v-if="accesso === 'A' || accesso === 'B'"
         >Nuova voce di bilancio</b-dropdown-item>
         <b-dropdown-item
-          onclick="document.getElementById('id09').style.display='block'"
+          onclick="document.getElementById('id07').style.display='block'"
           style="width:auto;"
           @click="closeAll()"
           v-if="accesso === 'A' || accesso === 'B'"
         >Rimuovi voce di bilancio</b-dropdown-item>
         <b-dropdown-item
-          onclick="document.getElementById('id10').style.display='block'"
+          onclick="document.getElementById('id08').style.display='block'"
           style="width:auto;"
           @click="closeAll()"
           v-if="accesso === 'A' || accesso === 'B'"
         >Inserisci voce in bilancio</b-dropdown-item>
         <b-dropdown-item
-          onclick="document.getElementById('id11').style.display='block'"
+          onclick="document.getElementById('id09').style.display='block'"
           style="width:auto;"
           @click="closeAll()"
           v-if="accesso === 'A' || accesso === 'B'"
@@ -115,21 +115,18 @@
       <ListaSoci/>
     </div>
     <div id="id05" class="modal">
-      <StampaPdf/>
-    </div>
-    <div id="id06" class="modal">
       <VisualizzaBilancio/>
     </div>
-    <div id="id08" class="modal">
+    <div id="id06" class="modal">
       <AggiungiVoce/>
     </div>
-    <div id="id09" class="modal">
+    <div id="id07" class="modal">
       <RimuoviVoce/>
     </div>
-    <div id="id10" class="modal">
+    <div id="id08" class="modal">
       <AggiungiVoceBilancio/>
     </div>
-    <div id="id11" class="modal">
+    <div id="id09" class="modal">
       <InserisciImportoBilancio/>
     </div>
     </body>
@@ -142,7 +139,6 @@ import RegistraUtente from "./RegistraUtente";
 import CambiaPassword from "./CambiaPassword";
 import AggiornaUtente from "./AggiornaUtente";
 import ListaSoci from "./ListaSoci";
-import StampaPdf from "./StampaPdf";
 import VisualizzaBilancio from "./VisualizzaBilancio";
 import AggiungiVoce from "./AggiungiVoce";
 import AggiungiVoceBilancio from "./AggiungiVoceBilancio";
@@ -164,26 +160,18 @@ export default {
       modal: "id07",
       modal: "id08",
       modal: "id09",
-      modal: "id10",
-      modal: "id11",
       accesso: null,
-      all: ["id01", "id02", "id03", "id04"]
+      all: ["id01", "id02", "id03", "id04", "id05", "id06", "id07", "id08", "id09"]
     };
   },
   created() {
     this.accesso = this.$route.query.livello;
   },
-  //   beforeRouteEnter(to, from, next) {
-  //   if (this.accesso != "") {
-  //     next();
-  //   }
-  // },
   components: {
     RegistraUtente,
     CambiaPassword,
     AggiornaUtente,
     ListaSoci,
-    StampaPdf,
     VisualizzaBilancio,
     AggiungiVoce,
     AggiungiVoceBilancio,
