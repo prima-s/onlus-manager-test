@@ -105,7 +105,7 @@ this.mail2 = mail2;
 this.scadenzaTessera = LocalDate.of(LocalDate.now().getYear(), 12, 31);
 this.campoNote = campoNote;
 ArrayList<String> r = new ArrayList<>(elaboraRuoli(ruolo));
-r.add(Ruolo.Ordinario.toString());
+r.add("ordinario");
 this.ruoli = r.toString().replace("[", "").replace("]", "").replace(",", " ");
 }
 
