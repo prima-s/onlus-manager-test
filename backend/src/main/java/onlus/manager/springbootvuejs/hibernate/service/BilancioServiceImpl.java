@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+import onlus.manager.springbootvuejs.hibernate.repository.VoceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,9 @@ public class BilancioServiceImpl implements BilancioService {
     private BilancioRepository bilancioRepository;
 
     @Autowired
+    private VoceRepository voceRepository;
+
+    @Autowired
     public BilancioServiceImpl(BilancioRepository bilancioRepository) {
         this.bilancioRepository = bilancioRepository;
     }
@@ -30,7 +34,6 @@ public class BilancioServiceImpl implements BilancioService {
     @Override
     public Voce aggiungiVoceInBilancio(Voce voce) {
         return bilancioRepository.save(voce);
-
     }
 
     @Override
@@ -42,38 +45,76 @@ public class BilancioServiceImpl implements BilancioService {
     public void salvaBilancio(List<Voce> bilancio) {
        // List<Voce> bil = bilancioRepository.saveAll(bilancio);
 
-
-
     }
 
-    @Override
-    public BigDecimal visualizzaBilancioAnnuale(int anno) {
-
-
-       // Criteria criteria = session.createCriteria(Voce.class);
-
-        //List<Voce> list = criteria.add(Restrictions.eq("anno", anno)).list();
-
-        BigDecimal result = BigDecimal.ZERO;
-       /* for (Voce v : list) {
-            result = result.add(v.getSommaAssociata());
-        }*/
-        return null;
-    }
+   /* public List<Voce> salvaBilancio() {
+        return voceRepository.findAll();
+    }*/
 
     @Override
     public BigDecimal visualizzaBilancioTotale() {
-        return null;
+        BigDecimal somma = BigDecimal.ZERO;
+        List<Voce> voci = visualizzaVociInBilancio();
+        for (Voce voce : voci) {
+            somma = somma.add(voce.getSommaAssociata());
+        }
+        return somma;
     }
 
     @Override
     public List<Voce> visualizzaVociInBilancio() {
-        return null;
+        return voceRepository.findAll();
     }
 
     @Override
     public List<Voce> visualizzaVociTemporale(LocalDate data){
         return null;
     }
+
+    @Override
+    public BigDecimal modificaBilancio(BigDecimal newImporto) {
+        BigDecimal importo = visualizzaBilancioTotale();
+        importo = newImporto; 
+        return importo;
+    }
+
+
+    public BigDecimal visualizzaBilancioAnnuale(int anno) {
+        BigDecimal somma = BigDecimal.ZERO;
+        List<Voce> voci = voceRepository.findAll();
+        for (Voce voce : voci) {
+            if(anno == voce.getAnno()){
+                somma = somma.add(voce.getSommaAssociata());
+            }
+        }
+        return somma;
+    }
+/*
+    public BigDecimal visualizzaBilancioTotale() {
+        BigDecimal somma = new BigDecimal(0);
+        List<Voce> voci = voceRepository.findAll();
+        for (Voce voce : voci) {
+            somma = somma.add(voce.getSommaAssociata());
+        }
+        return somma;
+    }
+
+    public Voce modificaVoceInBilancio(Voce voce) {
+        return voceRepository.save(voce);*/
+
+    @Override
+    public String aggiungiVoce(String voce) {
+        return null;
+    }
+
+    @Override
+    public String rimuoviVoce(String voce) {
+        return null;
+    }
+
+    @Override
+    public List<String> listaTipologieVoci() {
+        return null;
+    }
+    }
   
-}
