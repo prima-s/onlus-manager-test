@@ -3,6 +3,7 @@ package onlus.manager.springbootvuejs.repository;
 import onlus.manager.springbootvuejs.hibernate.domain.Socio;
 import onlus.manager.springbootvuejs.hibernate.repository.LoginRepository;
 import onlus.manager.springbootvuejs.hibernate.repository.SocioRepository;
+import onlus.manager.springbootvuejs.hibernate.repository.CredenzialiRepository;
 import onlus.manager.springbootvuejs.hibernate.service.SocioServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,6 +28,9 @@ public class SocioRepoTest {
     
     @Autowired
     private LoginRepository loginRepository;
+    
+    @Autowired
+    private CredenzialiRepository credenzialiRepository;
 
     private SocioServiceImpl service;
     private Socio marioRossi;
@@ -38,7 +42,7 @@ public class SocioRepoTest {
         marioRossi = new Socio("mario", "rossi", "Via delle frasche", "00177", "Venezia", "Italia", "AAAAAA000000BBBBBB", "3390000123", "062343123", "mario@mail.com", "mario3@mail.com", "note di mario", new String[]{});
         luigiVerdi = new Socio("luigi", "verdi", "Via che non esiste", "23563", "Milano", "Romania", "AAAAAA000000BBBBBB", "3384345334", "069383883", "luigi@mail.com", "luigi3@mail.com", "note di luigi", new String[]{});
         socioNull = null;
-        service = new SocioServiceImpl(socioRepository, loginRepository);
+        service = new SocioServiceImpl(socioRepository, loginRepository, credenzialiRepository);
         
     }
 
