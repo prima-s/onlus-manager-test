@@ -56,7 +56,7 @@
             "Bradirapidi", ora guidati da un allenatore ex rugbista e arbitro federale, è un'esperienza senza
              precedenti e con prospettive di grande valore, anche nel campo della ricerca clinica. E soprattutto un
             esempio di come lo sport possa essere davvero inclusivo e abbattere tutte le barriere.
-
+<button @click="test1()">test</button>
           </h5>
         </div>
       </div>
@@ -75,11 +75,8 @@ export default {
 
   data() {
     return {
-      msg: "HowTo call REST-Services:",
       checking:null,
-      params:null,
       accesso:null,
-      answer:null,
       response: [],
       errors: [],
        service: {
@@ -91,6 +88,14 @@ export default {
         showRetrievedUser: false
   }
 },
+  beforeRouteLeave(to, from, next) {
+    if (this.accesso === "A" || this.accesso === "B" || this.accesso === "C") {
+      next();
+    } else {
+      next("/");
+      this.accesso = null;
+    }
+  },
 methods: {
       // Fetches posts when the component is created.
       startchecker(){
@@ -98,47 +103,33 @@ methods: {
           window.location.href= "/#/callservice?livello="+this.accesso;
         }
         else{
-          //this.accesso=null;
-          /* this.params=null; */
           window.location.href="/#/";
         }
-        
       },
       validator () {
-        this.params = new URLSearchParams()
-        this.params.append('utente', this.service.utente)
-        this.params.append('password', this.service.password)
-        AXIOS.post(`/restlogin`, this.params)
+        var params = new URLSearchParams()
+        params.append('utente', this.service.utente)
+        params.append('password', this.service.password)
+        AXIOS.post(`/restlogin`, params)
           .then(response => {
-
-            //.then(response => {
-            // JSON responses are automatically parsed.
-            this.answer = response.data
-            console.log(this.answer+"This is answer from our checker")
-            console.log('Check of enter')
+            this.accesso = response.data
+            console.log(this.accesso+"This is answer from our checker")
             this.showResponse = true
-             
+            this.checking = true
 
-            if(this.answer =="A" || this.answer == "B" || this.answer == "C"){
-              console.log('This is the entrance to menu page')
-              this.accesso=this.answer;
-              //bus.$emit('form-submitted',this.accesso);
-              
+            if(this.accesso =="A" || this.accesso == "B" || this.accesso == "C"){
+              console.log('Valid level')
               this.checking=true;
-              //window.location.href= "/#/callservice"
-              
             }
             else{
-              //this.params=null;
               this.checking=false;
-              //window.location.href="/#/"
-            }
-            //this.startchecker();
-            
+              this.accesso = null;
+            }  
           })
           .catch(e => {
             this.errors.push(e)
           })
+            
      }
 }
 }
@@ -146,8 +137,6 @@ methods: {
 </script>
 
 <style scoped>
-
-
 input { 
 	width: 100%; 
 	margin-bottom: 10px; 
