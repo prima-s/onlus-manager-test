@@ -1,101 +1,94 @@
 <template>
- <form class="modal-content" style="width:60%;" action>
-    <span
-      @click="closeAll()"
-      class="close"
-      title="Close Modal"
-    >&times;</span>
-      <div class="container">
+  <form class="modal-content" style="width:60%;" action>
+    <span @click="closeAll()" class="close" title="Close Modal">&times;</span>
+    <div class="container">
       <h1>Aggiungi Voce</h1>
       <hr>
+
+      <label for="voci" style="padding-right:20px;">
+        <b>Nuova Voce Bilancio</b>
+      </label>
       
-<label for="voci" style="padding-right:20px;" ><b>Nuova Voce Bilancio</b></label>
-    
-       
-        <input type="text" class="testo" placeholder="Nome nuovo bilancio" name="NewVoce" v-model="voce" required>
-        
-       
+      <input
+        type="text"
+        class="testo"
+        placeholder="Nome nuovo bilancio"
+        name="NewVoce"
+        v-model="voce"
+        required
+      >
 
-        
-       
-
-<div class="row">
-				
-					<div class="col-xs-6 col-sm-6 col-md-6">
-						<button @click="closeAll()" class=" cancelbtn btn-block">Cancel</button>
-					</div>
-          	<div class="col-xs-6 col-sm-6 col-md-6">
-                        <button type="submit" @click="addVoce()" class=" btn-success btn-block">Aggiungi</button>
-					</div>
-
-				</div>
-
-
-
-
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <button @click="closeAll()" class="cancelbtn btn-block">Cancel</button>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <button type="submit" @click="addVoce()" class="btn-success btn-block">Aggiungi</button>
+        </div>
       </div>
-      <div v-if="success">
-        <h3><strong>{{voce}}</strong> è stata inserita tra le voci di bilancio.</h3>
-      </div>
- </form>
+    </div>
+    <div v-if="success">
+      <h3>
+        <strong>{{voce}}</strong> è stata inserita tra le voci di bilancio.
+      </h3>
+    </div>
+  </form>
 </template>
 
 <script>
 import { AXIOS } from "./http-common";
 export default {
-
   data() {
     return {
       response: [],
       errors: [],
-      voce: '',
+      voce: "",
       success: false
     };
   },
-   
+
   methods: {
-      closeAll(){
-      for(var i=0;i<document.getElementsByClassName('modal').length;i++){
-        document.getElementsByClassName('modal')[i].style.display='none';
+    closeAll() {
+      for (
+        var i = 0;
+        i < document.getElementsByClassName("modal").length;
+        i++
+      ) {
+        document.getElementsByClassName("modal")[i].style.display = "none";
       }
     },
-    
-   
+
     addVoce() {
-        var params = new URLSearchParams();
-         params.append("voce", this.voce);
+      var params = new URLSearchParams();
+      params.append("voce", this.voce);
       AXIOS.post(`/aggiungiVoce`, params)
         .then(response => {
           // JSON responses are automatically parsed.
-          this.response = response.data
-          console.log(response.data)
-          this.success = true
+          this.response = response.data;
+          console.log(response.data);
+          this.success = true;
         })
         .catch(e => {
-          this.errors.push(e)
+          this.errors.push(e);
         });
     },
-    onclick:function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-},
+    onclick: function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    },
 
-    mouseOver: function () {
+    mouseOver: function() {
       this.active = !this.active;
     }
-
-  },
-
-  };
+  }
+};
 </script>
 
 <style>
-
-
 /* Set a style for all buttons */
 button {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -106,7 +99,7 @@ button {
 }
 
 button:hover {
-  opacity:1;
+  opacity: 1;
 }
 
 /* Extra styles for the cancel button */
@@ -115,11 +108,6 @@ button:hover {
   background-color: #f44336;
 }
 
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
-  float: left;
-  width: 50%;
-}
 .container {
   padding: 16px;
 }
@@ -127,7 +115,7 @@ hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
 }
- 
+
 /* The Close Button (x) */
 .close {
   position: absolute;
@@ -153,14 +141,15 @@ hr {
 
 /* Change styles for cancel button and signup button on extra small screens */
 @media screen and (max-width: 300px) {
-  .cancelbtn, .signupbtn {
-     width: 100%;
+  .cancelbtn,
+  .signupbtn {
+    width: 100%;
   }
 }
 
 .testo {
   width: 40%;
-  padding:15px;
+  padding: 15px;
   margin: 5px 0 22px 0;
   display: inline-block;
   border: none;

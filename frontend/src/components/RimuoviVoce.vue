@@ -36,6 +36,9 @@
 			</tr>
 		</tbody>
 	</table>
+
+<b-table striped hover :items="voci" :fields="fields" />
+
 </div>    </div>     
  <br>
      		
@@ -52,7 +55,7 @@
 </form>
 </template>
 <script scoped>
-
+import { AXIOS } from "./http-common";
 export default {
 
   data() {
@@ -72,6 +75,18 @@ export default {
 				email: "email2@example.com"
 			}
 		],
+		fields: [
+                  {
+                    key: 'id',
+                    label:'Id',
+                    sortable:false
+                  },
+                  {
+                    key: 'name',
+                    label: 'Name',
+                    sortable: false
+                  }
+                 ],
 		selected: [],
 		selectAll: false,
 		voci: null
@@ -82,7 +97,7 @@ export default {
             .then(response => {
               // JSON responses are automatically parsed.
               this.voci = response.data;
-              console.log(response.data);
+              console.log(response.data.id);
             })
             .catch(e => {
               this.errors.push(e);

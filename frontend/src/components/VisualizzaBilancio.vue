@@ -7,7 +7,7 @@
 
       <h5 class="text-center">Bilancio attuale: {{bilancio}}</h5>
       <br>
-    
+
       <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-6">
           <button @click="closeAll()" class="cancelbtn btn-block">Indietro</button>
@@ -76,7 +76,6 @@ button {
   background-color: #4caf50;
   color: white;
   padding: 14px 20px;
-  margin: 8px 0;
   border: none;
   cursor: pointer;
   width: 100%;
@@ -94,11 +93,7 @@ button:hover {
 }
 
 /* Float cancel and signup buttons and add an equal width */
-.cancelbtn,
-.signupbtn {
-  float: left;
-  width: 50%;
-}
+
 .container {
   padding: 16px;
 }

@@ -1,20 +1,26 @@
 <template>
-    
-     <form class="modal-content" >
-         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-          <span  @click="closeAll()" class="close" title="Close Modal">&times;</span>
+  <form class="modal-content">
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+      integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+      crossorigin="anonymous"
+    >
+    <span @click="closeAll()" class="close" title="Close Modal">&times;</span>
     <div class="container">
       <h1>Aggiorna dati socio</h1>
       <hr>
 
-    <div class="container h-100">
-      <div class="d-flex justify-content-center h-100">
-        <div class="searchbar">
-          <input  class="search_input" type="text" name="" placeholder="Search...">
-          <a  class="search_icon"><i class="fas fa-search"></i></a>
+      <div class="container h-100">
+        <div class="d-flex justify-content-center h-100">
+          <div class="searchbar">
+            <input class="search_input" type="text" name placeholder="Search...">
+            <a class="search_icon">
+              <i class="fas fa-search"></i>
+            </a>
+          </div>
         </div>
       </div>
-    </div>
 
       <div class="row">
         <label style="margin-left:2%" for="nome">
@@ -27,29 +33,17 @@
       </div>
 
       <div style="width:100%">
+        <input type="text" class="testo anagrafica" placeholder="Nome utente" name="nome" required>
         <input
           type="text"
-          
-          class="testo anagrafica"
-          placeholder="Nome utente"
-          name="nome"
-          required
-        >
-        <input
-          type="text"
-          
           class="testo anagrafica"
           placeholder="Cognome utente"
           name="cognome"
           required
         >
       </div>
-      
 
-        
-   
-
-    <!--
+      <!--
     <select class="selectpicker" multiple>
 <option value="" disabled selected>Scegli il ruolo</option>
              <option   value="1"> Amministratore</option>
@@ -57,68 +51,50 @@
           <option   value="3"> Tesoriere</option>
           <option   value="4"> Consigliere</option>
 </select>
-	 -->
-     
-        <label for="Ruoli">
-           <b>Ruoli*</b>
-        </label>
-    <div class="funkyradio row">
+      -->
+      <label for="Ruoli">
+        <b>Ruoli*</b>
+      </label>
+      <div class="funkyradio row">
         <div class="funkyradio-danger" style="padding-left:20px;width:17%;">
-            <input type="checkbox" name="checkbox" id="checkbox6"/>
-            <label for="checkbox6">Amministratore</label>
-        </div>
-        <div class="funkyradio-danger" style="padding-left:20px;width:17%;">
-            <input type="checkbox" name="checkbox" id="checkbox7" />
-            <label for="checkbox7">Presidente</label>
+          <input type="checkbox" name="checkbox" id="checkbox6">
+          <label for="checkbox6">Amministratore</label>
         </div>
         <div class="funkyradio-danger" style="padding-left:20px;width:17%;">
-            <input type="checkbox" name="checkbox" id="checkbox8" />
-            <label for="checkbox8">Tesoriere</label>
+          <input type="checkbox" name="checkbox" id="checkbox7">
+          <label for="checkbox7">Presidente</label>
         </div>
         <div class="funkyradio-danger" style="padding-left:20px;width:17%;">
-            <input type="checkbox" name="checkbox" id="checkbox9" />
-            <label for="checkbox9">Consigliere</label>
+          <input type="checkbox" name="checkbox" id="checkbox8">
+          <label for="checkbox8">Tesoriere</label>
         </div>
-	 <div class="funkyradio-danger" style="padding-left:20px;width:15%;">
-            <input type="checkbox" name="checkbox" id="checkbox10" disabled="true" checked/>
-            <label for="checkbox10">Socio</label>
+        <div class="funkyradio-danger" style="padding-left:20px;width:17%;">
+          <input type="checkbox" name="checkbox" id="checkbox9">
+          <label for="checkbox9">Consigliere</label>
         </div>
-    </div>
-     
-  <br>
+        <div class="funkyradio-danger" style="padding-left:20px;width:15%;">
+          <input type="checkbox" name="checkbox" id="checkbox10" disabled="true" checked>
+          <label for="checkbox10">Socio</label>
+        </div>
+      </div>
+
+      <br>
       <label for="indirizzo">
         <b>Idirizzo*</b>
       </label>
       <div style="width:100%">
+        <input type="text" class="ind" placeholder="Via/Piazza, n°civico" name="indirizzo" required>
         <input
           type="text"
-         
-          class="ind"
-          placeholder="Via/Piazza, n°civico"
-          name="indirizzo"
-          required
-        >
-        <input
-          type="text"
-          
           style="width:15%;"
           class="ind"
           placeholder=" Citta"
           name="Citta"
           required
         >
+        <input type="text" style="width:10%;" class="ind" placeholder=" CAP" name="CAP" required>
         <input
           type="text"
-          
-          style="width:10%;"
-          class="ind"
-          placeholder=" CAP"
-          name="CAP"
-          required
-        >
-        <input
-          type="text"
-          
           style="width:20%;"
           class="ind"
           placeholder="Nazione"
@@ -133,34 +109,20 @@
       <div style="width:100%">
         <input
           type="email"
-          
           class="anagrafica"
           placeholder="firsEmail@ccc.com"
           name="email"
           required
         >
-        <input
-          type="email"
-          
-          class="anagrafica"
-          placeholder="secondEmail@log.com"
-          name="email"
-        >
+        <input type="email" class="anagrafica" placeholder="secondEmail@log.com" name="email">
       </div>
       <label for="numeri">
         <b>Numeri di Telefono</b>
       </label>
       <div style="width:100%">
+        <input type="text" class="anagrafica" placeholder="Numero Fisso" name="fisso">
         <input
           type="text"
-          
-          class="anagrafica"
-          placeholder="Numero Fisso"
-          name="fisso"
-        >
-        <input
-          type="text"
-         
           class="anagrafica"
           placeholder="Numero cellulare*"
           name="cellulare"
@@ -172,28 +134,21 @@
         <b>Note</b>
       </label>
       <br>
-      <textarea
-        type="text"
-        
-        id="message"
-        name="message"
-        rows="2"
-        class="form-control md-textarea"
-      ></textarea>
+      <textarea type="text" id="message1" name="message" rows="2" class="form-control md-textarea"></textarea>
       <div class="row">
-				
-					<div class="col-xs-6 col-sm-6 col-md-6">
-						<button @click="closeAll()" class=" cancelbtn btn-block">Cancel</button>
-					</div>
-          	<div class="col-xs-6 col-sm-6 col-md-6">
-                        <button type="submit" @click="createUser()" class=" btn-success btn-block" value="Sign In">Sign Up</button>
-					</div>
-
-				</div>
-    
-</div>
-
-
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <button @click="closeAll()" class="cancelbtn btn-block">Cancel</button>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <button
+            type="submit"
+            @click="createUser()"
+            class="btn-success btn-block"
+            value="Sign In"
+          >Sign Up</button>
+        </div>
+      </div>
+    </div>
   </form>
 </template>
 <script>
@@ -201,25 +156,26 @@ function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
 export default {
-
   data() {
     return {
       msg: "HowTo call REST-Services:",
       response: [],
       errors: [],
-      value: 75,
-
+      value: 75
     };
   },
-   
+
   methods: {
-      closeAll(){
-      for(var i=0;i<document.getElementsByClassName('modal').length;i++){
-        document.getElementsByClassName('modal')[i].style.display='none';
+    closeAll() {
+      for (
+        var i = 0;
+        i < document.getElementsByClassName("modal").length;
+        i++
+      ) {
+        document.getElementsByClassName("modal")[i].style.display = "none";
       }
     },
-    
-   
+
     callRestService() {
       AXIOS.get(`/hello`)
         .then(response => {
@@ -231,23 +187,19 @@ export default {
           this.errors.push(e);
         });
     },
-    onclick:function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-},
+    onclick: function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    },
 
-    mouseOver: function () {
+    mouseOver: function() {
       this.active = !this.active;
     }
-
-  },
-
-  };
+  }
+};
 </script>
 <style  scoped>
-  
-
 .funkyradio div {
   clear: both;
   overflow: hidden;
@@ -256,7 +208,7 @@ export default {
 .funkyradio label {
   width: 100%;
   border-radius: 3px;
-  border: 1px solid #D1D3D4;
+  border: 1px solid #d1d3d4;
   font-weight: normal;
 }
 
@@ -270,12 +222,12 @@ export default {
   position: relative;
   line-height: 2.5em;
   text-indent: 3.25em;
-  margin-top:4px ;
+  margin-top: 4px;
   cursor: pointer;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .funkyradio input[type="radio"]:empty ~ label:before,
@@ -285,11 +237,10 @@ export default {
   top: 0;
   bottom: 0;
   left: 0;
-  content: '';
+  content: "";
   width: 2.5em;
-  background: #D1D3D4;
+  background: #d1d3d4;
   border-radius: 3px 0 0 3px;
-  
 }
 
 .funkyradio input[type="radio"]:hover:not(:checked) ~ label,
@@ -299,9 +250,9 @@ export default {
 
 .funkyradio input[type="radio"]:hover:not(:checked) ~ label:before,
 .funkyradio input[type="checkbox"]:hover:not(:checked) ~ label:before {
-  content: '\2714';
-  text-indent: .9em;
-  color: #C2C2C2;
+  content: "\2714";
+  text-indent: 0.9em;
+  color: #c2c2c2;
 }
 
 .funkyradio input[type="radio"]:checked ~ label,
@@ -311,8 +262,8 @@ export default {
 
 .funkyradio input[type="radio"]:checked ~ label:before,
 .funkyradio input[type="checkbox"]:checked ~ label:before {
-  content: '\2714';
-  text-indent: .9em;
+  content: "\2714";
+  text-indent: 0.9em;
   color: #333;
   background-color: #ccc;
 }
@@ -322,92 +273,74 @@ export default {
   box-shadow: 0 0 0 3px #999;
 }
 
-
-
-
-
-
 .funkyradio-danger input[type="radio"]:checked ~ label:before,
 .funkyradio-danger input[type="checkbox"]:checked ~ label:before {
   color: #fff;
   background-color: #1800f19b;
 }
 
+body,
+html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #e74c3c !important;
+}
 
+.searchbar {
+  margin-bottom: auto;
+  margin-top: auto;
+  height: 60px;
+  background-color: #353b48;
+  border-radius: 30px;
+  padding: 10px;
+}
 
+.search_input {
+  color: white;
+  border: 0;
+  outline: 0;
+  background: none;
+  width: 0;
+  caret-color: transparent;
+  line-height: 40px;
+  transition: width 0.4s linear;
+}
 
+.searchbar > .search_input {
+  padding: 0 10px;
+  width: 450px;
+  caret-color: red;
+  transition: width 0.4s linear;
+}
 
- 
- body,html{
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    background: #e74c3c !important;
-    }
+.searchbar > .search_icon {
+  background: white;
+  color: #e74c3c;
+}
 
-    .searchbar{
-    margin-bottom: auto;
-    margin-top: auto;
-    height: 60px;
-    background-color: #353b48;
-    border-radius: 30px;
-    padding: 10px;
-    }
-
-    .search_input{
-    color: white;
-    border: 0;
-    outline: 0;
-    background: none;
-    width: 0;
-    caret-color:transparent;
-    line-height: 40px;
-    transition: width 0.4s linear;
-    }
-
-    .searchbar> .search_input{
-    padding: 0 10px;
-    width: 450px;
-    caret-color:red;
-    transition: width 0.4s linear;
-    }
-
-    .searchbar > .search_icon{
-    background: white;
-    color: #e74c3c;
-    }
-
-    .search_icon{
-    height: 40px;
-    width: 40px;
-    float: right;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    color:white;
-    }
-
-
-
+.search_icon {
+  height: 40px;
+  width: 40px;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: white;
+}
 
 .testo,
 input[type="password"],
 textarea[type="text"] {
-  
   padding: 15px;
- 
-  
-  
+
   background: #f1f1f1;
 }
-.selle{
-  
+.selle {
   padding: 15px;
-  
-  
-  
+
   background: #f1f1f1;
 }
 /* Add a background color when the inputs get focus */
@@ -417,8 +350,8 @@ textarea[type="text"]:focus {
   background-color: #ddd;
   outline: none;
 }
-.selle:focus{
-    background-color: #ddd;
+.selle:focus {
+  background-color: #ddd;
   outline: none;
 }
 /* Set a style for all buttons */
@@ -446,7 +379,6 @@ button:hover {
 /* Float cancel and signup buttons and add an equal width */
 .cancelbtn,
 .signupbtn {
-  
   width: 100%;
 }
 .container {
@@ -464,7 +396,7 @@ hr {
   top: 15px;
   font-size: 40px;
   font-weight: bold;
-  color: #f1f1f1;
+  color: black;
 }
 
 .close:hover,
@@ -533,8 +465,8 @@ input[name="CF"] {
   background: #f1f1f1;
   height: 50px;
 }
-input[name=CF]:focus{
-   background-color: #ddd;
+input[name="CF"]:focus {
+  background-color: #ddd;
   outline: none;
 }
 </style>

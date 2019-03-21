@@ -1,93 +1,108 @@
-<template >
+<template>
   <form class="modal-content" action>
-    <span
-      @click="closeAll()"
-      class="close"
-      title="Close Modal"
-    >&times;</span>
+    <span @click="closeAll()" class="close" title="Close Modal">&times;</span>
     <div class="container">
       <h1>Registra nuovo socio</h1>
       <hr>
       <h8>(*)Campi Obbligatori</h8>
-      <hr> 
+      <hr>
       <div class="row">
-        <label style="margin-left:1.8%" for="nome">
-          <b>Nome*</b>
-        </label>
-        
-        <label style="margin-left:42.4%" for="cognome">
-          <b>Cognome*</b>
-        </label>
+        <div class="col-md-6">
+          <label for="nome">
+            <b>Nome*</b>
+          </label>
+          <br>
+          <input
+            type="text"
+            v-model="user.nome"
+            class="testo anagrafica"
+            placeholder="Nome utente"
+            name="nome"
+            required
+          >
+        </div>
+        <div class="col-md-6">
+          <label for="cognome">
+            <b>Cognome*</b>
+          </label>
+          <br>
+          <input
+            type="text"
+            v-model="user.cognome"
+            class="testo anagrafica"
+            placeholder="Cognome utente"
+            name="cognome"
+            required
+          >
+        </div>
       </div>
 
-      <div style="width:100%">
-        <input
-          type="text"
-          v-model="user.nome"
-          class="testo anagrafica"
-          placeholder="Nome utente"
-          name="nome"
-          required
-        >
-        <input
-          type="text"
-          v-model="user.cognome"
-          class="testo anagrafica"
-          placeholder="Cognome utente"
-          name="cognome"
-          required
-        >
+      <div class="row">
+        <div class="col-md-6">
+          <label for="CF">
+            <b>Codice Fiscale*</b>
+          </label>
+          <br>
+          <input
+            type="text"
+            v-model="user.cf"
+            maxlength="16"
+            placeholder="xxxxxxxxxxxxxxxxxx"
+            name="CF"
+            required
+          >
+        </div>
       </div>
-      
 
-        <label for="CF">
-          <b>Codice Fiscale*</b>
-        </label>
-         
-        <br>
-        <div class="row">
-        <input
-      
-          type="text" 
-          v-model="user.cf"
-          class=""
-          placeholder="xxxxxxxxxxxxxxxxxx"
-          name="CF"
-          required
-        >
-        
-  
-
-
-
+      <label for="Ruoli">
+        <b>Ruoli</b>
+      </label>
+      <div class="funkyradio row">
+        <div class="funkyradio-danger col-md-3">
+          <input
+            type="checkbox"
+            value="amministratore"
+            v-model="user.Ruolo"
+            name="checkbox"
+            id="checkbox1"
+          >
+          <label for="checkbox1">Amministratore</label>
+        </div>
+        <div class="funkyradio-danger col-md-2">
+          <input
+            type="checkbox"
+            value="presidente"
+            v-model="user.Ruolo"
+            name="checkbox"
+            id="checkbox2"
+          >
+          <label for="checkbox2">Presidente</label>
+        </div>
+        <div class="funkyradio-danger col-md-2">
+          <input
+            type="checkbox"
+            value="tesoriere"
+            v-model="user.Ruolo"
+            name="checkbox"
+            id="checkbox3"
+          >
+          <label for="checkbox3">Tesoriere</label>
+        </div>
+        <div class="funkyradio-danger col-md-2">
+          <input
+            type="checkbox"
+            value="consigliere"
+            v-model="user.Ruolo"
+            name="checkbox"
+            id="checkbox4"
+          >
+          <label for="checkbox4">Consigliere</label>
+        </div>
+        <div class="funkyradio-danger col-md-2">
+          <input type="checkbox" name="checkbox" id="checkbox5" disabled="true" checked>
+          <label for="checkbox5">Socio</label>
+        </div>
       </div>
-           <label for="Ruoli">
-           <b>Ruoli</b>
-        </label>
-    <div class="funkyradio row">
-        <div class="funkyradio-danger" style="padding-left:20px;width:17%;">
-            <input type="checkbox" value="amministratore" v-model="user.Ruolo" name="checkbox" id="checkbox1" />
-            <label for="checkbox1">Amministratore</label>
-        </div>
-        <div class="funkyradio-danger" style="padding-left:20px;width:17%;">
-            <input type="checkbox" value="presidente" v-model="user.Ruolo" name="checkbox" id="checkbox2" />
-            <label for="checkbox2">Presidente</label>
-        </div>
-        <div class="funkyradio-danger" style="padding-left:20px;width:17%;">
-            <input type="checkbox" value="tesoriere" v-model="user.Ruolo" name="checkbox" id="checkbox3" />
-            <label for="checkbox3">Tesoriere</label>
-        </div>
-        <div class="funkyradio-danger" style="padding-left:20px;width:17%;">
-            <input type="checkbox" value="consigliere" v-model="user.Ruolo" name="checkbox" id="checkbox4" />
-            <label for="checkbox4">Consigliere</label>
-        </div>
-	 <div class="funkyradio-danger" style="padding-left:20px;width:15%;">
-            <input type="checkbox" name="checkbox" id="checkbox5" disabled="true" checked/>
-            <label for="checkbox5">Socio</label>
-
-        
-        </div>
-    </div>
       <br>
       <label for="indirizzo">
         <b>Indirizzo*</b>
@@ -97,7 +112,7 @@
           type="text"
           v-model="user.indirizzo"
           class="ind"
-          placeholder="Via/Piazza, n°civico"
+          placeholder="Via/Piazza, n° civico"
           name="indirizzo"
           required
         >
@@ -107,7 +122,7 @@
           style="width:15%;"
           class="ind"
           placeholder=" Citta"
-          name="Citta"
+          name="citta"
           required
         >
         <input
@@ -116,7 +131,7 @@
           style="width:10%;"
           class="ind"
           placeholder=" CAP"
-          name="CAP"
+          name="cap"
           required
         >
         <input
@@ -125,36 +140,42 @@
           style="width:20%;"
           class="ind"
           placeholder="Nazione"
-          name="Nazione"
+          name="nazione"
           required
         >
       </div>
       <hr>
       <label for="email">
-        <b>Email</b>
+        <b>Email*</b>
       </label>
       <div style="width:100%">
         <input
           type="email"
           v-model="user.email"
           class="anagrafica"
-          placeholder="PrimaEmail@ccc.com"
+          placeholder="primaEmail@ccc.com"
           name="email"
-          
+          required
         >
         <input
           type="email"
           v-model="user.email2"
           class="anagrafica"
-          placeholder="SecondaEmail@log.com"
-          name="email"
+          placeholder="secondaEmail@ccc.com"
+          name="email2"
         >
       </div>
       <label for="numeri">
         <b>Numeri di Telefono</b>
       </label>
       <div style="width:100%">
-        
+        <input
+          type="text"
+          v-model="user.fisso"
+          class="anagrafica"
+          placeholder="Numero Fisso"
+          name="fisso"
+        >
         <input
           type="text"
           v-model="user.cellulare"
@@ -162,13 +183,6 @@
           placeholder="Numero cellulare*"
           name="cellulare"
           required
-        >
-        <input
-          type="text"
-          v-model="user.fisso"
-          class="anagrafica"
-          placeholder="Numero Fisso"
-          name="fisso"
         >
       </div>
       <hr>
@@ -179,21 +193,24 @@
       <textarea
         type="text"
         v-model="user.note"
-        id="message1"
+        id="message"
         name="message"
         rows="2"
         class="form-control md-textarea"
       ></textarea>
       <div class="row">
-				
-					<div class="col-xs-6 col-sm-6 col-md-6">
-						<button @click="closeAll()" class=" cancelbtn btn-block">Annulla</button>
-					</div>
-          	<div class="col-xs-6 col-sm-6 col-md-6">
-                        <button type="submit" @click="createUser()" class=" btn-success btn-block" value="Sign In">Conferma</button>
-					</div>
-
-				</div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <button
+            type="submit"
+            @click="createUser()"
+            class="btn-success btn-block"
+            value="Sign In"
+          >Registra</button>
+        </div>
+      </div>
     </div>
   </form>
 </template>
@@ -203,6 +220,7 @@
 import { AXIOS } from "./http-common";
 export default {
   name: "user",
+
   data() {
     return {
       response: [],
@@ -220,7 +238,7 @@ export default {
         fisso: "",
         cellulare: "",
         note: "",
-         Ruolo: [],
+        Ruolo: []
       },
       showResponse: false,
       retrievedUser: {},
@@ -228,11 +246,16 @@ export default {
     };
   },
   methods: {
-     closeAll(){
-      for(var i=0;i<document.getElementsByClassName('modal').length;i++){
-        document.getElementsByClassName('modal')[i].style.display='none';
+    closeAll() {
+      for (
+        var i = 0;
+        i < document.getElementsByClassName("modal").length;
+        i++
+      ) {
+        document.getElementsByClassName("modal")[i].style.display = "none";
       }
     },
+
     // Fetches posts when the component is created.
     createUser() {
       var params = new URLSearchParams();
@@ -250,26 +273,25 @@ export default {
       params.append("note", this.user.note);
       params.append("Ruolo", this.user.Ruolo);
       console.log(this.user.Ruolo);
+
       AXIOS.post(`/person`, params)
-      .then(response => {
-       //JSON responses are automatically parsed.
-        this.response = response.data
-        this.user.id = response.data
-      console.log(response.data)
-            this.showResponse = true
-      })
-      .catch(e => {
-       this.errors.push(e)
-      })
+        .then(response => {
+          //JSON responses are automatically parsed.
+          this.response = response.data;
+          console.log(response.data);
+
+          this.showResponse = true;
+        })
+        .catch(e => {
+          this.errors.push(e);
+        });
     }
   }
-}; 
+};
 </script>
 
 
 <style scoped>
-
-
 .funkyradio div {
   clear: both;
   overflow: hidden;
@@ -278,7 +300,7 @@ export default {
 .funkyradio label {
   width: 100%;
   border-radius: 3px;
-  border: 1px solid #D1D3D4;
+  border: 1px solid #d1d3d4;
   font-weight: normal;
 }
 
@@ -292,12 +314,12 @@ export default {
   position: relative;
   line-height: 2.5em;
   text-indent: 3.25em;
-  margin-top:4px ;
+  margin-top: 4px;
   cursor: pointer;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .funkyradio input[type="radio"]:empty ~ label:before,
@@ -307,11 +329,10 @@ export default {
   top: 0;
   bottom: 0;
   left: 0;
-  content: '';
+  content: "";
   width: 2.5em;
-  background: #D1D3D4;
+  background: #d1d3d4;
   border-radius: 3px 0 0 3px;
-  
 }
 
 .funkyradio input[type="radio"]:hover:not(:checked) ~ label,
@@ -321,9 +342,9 @@ export default {
 
 .funkyradio input[type="radio"]:hover:not(:checked) ~ label:before,
 .funkyradio input[type="checkbox"]:hover:not(:checked) ~ label:before {
-  content: '\2714';
-  text-indent: .9em;
-  color: #C2C2C2;
+  content: "\2714";
+  text-indent: 0.9em;
+  color: #c2c2c2;
 }
 
 .funkyradio input[type="radio"]:checked ~ label,
@@ -333,8 +354,8 @@ export default {
 
 .funkyradio input[type="radio"]:checked ~ label:before,
 .funkyradio input[type="checkbox"]:checked ~ label:before {
-  content: '\2714';
-  text-indent: .9em;
+  content: "\2714";
+  text-indent: 0.9em;
   color: #333;
   background-color: #ccc;
 }
@@ -344,48 +365,28 @@ export default {
   box-shadow: 0 0 0 3px #999;
 }
 
-
-
-
-
-
 .funkyradio-danger input[type="radio"]:checked ~ label:before,
 .funkyradio-danger input[type="checkbox"]:checked ~ label:before {
   color: #fff;
   background-color: #1800f19b;
 }
 
-
-
-
-
- 
- body,html{
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    background: #e74c3c !important;
-    }
-
+body,
+html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
 
 .testo,
 input[type="password"],
 textarea[type="text"] {
-  
   padding: 15px;
-  
- 
-  
-  
   background: #f1f1f1;
 }
-.selle{
-  
+.selle {
   padding: 15px;
-  
-  
-  
   background: #f1f1f1;
 }
 /* Add a background color when the inputs get focus */
@@ -395,16 +396,15 @@ textarea[type="text"]:focus {
   background-color: #ddd;
   outline: none;
 }
-.selle:focus{
-    background-color: #ddd;
+.selle:focus {
+  background-color: #ddd;
   outline: none;
 }
 /* Set a style for all buttons */
 button {
-
   background-color: #4caf50;
   color: white;
-  padding: 14px 20px ;
+  padding: 14px 20px;
   margin: 8px 0;
   border: none;
   cursor: pointer;
@@ -425,7 +425,6 @@ button:hover {
 /* Float cancel and signup buttons and add an equal width */
 .cancelbtn,
 .signupbtn {
-  
   width: 100%;
 }
 .container {
@@ -443,7 +442,7 @@ hr {
   top: 15px;
   font-size: 40px;
   font-weight: bold;
-  color:black;
+  color: black;
 }
 
 .close:hover,
@@ -502,20 +501,12 @@ hr {
   background-color: #ddd;
   outline: none;
 }
-input[name="CF"] {
-  width: 30% !important;
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 20px;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
-  height: 50px;
-}
-input[name=CF]:focus{
-   background-color: #ddd;
+input[name="CF"]:focus {
+  background-color: #ddd;
   outline: none;
 }
 </style>
+
+
 
 

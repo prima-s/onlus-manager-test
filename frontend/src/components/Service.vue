@@ -6,7 +6,7 @@
         offset="25"
         text="Modifica Account"
         variant=" btn-outline-light btn-block"
-        class="m-2 w-15"
+        class="m-2"
       >
         <b-dropdown-item
           onclick="document.getElementById('id01').style.display='block'"
@@ -37,7 +37,7 @@
         offset="25"
         text="Gestione bilancio"
         variant=" btn-outline-light btn-block"
-        class="m-2 w-15"
+        class="m-2"
       >
         <b-dropdown-item
           onclick="document.getElementById('id05').style.display='block'"
@@ -75,7 +75,7 @@
         offset="25"
         text="Modifica opzioni"
         variant=" btn-outline-light btn-block"
-        class="m-2 w-15"
+        class="m-2"
         v-if="accesso === 'A' || accesso === 'B'"
       >
         <b-dropdown-item href="#">Area amministratore</b-dropdown-item>
@@ -86,7 +86,7 @@
         offset="25"
         text="Visualizza file log"
         variant=" btn-outline-light"
-        class="m-2 w-15"
+        class="m-2"
         v-if="accesso === 'A' || accesso === 'B'"
       >
         <b-dropdown-item href="#">Registro attivita</b-dropdown-item>
@@ -95,8 +95,8 @@
       <b-button
         offset="25"
         text="Logout"
-        variant=" btn-block"
-        class="m-2 w-15 logout btn-outline-light btn-block"
+        variant="btn-block"
+        class="m-2 logout btn-outline-light btn-block"
         @click="logout()"
       >Logout</b-button>
     </div>
@@ -224,14 +224,10 @@ export default {
 
 .test > .btn-group > .dropdown-menu:active {
   display: block;
-  margin-bottom: 5px;
   position: static;
 }
 #ddown-offset {
   height: 50px;
-}
-body {
-  margin-top: 2%;
 }
 .fa-fw {
   width: 2em;
@@ -254,10 +250,6 @@ li {
 a {
   color: #42b983;
 }
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  size: 100%;
-}
 * {
   box-sizing: border-box;
 }
@@ -268,12 +260,11 @@ body {
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 0;
-  top: 12.5%;
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: #474e5d;
-  padding-top: 0px;
+  background-color: #474e5d94;
+  padding-top: 20px;
 }
 
 /* Modal Content/Box */

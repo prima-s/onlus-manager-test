@@ -4,19 +4,22 @@
     <div class="container">
       <h1>Cambia password</h1>
       <hr>
-
-      <label for="password">
-        <b>Vecchia password*</b>
-      </label>
-      <div style="width:100%">
-        <input
-          type="password"
-          class="testo"
-          placeholder="xxxxxxOLDxxxxxxxx"
-          name="oldPass"
-          v-model="oldPassword"
-          required
-        >
+      <div class="row">
+        <div class="col-md-6">
+          <label for="password">
+            <b>Vecchia password*</b>
+          </label>
+          <div style="width:100%">
+            <input
+              type="password"
+              class="testo"
+              placeholder="xxxxxxOLDxxxxxxxx"
+              name="oldPass"
+              v-model="oldPassword"
+              required
+            >
+          </div>
+        </div>
       </div>
       <div class="row">
         <div class="col-md-6">
@@ -99,17 +102,19 @@ export default {
     },
     checkPasswordMatching() {
       if (
-        (this.newPassword !== this.repeatPassword) 
-        || this.newPassword === null ) {
+        this.newPassword !== this.repeatPassword ||
+        this.newPassword === null
+      ) {
         this.message = "Password not matching!";
       } else {
-        this.message = null
+        this.message = null;
       }
     },
     activeButton() {
       if (
-        (this.newPassword !== this.repeatPassword) 
-        || this.newPassword === null) {
+        this.newPassword !== this.repeatPassword ||
+        this.newPassword === null
+      ) {
         this.passwordOk = false;
       } else {
         this.passwordOk = true;
@@ -141,7 +146,6 @@ export default {
 <style>
 /* Full-width input fields */
 input {
-  margin: 5px 10px 22px 0;
   width: 100%;
   padding: 15px;
   display: inline-block;
@@ -187,15 +191,11 @@ button:hover {
 .notMatching {
   padding: 3px;
   background: orangered;
-  color:#f1f1f1;
+  color: #f1f1f1;
   text-align: center;
 }
 /* Float cancel and signup buttons and add an equal width */
-.cancelbtn,
-.signupbtn {
-  float: left;
-  width: 50%;
-}
+
 .container {
   padding: 16px;
 }

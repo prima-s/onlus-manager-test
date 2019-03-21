@@ -4,7 +4,7 @@
     <div class="container">
       <h1>Lista soci</h1>
       <hr>
-     <a href="#" @click="createPDF()" ><i class="far fa-file-pdf"></i>Scarica Pdf lista soci </a>
+   <a href="#" @click="createPDF()" ><i class="far fa-file-pdf"></i>Scarica Pdf ListaSoci </a>
  <br>
  	<div id="sociTable">
     <b-table striped hover :items="soci" :fields="fields" />
@@ -15,6 +15,7 @@
 
 		<br/><br/>
 
+            <button @click="createPDF()" class="cancelbtn btn-block">Download PDF</button>
 			<button @click="closeAll()" class="cancelbtn btn-block">Cancel</button>
 
 
@@ -75,7 +76,7 @@ export default {
     var doc = new jsPDF();
     for (var i=0;i<this.soci.length;i++){
     doc.text(
-    this.soci[i]['numTessera']  + '  -  ' + this.soci[i]['nome'] + '   ' + this.soci[i]['cognome'], 10, 10 + 10*i)
+    this.soci[i]['numTessera']  + ' -   ' + this.soci[i]['nome'] + '   ' + this.soci[i]['cognome'], 10, 10 + 10*i)
     }
     doc.save('ListaSoci' + '.pdf');
   },

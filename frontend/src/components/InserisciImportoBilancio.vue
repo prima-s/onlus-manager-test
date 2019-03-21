@@ -17,7 +17,7 @@
         v-model="newBilancio"
         required
       >
-    
+
       <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-6">
           <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
@@ -106,12 +106,6 @@ button:hover {
   background-color: #f44336;
 }
 
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn,
-.signupbtn {
-  float: left;
-  width: 50%;
-}
 .container {
   padding: 16px;
 }

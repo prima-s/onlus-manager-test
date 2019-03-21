@@ -1,125 +1,198 @@
 <template>
- <form class="modal-content" style="width:60%;" action>
-    <span
-      @click="closeAll()"
-      class="close"
-      title="Close Modal"
-    >&times;</span>
-      <div class="container">
+  <form class="modal-content" action>
+    <span @click="closeAll()" class="close" title="Close Modal">&times;</span>
+    <div class="container">
       <h1>Inserisci Voce</h1>
       <hr>
 
-<label for="tipo" style="padding-right:20px;" ><b>Tipo Voce</b></label>
-<br>
-<select v-model="voce.tipoVoce" name="tipo">
-  <option disabled value="">Please select one</option>
-  <option>Tesseramento</option>
-  <option>Donazione</option>
-  <option>Acquisto Materiali</option>
-</select>
-
-<br>
-<br>
-<div class="row">
-<label for="data" style="padding-right:20px;margin-left:7.5%;" ><b>Data</b></label>
-<label for="importo" style="padding-right:20px; margin-left:36.4%;" ><b>Importo</b></label>
-</div>
-
-<div style="width:100%">
-  <input type="date" style="margin-left:5.4%;" class="testo" placeholder="Data riferimento" name="data" v-model="voce.dataVoce" required>
-   <input type="number" style="margin-left:5.4%;" class="testo" placeholder="Importo" name="importo" v-model="voce.importoVoce" required>
-   </div>
-
-
-    <label for="note" style="padding-right:20px;" ><b>Note</b></label>
-<br>
-        <textarea style="width:100%" class="testo" placeholder="Campo note" name="note" v-model="voce.noteVoce" required></textarea>
-
-
-<div class="row">
-
-					<div class="col-xs-6 col-sm-6 col-md-6">
-						<button @click="closeAll()" class=" cancelbtn btn-block">Annulla</button>
-					</div>
-          	<div class="col-xs-6 col-sm-6 col-md-6">
-                        <button type="submit" @click="inserisciVoce()" class=" btn-success btn-block">Inserisci</button>
-					</div>
-
-				</div>
-
-
-
-
+      <label for="nome">
+        <b>Nome Voce</b>
+      </label>
+      <br>
+      <div class="autocomplete">
+        <input
+          type="text"
+          v-model="voce.nomeVoce"
+          placeholder="Nome voce"
+          @input="onChange()"
+          required
+        >
+        <ul v-show="isOpen" class="autocomplete-results">
+          <li
+            v-for="(result, i) in results"
+            :key="i"
+            @click="setResult(result)"
+            class="autocomplete-result"
+          >{{result}}</li>
+        </ul>
       </div>
-     
- </form>
+
+      <br>
+      <br>
+      <div class="row">
+        <div class="col-md-6">
+          <label for="data">
+            <b>Data</b>
+          </label>
+          <br>
+          <input
+            type="date"
+            class="testo"
+            placeholder="Data riferimento"
+            name="data"
+            v-model="voce.dataVoce"
+            required
+          >
+        </div>
+        <div class="col-md-6">
+          <label for="importo">
+            <b>Importo</b>
+          </label>
+          <br>
+          <input
+            type="number"
+            class="testo"
+            placeholder="Importo"
+            name="importo"
+            v-model="voce.importoVoce"
+            required
+          >
+        </div>
+      </div>
+
+      <label for="note" style="padding-right:20px;">
+        <b>Note</b>
+      </label>
+      <br>
+      <textarea
+        style="width:100%"
+        class="testo"
+        placeholder="Campo note"
+        name="note"
+        v-model="voce.noteVoce"
+      ></textarea>
+
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <button
+            type="submit"
+            @mouseenter="checkImporto()"
+            @click="inserisciVoce()"
+            class="btn-success btn-block"
+          >Inserisci</button>
+        </div>
+      </div>
+    </div>
+  </form>
 </template>
 
 <script>
 import { AXIOS } from "./http-common";
 export default {
-
   data() {
     return {
       response: [],
       errors: [],
       voce: {
-         tipoVoce: '',
-         dataVoce: '',
-         importoVoce: 0,
-         noteVoce: ''
+        nomeVoce: "",
+        dataVoce: "",
+        importoVoce: 0,
+        noteVoce: ""
       },
+      importOk: false,
       success: false,
-      selected: ''
+      selected: "",
+      results: this.fetchedResults,
+      fetchedResults: [],
+      isOpen: false
     };
   },
-
+  created() {
+    AXIOS.get(`/voci`)
+      .then(response => {
+        this.fetchedResults = response.data;
+      })
+      .catch(e => {
+        this.errors.push(e);
+      });
+  },
   methods: {
-      closeAll(){
-      for(var i=0;i<document.getElementsByClassName('modal').length;i++){
-        document.getElementsByClassName('modal')[i].style.display='none';
+    onChange() {
+      if (this.voce.nomeVoce.length < 3) {
+        this.results = this.fetchedResults;
+      }
+
+      this.isOpen = true;
+      this.filterResults();
+      if (this.results.length < 1) {
+        this.isOpen = false;
       }
     },
-
-
+    filterResults() {
+      this.results = this.results.filter(
+        item =>
+          item.toLowerCase().indexOf(this.voce.nomeVoce.toLowerCase()) > -1
+      );
+    },
+    setResult(result) {
+      this.voce.nomeVoce = result;
+      this.isOpen = false;
+    },
+    closeAll() {
+      for (
+        var i = 0;
+        i < document.getElementsByClassName("modal").length;
+        i++
+      ) {
+        document.getElementsByClassName("modal")[i].style.display = "none";
+      }
+    },
+    checkImporto() {
+      if (this.voce.importoVoce == 0 && this.importOk == false) {
+        confirm(
+          "Sei sicuro di voler inserire una voce di bilancio con importo pari a 0?"
+        );
+        this.importOk = true;
+      }
+    },
     inserisciVoce() {
-        var params = new URLSearchParams();
-         params.append("tipoVoce", this.voce.tipoVoce);
-         params.append("dataVoce", this.voce.dataVoce);
-         params.append("importoVoce", this.voce.importoVoce);
-         params.append("noteVoce", this.voce.noteVoce);
+      var params = new URLSearchParams();
+      params.append("nomeVoce", this.voce.nomeVoce);
+      params.append("dataVoce", this.voce.dataVoce);
+      params.append("importoVoce", this.voce.importoVoce);
+      params.append("noteVoce", this.voce.noteVoce);
       AXIOS.post(`/inserisciVoce`, params)
         .then(response => {
           // JSON responses are automatically parsed.
-          this.response = response.data
-          console.log(response.data)
-          this.success = true
+          this.response = response.data;
+          console.log(response.data);
+          this.success = true;
         })
         .catch(e => {
-          this.errors.push(e)
+          this.errors.push(e);
         });
     },
-    onclick:function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-},
+    onclick: function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    },
 
-    mouseOver: function () {
+    mouseOver: function() {
       this.active = !this.active;
     }
-
-  },
-
-  };
+  }
+};
 </script>
 
 <style>
-
-
 /* Set a style for all buttons */
+
 button {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -130,7 +203,7 @@ button {
 }
 
 button:hover {
-  opacity:1;
+  opacity: 1;
 }
 
 /* Extra styles for the cancel button */
@@ -139,11 +212,6 @@ button:hover {
   background-color: #f44336;
 }
 
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
-  float: left;
-  width: 50%;
-}
 .container {
   padding: 16px;
 }
@@ -157,14 +225,14 @@ hr {
   position: absolute;
   right: 35px;
   top: 15px;
-  font-size: 40px;
+  font-size: 40px !important;
   font-weight: bold;
-  color: #f1f1f1;
+  color: black;
 }
 
 .close:hover,
 .close:focus {
-  color: #f44336;
+  color: #f44336 !important;
   cursor: pointer;
 }
 
@@ -177,14 +245,15 @@ hr {
 
 /* Change styles for cancel button and signup button on extra small screens */
 @media screen and (max-width: 300px) {
-  .cancelbtn, .signupbtn {
-     width: 100%;
+  .cancelbtn,
+  .signupbtn {
+    width: 100%;
   }
 }
 
 .testo {
-  width: 40%;
-  padding:15px;
+  width: 100% !important;
+  padding: 15px;
   margin: 5px 0 22px 0;
   display: inline-block;
   border: none;
@@ -195,5 +264,31 @@ hr {
 .testo:focus {
   background-color: #ddd;
   outline: none;
+}
+
+.autocomplete {
+  position: relative;
+}
+
+.autocomplete-results {
+  padding: 0;
+  margin: 0;
+  border: 1px solid #eeeeee;
+  height: 120px;
+  overflow: auto;
+  width: 100%;
+}
+
+.autocomplete-result {
+  list-style: none;
+  text-align: left;
+  padding: 4px 2px;
+  cursor: pointer;
+}
+
+.autocomplete-result.is-active,
+.autocomplete-result:hover {
+  background-color: #4aae9b;
+  color: white;
 }
 </style>
