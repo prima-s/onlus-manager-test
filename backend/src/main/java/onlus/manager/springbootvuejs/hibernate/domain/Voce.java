@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.TermVector;
-
-import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,26 +16,23 @@ public class Voce {
     @GeneratedValue
     private Integer idVoce;
 
+	@NotBlank
+    @Field(termVector = TermVector.YES)
+    private String nomeVoce;
 
-	@ManyToOne
-	@JoinColumn(name = "tipoVoce")
-    private TipoVoce nomeVoce;
-
-    @NotBlank
     @Field(termVector = TermVector.YES)
     private BigDecimal sommaAssociata;
 
-    @NotBlank
+    
     @Field(termVector = TermVector.YES)
     private LocalDate dataRiferimento;
 
-    @NotBlank
     @Field(termVector = TermVector.YES)
 	private String note;
 
 	public Voce(){}
 
-	public Voce(TipoVoce nomeVoce, BigDecimal sommaAssociata, LocalDate dataRiferimento, String note) {
+	public Voce(String nomeVoce, BigDecimal sommaAssociata, LocalDate dataRiferimento, String note) {
 		super();
 		this.nomeVoce = nomeVoce;
 		this.sommaAssociata = sommaAssociata;
@@ -48,10 +43,10 @@ public class Voce {
 	public Integer getIdVoce() {
 		return this.idVoce;
 	}
-	public TipoVoce getNomeVoce() {
+	public String getNomeVoce() {
 		return this.nomeVoce;
 	}
-	public void setNomeVoce(TipoVoce nomeVoce) {
+	public void setNomeVoce(String nomeVoce) {
 		this.nomeVoce = nomeVoce;
 	}
 	public BigDecimal getSommaAssociata() {
@@ -72,7 +67,6 @@ public class Voce {
 	public void setNote(String note) {
 		this.note = note;
 	}
-
 	public int getAnno(){
 		return this.dataRiferimento.getYear();
 	}
