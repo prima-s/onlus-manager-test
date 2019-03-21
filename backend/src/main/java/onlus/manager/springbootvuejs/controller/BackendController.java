@@ -73,12 +73,6 @@ public class BackendController {
         return persistedSocio;
     }
 
-    // @RequestMapping(path="/person/{numTessera}", method = RequestMethod.DELETE)
-    // @ResponseStatus(HttpStatus.OK)
-    // public void deleteSocioById(@PathVariable("numTessera") Integer numTessera) {
-    //     LOG.info("Delete socio con numero tessera " + numTessera + " from database.");
-    //     socioService.deleteSocio(numTessera);
-    // }
 
     @RequestMapping(path="/aggiornaPassword", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
@@ -101,51 +95,7 @@ public class BackendController {
         return socioService.getAllSoci();
     }
 
-    @RequestMapping(path="/voci", method = RequestMethod.GET)
-    public @ResponseBody
-    List<TipoVoce> getVoci() {
-        return voceService.getVoci();
-    }
 
-    @RequestMapping(path="/aggiungiVoce", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.OK)
-    public void addVoce(@RequestParam String voce) {
-        LOG.info("Aggiunta voce " + voce );
-        TipoVoce tv = new TipoVoce(voce);
-        voceService.aggiungiVoceDiBilancio(tv);
-    }
-
-    @RequestMapping(path="/rimuoviVoce", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.OK)
-    public void addVoce(@RequestParam Integer id) {
-        LOG.info("Rimossa voce con id " + id );
-        voceService.rimuoviVoceDiBilancio(id);
-    }
-
-    @RequestMapping(path="/inserisciVoce", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.OK)
-    public void inserisciVoce(@RequestParam String tipoVoce, @RequestParam BigDecimal importoVoce, @RequestParam String dataVoce, @RequestParam String noteVoce ) {
-        LOG.info("Inserita voce: " + tipoVoce + " " + importoVoce + " " + dataVoce + " " + noteVoce );
-        TipoVoce tv = new TipoVoce(tipoVoce);
-        LocalDate date = LocalDate.parse(dataVoce);
-        Voce v = new Voce(tv, importoVoce, date, noteVoce);
-        bilancioService.aggiungiVoceInBilancio(v);
-    }
-
-    @RequestMapping(path="/inserisciBilancio", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.OK)
-    public void inserisciBilancio(@RequestParam Integer importo) {
-        BigDecimal bil = getBilancio();
-        BigDecimal imp = new BigDecimal(importo);
-        LOG.info("Inserito nuovo bilancio con importo pari a " + imp );
-        bilancioService.modificaBilancio(imp);
-    }
-
-    @RequestMapping(path="/bilancio", method = RequestMethod.GET)
-    public @ResponseBody
-    BigDecimal getBilancio() {
-        //return bilancioService.visualizzaBilancioTotale();
-        return new BigDecimal(57);
-    }
+  
 
 }
