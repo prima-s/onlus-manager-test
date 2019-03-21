@@ -11,7 +11,6 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Voce {
-
 	@Id
     @GeneratedValue
     private Integer idVoce;
