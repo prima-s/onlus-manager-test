@@ -92,13 +92,13 @@
         <b-dropdown-item href="#">Registro attivita</b-dropdown-item>
       </b-dropdown>
 
-      <b-button
+      <button
         offset="25"
         text="Logout"
         variant="btn-block"
         class="m-2 logout btn-outline-light btn-block"
         @click="logout()"
-      >Logout</b-button>
+      >Logout</button>
     </div>
 
 <body>
@@ -228,6 +228,7 @@ export default {
 }
 #ddown-offset {
   height: 50px;
+  margin: 0;
 }
 .fa-fw {
   width: 2em;
@@ -275,7 +276,16 @@ a {
   width: 80%;
 }
 
+button {
+  margin: 0 !important;
+}
 .logout {
   width: auto;
+  background: #888;
+  color:#fefefe;
+}
+.logout:hover {
+  background: rgba(136, 136, 136, 0.637);
+  color: white;
 }
 </style>
