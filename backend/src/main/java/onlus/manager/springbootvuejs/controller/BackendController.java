@@ -7,13 +7,11 @@ import onlus.manager.springbootvuejs.hibernate.domain.Voce;
 import onlus.manager.springbootvuejs.hibernate.service.BilancioService;
 import onlus.manager.springbootvuejs.hibernate.service.LoginService;
 import onlus.manager.springbootvuejs.hibernate.service.SocioService;
-import onlus.manager.springbootvuejs.hibernate.service.VoceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -28,9 +26,6 @@ public class BackendController {
 
     @Autowired
     private LoginService loginService;
-
-    @Autowired
-    private VoceService voceService;
 
     @Autowired
     private SocioService socioService;
@@ -110,21 +105,6 @@ public class BackendController {
         return listaVociBilancio;
     }
 
-    // @RequestMapping(path="/aggiungiVoce", method = RequestMethod.POST)
-    // @ResponseStatus(HttpStatus.OK)
-    // public void addVoce(@RequestParam String voce) {
-    //     LOG.info("Aggiunta voce: " + voce + " alle voci di bilancio di default");
-    //     List<String> listaVoci = getVoci();
-    //     listaVoci.add(voce);
-    //     System.out.println(listaVoci);
-    // }
-
-    // @RequestMapping(path="/rimuoviVoce", method = RequestMethod.POST)
-    // @ResponseStatus(HttpStatus.OK)
-    // public void removeVoce(@RequestParam String voce) {
-    //     LOG.info("Rimossa voce: " + voce );
-    //     bilancio.rimuoviVoce(voce);
-    // }
 
     @RequestMapping(path="/inserisciVoce", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
@@ -143,10 +123,6 @@ public class BackendController {
         BigDecimal imp = new BigDecimal(importo);
         LOG.info("Inserito nuovo bilancio con importo pari a " + imp );
         bilancioService.modificaBilancio(imp);
-        //TODO
-        // creare una call al controller dalla vue di inserisciBilancio che passi
-        // anche la data
-        // poi nel bilancio se questa data esiste si calcolerà la somma delle voci solo da tale data
     }
 
     @RequestMapping(path="/bilancio", method = RequestMethod.GET)
