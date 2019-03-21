@@ -1,56 +1,31 @@
 package onlus.manager.springbootvuejs.hibernate.domain;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.validator.constraints.UniqueElements;
 
-public enum TipoVoce {
+import javax.persistence.*;
 
+@Entity
+public class TipoVoce {
+	@Id
+	@GeneratedValue
+	private Integer id;
 
-	Tesseramento{
-		@Override
-		public String toString() {
-		   return "tesseramento";
-		}
-	 },
-  
-	 Donazione{
-		@Override
-		public String toString() {
-		   return "donazione";
-		}
-	 },
-  
-	 RimborsoSpeseAttivita{
-		@Override
-		public String toString() {
-		   return "rimborso spese attivita";
-		}
-	 },
-  
-	 QuotaMensileAttivita{
-		@Override
-		public String toString() {
-		   return "quota mensile attivita";
-		}
-	 },
-  
-	 Assicurazione{
-		@Override
-		public String toString() {
-		   return "assicurazione";
-		}
-	 },
+	@Field
+	private String name;
 
-	 AffittoSedi{
-		@Override
-		public String toString() {
-		   return "affitto sedi";
-		}
-	 },
-	 AcquistoMateriali{
-		@Override
-		public String toString() {
-		   return "acquisto materiali";
-		}
-	 }
+	public TipoVoce() {}
+
+	public TipoVoce(String name) {
+
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return  name;
+	}
+
 }
 
 

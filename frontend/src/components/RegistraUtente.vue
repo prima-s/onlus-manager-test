@@ -1,15 +1,15 @@
-<template>
-
-  <form class="modal-content" action="">
+<template >
+  <form class="modal-content" action>
     <span
-
       @click="closeAll()"
       class="close"
       title="Close Modal"
     >&times;</span>
     <div class="container">
-      <h1>Registra utente</h1>
+      <h1>Registra nuovo socio</h1>
       <hr>
+      <h8>(*)Campi Obbligatori</h8>
+      <hr> 
       <div class="row">
         <label style="margin-left:1.8%" for="nome">
           <b>Nome*</b>
@@ -19,7 +19,6 @@
           <b>Cognome*</b>
         </label>
       </div>
-
 
       <div style="width:100%">
         <input
@@ -56,10 +55,13 @@
           name="CF"
           required
         >
-	
         
+  
+
+
+
       </div>
-      <label for="Ruoli">
+           <label for="Ruoli">
            <b>Ruoli</b>
         </label>
     <div class="funkyradio row">
@@ -82,18 +84,20 @@
 	 <div class="funkyradio-danger" style="padding-left:20px;width:15%;">
             <input type="checkbox" name="checkbox" id="checkbox5" disabled="true" checked/>
             <label for="checkbox5">Socio</label>
+
+        
         </div>
     </div>
       <br>
       <label for="indirizzo">
-        <b>Idirizzo*</b>
+        <b>Indirizzo*</b>
       </label>
       <div style="width:100%">
         <input
           type="text"
           v-model="user.indirizzo"
           class="ind"
-          placeholder="Via/Piazza, numero civico"
+          placeholder="Via/Piazza, n°civico"
           name="indirizzo"
           required
         >
@@ -103,7 +107,7 @@
           style="width:15%;"
           class="ind"
           placeholder=" Citta"
-          name="citta"
+          name="Citta"
           required
         >
         <input
@@ -112,7 +116,7 @@
           style="width:10%;"
           class="ind"
           placeholder=" CAP"
-          name="cap"
+          name="CAP"
           required
         >
         <input
@@ -121,42 +125,36 @@
           style="width:20%;"
           class="ind"
           placeholder="Nazione"
-          name="nazione"
+          name="Nazione"
           required
         >
       </div>
       <hr>
       <label for="email">
-        <b>User Email*</b>
+        <b>Email</b>
       </label>
       <div style="width:100%">
         <input
           type="email"
           v-model="user.email"
           class="anagrafica"
-          placeholder="firsEmail@ccc.com"
+          placeholder="PrimaEmail@ccc.com"
           name="email"
-          required
+          
         >
         <input
           type="email"
           v-model="user.email2"
           class="anagrafica"
-          placeholder="secondEmail@log.com"
-          name="email2"
+          placeholder="SecondaEmail@log.com"
+          name="email"
         >
       </div>
       <label for="numeri">
         <b>Numeri di Telefono</b>
       </label>
       <div style="width:100%">
-        <input
-          type="text"
-          v-model="user.fisso"
-          class="anagrafica"
-          placeholder="Numero Fisso"
-          name="fisso"
-        >
+        
         <input
           type="text"
           v-model="user.cellulare"
@@ -164,6 +162,13 @@
           placeholder="Numero cellulare*"
           name="cellulare"
           required
+        >
+        <input
+          type="text"
+          v-model="user.fisso"
+          class="anagrafica"
+          placeholder="Numero Fisso"
+          name="fisso"
         >
       </div>
       <hr>
@@ -174,7 +179,7 @@
       <textarea
         type="text"
         v-model="user.note"
-        id="message"
+        id="message1"
         name="message"
         rows="2"
         class="form-control md-textarea"
@@ -182,10 +187,10 @@
       <div class="row">
 				
 					<div class="col-xs-6 col-sm-6 col-md-6">
-						<button @click="closeAll()" class=" cancelbtn btn-block">Cancel</button>
+						<button @click="closeAll()" class=" cancelbtn btn-block">Annulla</button>
 					</div>
           	<div class="col-xs-6 col-sm-6 col-md-6">
-                        <button type="submit" @click="createUser()" class=" btn-success btn-block" value="Sign In">Sign Up</button>
+                        <button type="submit" @click="createUser()" class=" btn-success btn-block" value="Sign In">Conferma</button>
 					</div>
 
 				</div>
@@ -198,7 +203,6 @@
 import { AXIOS } from "./http-common";
 export default {
   name: "user",
-
   data() {
     return {
       response: [],
@@ -229,7 +233,6 @@ export default {
         document.getElementsByClassName('modal')[i].style.display='none';
       }
     },
-
     // Fetches posts when the component is created.
     createUser() {
       var params = new URLSearchParams();
@@ -247,14 +250,12 @@ export default {
       params.append("note", this.user.note);
       params.append("Ruolo", this.user.Ruolo);
       console.log(this.user.Ruolo);
-
       AXIOS.post(`/person`, params)
       .then(response => {
        //JSON responses are automatically parsed.
         this.response = response.data
         this.user.id = response.data
       console.log(response.data)
-
             this.showResponse = true
       })
       .catch(e => {
@@ -262,7 +263,7 @@ export default {
       })
     }
   }
-};
+}; 
 </script>
 
 
@@ -373,6 +374,7 @@ input[type="password"],
 textarea[type="text"] {
   
   padding: 15px;
+  
  
   
   
@@ -399,9 +401,10 @@ textarea[type="text"]:focus {
 }
 /* Set a style for all buttons */
 button {
+
   background-color: #4caf50;
   color: white;
-  padding: 14px 20px;
+  padding: 14px 20px ;
   margin: 8px 0;
   border: none;
   cursor: pointer;
@@ -514,7 +517,5 @@ input[name=CF]:focus{
   outline: none;
 }
 </style>
-
-
 
 

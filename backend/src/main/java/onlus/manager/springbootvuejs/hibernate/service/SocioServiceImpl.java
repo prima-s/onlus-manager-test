@@ -1,35 +1,37 @@
 package onlus.manager.springbootvuejs.hibernate.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import onlus.manager.springbootvuejs.hibernate.domain.Credenziali;
-import onlus.manager.springbootvuejs.hibernate.domain.Ruolo;
 import onlus.manager.springbootvuejs.hibernate.domain.Socio;
 import onlus.manager.springbootvuejs.hibernate.repository.SocioRepository;
-
+import onlus.manager.springbootvuejs.hibernate.repository.CredenzialiRepository;
 import onlus.manager.springbootvuejs.hibernate.repository.LoginRepository;
 
 @Service
 public class SocioServiceImpl implements SocioService {
-	
-	@Autowired
-    private SocioRepository socioRepository;
-    private LoginRepository loginRepository;
-
 
     @Autowired
-    public SocioServiceImpl(SocioRepository socioRepository, LoginRepository loginRepository) {
+    private SocioRepository socioRepository;
+    @Autowired
+    private LoginRepository loginRepository;
+    @Autowired
+    private CredenzialiRepository credenzialiRepository;
+
+    @Autowired
+    public SocioServiceImpl(SocioRepository socioRepository, LoginRepository loginRepository, CredenzialiRepository credenzialiRepository) {
         this.socioRepository = socioRepository;
         this.loginRepository = loginRepository;
+        this.credenzialiRepository = credenzialiRepository;
     }
+
     @Override
-    public Socio createSocio(Socio socio) {       
-        Socio s =  socioRepository.save(socio);
-        Credenziali cd = new Credenziali(s.getNumTessera().toString(), s.getNome()+"."+s.getCognome(), s.getNumTessera());
+    public Socio createSocio(Socio socio) {
+        Socio s = socioRepository.save(socio);
+        Credenziali cd = new Credenziali(s.getNumTessera().toString(), s.getNome() + "." + s.getCognome(),
+                s.getNumTessera());
         loginRepository.save(cd);
         return s;
     }
@@ -51,44 +53,49 @@ public class SocioServiceImpl implements SocioService {
 
     @Override
     public List<Socio> getAllSoci() {
-        
+
         return socioRepository.findAll();
     }
 
+
     @Override
-    public void modificaPassword(String password) {
-        //TODO
+    public Credenziali aggiornaPassword(String oldPassword, String newPassword) {
+        Credenziali cred = credenzialiRepository.findByPassword(oldPassword);
+        if (cred != null) {
+            cred.setPassword(newPassword);
+            loginRepository.save(cred);
+        }
+        return cred;
     }
 
     @Override
     public void modificaUtente(String nomeUtente) {
-        //TODO
+        // TODO
     }
 
     @Override
     public void inviaMailNuovoSocio(String credenziali, String mail) {
-        //TODO
+        // TODO
     }
 
     @Override
     public void salvaListaSoci() {
-        //TODO
+        // TODO
     }
 
     @Override
     public void visualizzaFileLog() {
-        //TODO
+        // TODO
     }
 
     @Override
     public void inviaMailAmministratore(String indirizzoMail) {
-        //TODO
+        // TODO
     }
 
     @Override
     public void ModificaOpzioniApplicazione() {
-        //TODO
+        // TODO
     }
- 
-    
+
 }

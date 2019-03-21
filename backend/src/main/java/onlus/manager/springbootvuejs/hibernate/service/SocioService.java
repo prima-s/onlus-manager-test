@@ -2,13 +2,13 @@ package onlus.manager.springbootvuejs.hibernate.service;
 
 import java.util.List;
 
-
+import onlus.manager.springbootvuejs.hibernate.domain.Credenziali;
 import onlus.manager.springbootvuejs.hibernate.domain.Socio;
 
 public interface SocioService {
 
     Socio createSocio(Socio socio);
-    void modificaPassword(String password);
+    Credenziali aggiornaPassword(String oldPassword, String newPassword);
     void modificaUtente(String nomeUtente);
     Socio editSocio(Socio person);
     void inviaMailNuovoSocio(String credenziali, String mail);

@@ -1,20 +1,11 @@
 package onlus.manager.springbootvuejs.hibernate.service;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import onlus.manager.springbootvuejs.hibernate.domain.Credenziali;
-import onlus.manager.springbootvuejs.hibernate.domain.Ruolo;
 import onlus.manager.springbootvuejs.hibernate.domain.Socio;
 import onlus.manager.springbootvuejs.hibernate.repository.SocioRepository;
-import onlus.manager.springbootvuejs.hibernate.utility.HibernateUtil;
-
 import onlus.manager.springbootvuejs.hibernate.repository.LoginRepository;
 
 @Service
@@ -56,16 +47,16 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public String getLivelloAmministrazione(Socio socio) {
         String[] ruoli = socio.getRuolo().split(",");
-        for (String s : ruoli) {
-            if (s.equals("amministratore")) {
-                return "livello1";
-            }
-            if (s.equals("presidente") || s.equals("tesoriere")) {
-                return "livello2";
-            }
+        String ruolo = ruoli[0];
 
+        if (ruolo.contains("amministratore")) {
+            return "A";
+        } else if ((ruolo.contains("presidente") || ruolo.contains("tesoriere")) && !ruolo.contains("amministratore")) {
+            return "B";
+        } else {
+            return "C";
         }
-        return "livello3";
+
     }
 
 }

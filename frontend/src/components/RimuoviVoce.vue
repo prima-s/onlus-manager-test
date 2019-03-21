@@ -44,7 +44,7 @@
 		
 				
 					
-						<button @click="closeAll()" class=" cancelbtn btn-block">Cancel</button>
+						<button @click="closeAll()" class="cancelbtn btn-block">Cancel</button>
 					
           
 
@@ -57,10 +57,8 @@ export default {
 
   data() {
     return {
-      msg: "HowTo call REST-Services:",
       response: [],
       errors: [],
-      value: 75,
          
 		items: [
 			{
@@ -75,10 +73,21 @@ export default {
 			}
 		],
 		selected: [],
-		selectAll: false
+		selectAll: false,
+		voci: null
     };
   },
-   
+  created() {
+    AXIOS.get(`/voci`)
+            .then(response => {
+              // JSON responses are automatically parsed.
+              this.voci = response.data;
+              console.log(response.data);
+            })
+            .catch(e => {
+              this.errors.push(e);
+            });
+  },
   methods: {
       select() {
 			this.selected = [];
@@ -95,8 +104,11 @@ export default {
     },
     
     // Fetches posts when the component is created.
-    callRestService() {
-      AXIOS.get(`/hello`)
+    rimuoviVoce() {
+     var params = new URLSearchParams();
+          params.append("voci", this.selected);
+
+      AXIOS.post(`/rimuoviVoce`, params)
         .then(response => {
           // JSON responses are automatically parsed.
           this.response = response.data;
@@ -105,12 +117,7 @@ export default {
         .catch(e => {
           this.errors.push(e);
         });
-    },
-    onclick:function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
+    }
   }
   
 };

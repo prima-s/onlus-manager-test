@@ -10,7 +10,7 @@ import org.hibernate.search.annotations.Indexed;
 @Entity
 @Table
 @Indexed
-public class Credenziali{
+public class Credenziali {
     @Id
     private Integer numTessera;
     @Field
@@ -18,32 +18,41 @@ public class Credenziali{
     @Field
     private String password;
 
-    public Credenziali(){
+    public Credenziali() {
 
     }
 
-    public Credenziali(String nome, String password, Integer numTessera){
+    public Credenziali(String nome, String password, Integer numTessera) {
         this.nomeUtente = nome;
         this.password = password;
         this.numTessera = numTessera;
- 
+
     }
 
-        public Integer getNumTessera() {
+    public Integer getNumTessera() {
         return this.numTessera;
-        }
-        public void setNomeUtente(String nome) {
+    }
+
+    public void setNomeUtente(String nome) {
         this.nomeUtente = nome;
-        }
-        public String getNomeUtente() {
+    }
+
+    public String getNomeUtente() {
         return this.nomeUtente;
-        }
-        public void setPassword(String password) {
+    }
+
+    public void setPassword(String password) {
         this.password = password;
-        }
-        public String getPassword() {
-            return this.password;
-        }
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public String toString() {
+        return numTessera + ": " + nomeUtente + ", " + password;
+    }
 
     
 }

@@ -2,7 +2,7 @@
 <body class="bg">
   <div class="container">
     <div class="row">
-      <div class="col-md-offset-5 col-md-5 text-center ">
+      <div class="col-md-5 text-center ">
         <form action method="">
           
           <div class="form-login">
@@ -26,6 +26,7 @@
               name="password"
               type="password"
               v-model="service.password"
+              @keydown.enter.prevent="addCategory"
               class="form-control input-sm chat-input"
               placeholder="password"
               required
@@ -34,7 +35,7 @@
             <br>
             <div class="wrapper">
               <span class="group-btn">
-                <button type="login" href class="btn btn-primary btn-md" @click="validator()">
+                <button type="login" href class="btn btn-primary btn-md" @mouseenter="validator()" @click="startchecker()">
                   Login
                   <i class="fa fa-sign-in"></i>
                 </button>
@@ -43,10 +44,10 @@
           </div>
         </form>
       </div>
-      <div class="col-md-6 text-center ">
+      <div class="col-md-7 text-center ">
         <div class="desc">
           <br>
-          <h4>Descrizione</h4>
+          <h4>Parky Touch Rugby</h4>
           <br>
           <h5 class="test">
 
@@ -75,6 +76,10 @@ export default {
   data() {
     return {
       msg: "HowTo call REST-Services:",
+      checking:null,
+      params:null,
+      accesso:null,
+      answer:null,
       response: [],
       errors: [],
        service: {
@@ -88,21 +93,53 @@ export default {
 },
 methods: {
       // Fetches posts when the component is created.
+      startchecker(){
+        if(this.checking===true){
+          window.location.href= "/#/callservice?livello="+this.accesso;
+        }
+        else{
+          //this.accesso=null;
+          /* this.params=null; */
+          window.location.href="/#/";
+        }
+        
+      },
       validator () {
-        var params = new URLSearchParams()
-        params.append('utente', this.service.utente)
-        params.append('password', this.service.password)
-        AXIOS.post(`/restlogin`, params)
+        this.params = new URLSearchParams()
+        this.params.append('utente', this.service.utente)
+        this.params.append('password', this.service.password)
+        AXIOS.post(`/restlogin`, this.params)
           .then(response => {
+
+            //.then(response => {
             // JSON responses are automatically parsed.
-            this.response = response.data
-            console.log(response.data)
+            this.answer = response.data
+            console.log(this.answer+"This is answer from our checker")
+            console.log('Check of enter')
             this.showResponse = true
+             
+
+            if(this.answer =="A" || this.answer == "B" || this.answer == "C"){
+              console.log('This is the entrance to menu page')
+              this.accesso=this.answer;
+              //bus.$emit('form-submitted',this.accesso);
+              
+              this.checking=true;
+              //window.location.href= "/#/callservice"
+              
+            }
+            else{
+              //this.params=null;
+              this.checking=false;
+              //window.location.href="/#/"
+            }
+            //this.startchecker();
+            
           })
           .catch(e => {
             this.errors.push(e)
           })
-      }
+     }
 }
 }
 
@@ -209,15 +246,15 @@ body {
 }
 .bg {
   /* The image used */
-  background-image: url(../assets/sfondo1.jpg);
+  background-image: url(../assets/hands.jpg);
 
   /* Full height */
-  height: 100%;
+  transform: scale(1.17);
 
   /* Center and scale the image nicely */
-  background-position: center;
+  background-position: top;
   background-repeat: no-repeat;
-  background-size: cover;
+   background-size: cover;
 }
 
 .container {
