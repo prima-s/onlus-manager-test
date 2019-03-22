@@ -198,19 +198,16 @@
         rows="2"
         class="form-control md-textarea"
       ></textarea>
-
-</div>
-<br>
-<div class="row">
+    </div>
+    <br>
+    <div class="row">
       <div class="col-md-6">
-      <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
+        <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
       </div>
       <div class="col-md-6">
-      <button @click="createUser()" class="signupbtn btn-block">Registra</button>
-			</div>
-</div>
-
-    
+        <button @click="createUser()" class="signupbtn btn-block">Registra</button>
+      </div>
+    </div>
   </form>
 </template>
 
@@ -291,137 +288,6 @@ export default {
 
 
 <style scoped>
-.funkyradio {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.funkyradio div {
-  clear: both;
-  overflow: hidden;
-}
-
-.funkyradio label {
-  width: 100%;
-  border-radius: 3px;
-  border: 1px solid #d1d3d4;
-  font-weight: normal;
-}
-
-.funkyradio input[type="radio"]:empty,
-.funkyradio input[type="checkbox"]:empty {
-  display: none;
-}
-
-.funkyradio input[type="radio"]:empty ~ label,
-.funkyradio input[type="checkbox"]:empty ~ label {
-  position: relative;
-  line-height: 2.5em;
-  text-indent: 3.25em;
-  margin-top: 4px;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.funkyradio input[type="radio"]:empty ~ label:before,
-.funkyradio input[type="checkbox"]:empty ~ label:before {
-  position: absolute;
-  display: block;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  content: "";
-  width: 2.5em;
-  background: #d1d3d4;
-  border-radius: 3px 0 0 3px;
-  color:#777;
-}
-
-.funkyradio input[type="radio"]:hover:not(:checked) ~ label,
-.funkyradio input[type="checkbox"]:hover:not(:checked) ~ label {
-  color: #888;
-}
-
-.funkyradio input[type="radio"]:hover:not(:checked) ~ label:before,
-.funkyradio input[type="checkbox"]:hover:not(:checked) ~ label:before {
-  content: "\2714";
-  text-indent: 0.9em;
-  color: #c2c2c2;
-}
-
-.funkyradio input[type="radio"]:checked ~ label,
-.funkyradio input[type="checkbox"]:checked ~ label {
-  color: #777;
-}
-
-.funkyradio input[type="radio"]:checked ~ label:before,
-.funkyradio input[type="checkbox"]:checked ~ label:before {
-  content: "\2714";
-  text-indent: 0.9em;
-  color: white;
-  background-color: #ccc;
-}
-
-.funkyradio input[type="radio"]:focus ~ label:before,
-.funkyradio input[type="checkbox"]:focus ~ label:before {
-  box-shadow: 0 0 0 3px #999;
-}
-
-.funkyradio-danger input[type="radio"]:checked ~ label:before,
-.funkyradio-danger input[type="checkbox"]:checked ~ label:before {
-  color: #fff;
-  background-color: #1800f19b;
-}
-
-.testo,
-input[type="password"],
-textarea[type="text"] {
-  padding: 15px;
-  background: #f1f1f1;
-}
-.selle {
-  padding: 15px;
-  background: #f1f1f1;
-}
-/* Add a background color when the inputs get focus */
-.testo:focus,
-input[type="password"]:focus,
-textarea[type="text"]:focus {
-  background-color: #ddd;
-  outline: none;
-}
-.selle:focus {
-  background-color: #ddd;
-  outline: none;
-}
-/* Set a style for all buttons */
-button {
-  background-color: #4caf50;
-  color: white;
-  padding: 14px 20px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
-  height: 60px;
-}
-
-button:hover {
-  opacity: 1;
-}
-
-/* Extra styles for the cancel button */
-.cancelbtn {
-  padding: 14px 20px;
-  background-color: #f44336;
-  border-top-right-radius: 1rem;
-}
-.signupbtn {
-  border-top-left-radius: 1rem;
-}
-
 .container {
   padding: 16px;
 }
@@ -429,30 +295,28 @@ hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
 }
-
-/* The Close Button (x) */
-.close {
-  position: absolute;
-  right: 35px;
-  top: 15px;
-  font-size: 40px;
-  font-weight: bold;
-  color: black;
-}
-
-.close:hover,
-.close:focus {
-  color: #f44336;
-  cursor: pointer;
-}
-
 /* Clear floats */
 .clearfix::after {
   content: "";
   clear: both;
   display: table;
 }
-
+.funkyradio input[type="radio"]:checked ~ label,
+.funkyradio input[type="checkbox"]:checked ~ label {
+  color: #777;
+}
+.funkyradio input[type="radio"]:checked ~ label:before,
+.funkyradio input[type="checkbox"]:checked ~ label:before {
+  content: "\2714";
+  text-indent: 0.9em;
+  color: white;
+  background-color: #ccc;
+}
+.funkyradio-danger input[type="radio"]:checked ~ label:before,
+.funkyradio-danger input[type="checkbox"]:checked ~ label:before {
+  color: #fff;
+  background-color: #1800f19b;
+}
 /* Change styles for cancel button and signup button on extra small screens */
 @media screen and (max-width: 300px) {
   .cancelbtn,

@@ -15,7 +15,7 @@
       <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
       </div>
       <div class="col-md-6">
-     <button type="submit" @click="addBilancio()" class="signupbtn btn-block">Scarica PDF</button>
+     <button type="submit" @click="createPDF()" class="signupbtn btn-block">Scarica PDF</button>
 			</div>
 </div>
    
@@ -44,6 +44,11 @@ export default {
         this.errors.push(e);
       });
   },
+   mounted() {
+    let recaptchaScript = document.createElement('script');
+    recaptchaScript.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js');
+    document.head.appendChild(recaptchaScript);
+    },
   methods: {
     closeAll() {
       for (
@@ -59,7 +64,14 @@ export default {
         modal.style.display = "none";
       }
     },
-
+  createPDF () {
+    var doc = new jsPDF();
+    for (var i=0;i<this.soci.length;i++){
+    doc.text(
+    'Il bilancio attuale è: ' + this.bilancio, 10, 10 + 10*i)
+    }
+    doc.save('Bilancio' + '.pdf');
+  },
     mouseOver: function() {
       this.active = !this.active;
     }
@@ -67,7 +79,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 /* Set a style for all buttons */
 button {
   background-color: #4caf50;
@@ -79,7 +91,9 @@ button {
   opacity: 0.9;
   height: 60px;
 }
-
+button:focus {
+  outline: none !important;
+}
 button:hover {
   opacity: 1;
 }
@@ -101,21 +115,7 @@ hr {
   margin-bottom: 25px;
 }
 
-/* The Close Button (x) */
-.close {
-  position: absolute;
-  right: 35px;
-  top: 15px;
-  font-size: 40px;
-  font-weight: bold;
-  color: black;
-}
 
-.close:hover,
-.close:focus {
-  color: #f44336;
-  cursor: pointer;
-}
 
 /* Clear floats */
 .clearfix::after {

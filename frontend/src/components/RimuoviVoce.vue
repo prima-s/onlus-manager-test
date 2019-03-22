@@ -130,7 +130,9 @@ button {
   opacity: 0.9;
   height: 60px;
 }
-
+button:focus {
+  outline: none !important;
+}
 button:hover {
   opacity: 1;
 }
@@ -150,22 +152,6 @@ button:hover {
 hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
-}
-
-/* The Close Button (x) */
-.close {
-  position: absolute;
-  right: 35px;
-  top: 15px;
-  font-size: 40px !important;
-  font-weight: bold;
-  color: black !important;
-}
-
-.close:hover,
-.close:focus {
-  color: #f44336 !important;
-  cursor: pointer;
 }
 
 /* Clear floats */

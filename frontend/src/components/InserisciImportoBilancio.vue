@@ -17,19 +17,16 @@
         v-model="newBilancio"
         required
       >
-
-   
     </div>
 
     <div class="row">
       <div class="col-md-6">
-      <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
+        <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
       </div>
       <div class="col-md-6">
-       <button type="submit" @click="addBilancio()" class="signupbtn btn-block">Inserisci</button>
-			</div>
-</div>
-   
+        <button type="submit" @click="addBilancio()" class="signupbtn btn-block">Inserisci</button>
+      </div>
+    </div>
   </form>
 </template>
 
@@ -82,54 +79,12 @@ export default {
 </script>
 
 <style>
-/* Set a style for all buttons */
-button {
-  background-color: #4caf50;
-  color: white;
-  padding: 14px 20px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
-  height: 60px;
-}
-
-button:hover {
-  opacity: 1;
-}
-
-/* Extra styles for the cancel button */
-.cancelbtn {
-  padding: 14px 20px;
-  background-color: #f44336;
-  border-top-right-radius: 1rem;
-}
-.signupbtn {
-  border-top-left-radius: 1rem;
-}
-
 .container {
   padding: 16px;
 }
 hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
-}
-
-/* The Close Button (x) */
-.close {
-  position: absolute;
-  right: 35px;
-  top: 15px;
-  font-size: 40px;
-  font-weight: bold;
-  color: #f1f1f1;
-}
-
-.close:hover,
-.close:focus {
-  color: #f44336;
-  cursor: pointer;
 }
 
 /* Clear floats */

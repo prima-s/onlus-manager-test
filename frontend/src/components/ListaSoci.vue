@@ -102,41 +102,6 @@ export default {
 };
 </script>
 <style scoped>
-button {
-  background-color: #4caf50;
-  color: white;
-  padding: 14px 20px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
-  height: 60px;
-}
 
-button:hover {
-  opacity: 1;
-}
-/* Extra styles for the cancel button */
-.cancelbtn {
-  padding: 14px 20px;
-  background-color: #f44336;
-  border-top-right-radius: 1rem;
-}
-.signupbtn {
-  border-top-left-radius: 1rem;
-}
-.close {
-  position: absolute;
-  right: 35px;
-  top: 15px;
-  font-size: 40px;
-  font-weight: bold;
-  color: black;
-}
 
-.close:hover,
-.close:focus {
-  color: #f44336;
-  cursor: pointer;
-}
 </style>

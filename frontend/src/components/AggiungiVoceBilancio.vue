@@ -216,33 +216,7 @@ console.log("before destroyed :(");
 };
 </script>
 
-<style>
-/* Set a style for all buttons */
-
-button {
-  background-color: #4caf50;
-  color: white;
-  padding: 14px 20px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
-  height: 60px;
-}
-
-button:hover {
-  opacity: 1;
-}
-
-/* Extra styles for the cancel button */
-.cancelbtn {
-  padding: 14px 20px;
-  background-color: #f44336;
-  border-top-right-radius: 1rem;
-}
-.signupbtn {
-  border-top-left-radius: 1rem;
-}
+<style scoped>
 
 .container {
   padding: 16px;
@@ -250,22 +224,6 @@ button:hover {
 hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
-}
-
-/* The Close Button (x) */
-.close {
-  position: absolute;
-  right: 35px;
-  top: 15px;
-  font-size: 40px !important;
-  font-weight: bold;
-  color: black !important;
-}
-
-.close:hover,
-.close:focus {
-  color: #f44336 !important;
-  cursor: pointer;
 }
 
 /* Clear floats */
