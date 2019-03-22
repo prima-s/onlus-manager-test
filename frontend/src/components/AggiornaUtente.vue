@@ -279,15 +279,6 @@ export default {
   background-color: #1800f19b;
 }
 
-body,
-html {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  background: #e74c3c !important;
-}
-
 .searchbar {
   margin-bottom: auto;
   margin-top: auto;
@@ -359,7 +350,6 @@ button {
   background-color: #4caf50;
   color: white;
   padding: 14px 20px;
-  margin: 8px 0;
   border: none;
   cursor: pointer;
   width: 100%;

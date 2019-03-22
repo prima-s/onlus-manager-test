@@ -1,59 +1,51 @@
 <template>
-    <form class="modal-content" action="">
-        <span  @click="closeAll()" class="close" title="Close Modal">&times;</span>
+  <form class="modal-content" action>
+    <span @click="closeAll()" class="close" title="Close Modal">&times;</span>
     <div class="container">
-      <h1>Rimuovi voce</h1>
-      <hr> 
-      <h4>Lista voci da eliminare</h4>
-      <div id="app" class="text-uppercase text-bold">id selected: {{selected}}</div>
- <br><div id="app">
-	
-	<table class="table table-striped table-hover">
-		<thead>
-			<tr>
-				<th>
-					<label class="form-checkbox">
-    <input type="checkbox" v-model="selectAll" @click="select">
-    <i class="form-icon"></i>
-  </label>
-				</th>
-				<th>id</th>
-				<th>name</th>
-				
-			</tr>
-		</thead>
-		<tbody>
-			<tr v-for="(i, index) in items" :key="index">
-				<td>
-					<label class="form-checkbox">
-    					<input type="checkbox" :value="i.id" v-model="selected">
-						<i class="form-icon"></i>
-  					</label>
-				</td>
-				<td>{{i.id}}</td>
-				<td>{{i.name}}</td>
-			
-			</tr>
-		</tbody>
-	</table>
+      <h1>Rimuovi Voce</h1>
+      <hr>
+<br>
+      <label for="nome">
+        <b>Nome Voce (seleziona la voce che desideri rimuovere da quelle di default)</b>
+      </label>
+      <br>
+      <div class="autocomplete">
+        <input
+          type="text"
+          v-model="nomeVoce"
+          placeholder="Nome voce"
+          @input="onChange()"
+          required
+        >
+        <ul v-show="isOpen" class="autocomplete-results">
+          <li
+            v-for="(result, i) in results"
+            :key="i"
+            @click="setResult(result)"
+            class="autocomplete-result"
+          >{{result}}</li>
+        </ul>
+      </div>
 
-<b-table striped hover :items="voci" :fields="fields" />
+<br>
+<br>
 
-</div>    </div>     
- <br>
-     		
-		
-		<br/><br/>
-		
-				
-					
-						<button @click="closeAll()" class="cancelbtn btn-block">Cancel</button>
-					
-          
-
-				
-</form>
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <button
+            type="submit"
+            @click="rimuoviVoce()"
+            class="btn-success btn-block"
+          >Rimuovi</button>
+        </div>
+      </div>
+    </div>
+  </form>
 </template>
+
 <script scoped>
 import { AXIOS } from "./http-common";
 export default {
@@ -62,56 +54,43 @@ export default {
     return {
       response: [],
       errors: [],
-         
-		items: [
-			{
-				id: "id1",
-				name: "John Doe",
-				email: "email@example.com"
-			},
-			{
-				id: "id2",
-				name: "Jone Doe",
-				email: "email2@example.com"
-			}
-		],
-		fields: [
-                  {
-                    key: 'id',
-                    label:'Id',
-                    sortable:false
-                  },
-                  {
-                    key: 'name',
-                    label: 'Name',
-                    sortable: false
-                  }
-                 ],
-		selected: [],
-		selectAll: false,
-		voci: null
+      nomeVoce: '',
+		 results: this.fetchedResults,
+      fetchedResults: [],
+      isOpen: false
     };
   },
   created() {
     AXIOS.get(`/voci`)
-            .then(response => {
-              // JSON responses are automatically parsed.
-              this.voci = response.data;
-              console.log(response.data.id);
-            })
-            .catch(e => {
-              this.errors.push(e);
-            });
+      .then(response => {
+        this.fetchedResults = response.data;
+      })
+      .catch(e => {
+        this.errors.push(e);
+      });
   },
   methods: {
-      select() {
-			this.selected = [];
-			if (!this.selectAll) {
-				for (let i in this.items) {
-					this.selected.push(this.items[i].id);
-				}
-			}
-		},
+      onChange() {
+      if (this.nomeVoce.length < 3) {
+        this.results = this.fetchedResults;
+      }
+
+      this.isOpen = true;
+      this.filterResults();
+      if (this.results.length < 1) {
+        this.isOpen = false;
+      }
+    },
+    filterResults() {
+      this.results = this.results.filter(
+        item =>
+          item.toLowerCase().indexOf(this.nomeVoce.toLowerCase()) > -1
+      );
+    },
+    setResult(result) {
+      this.nomeVoce = result;
+      this.isOpen = false;
+    },
        closeAll(){
       for(var i=0;i<document.getElementsByClassName('modal').length;i++){
         document.getElementsByClassName('modal')[i].style.display='none';
@@ -121,7 +100,7 @@ export default {
     // Fetches posts when the component is created.
     rimuoviVoce() {
      var params = new URLSearchParams();
-          params.append("voci", this.selected);
+          params.append("voce", this.nomeVoce);
 
       AXIOS.post(`/rimuoviVoce`, params)
         .then(response => {
@@ -137,14 +116,17 @@ export default {
   
 };
 </script>
-<style scoped>
+
+<style>
+/* Set a style for all buttons */
+
 button {
-  position: absolute;
+  background-color: #4caf50;
+  color: white;
   padding: 14px 20px;
-  margin: 8px 25% ;
   border: none;
   cursor: pointer;
-  width: 50% ;
+  width: 100%;
   opacity: 0.9;
 }
 
@@ -158,11 +140,83 @@ button:hover {
   background-color: #f44336;
 }
 
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn{
+.container {
+  padding: 16px;
+}
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px !important;
+  font-weight: bold;
+  color: black !important;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336 !important;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn,
+  .signupbtn {
+    width: 100%;
+  }
+}
+
+.testo {
+  width: 100% !important;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* Add a background color when the inputs get focus */
+.testo:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.autocomplete {
   position: relative;
-  padding-left:30;
-  width: 50%;
+}
+
+.autocomplete-results {
+  padding: 0;
+  margin: 0;
+  border: 1px solid #eeeeee;
+  height: 120px;
+  overflow: auto;
+  width: 100%;
+}
+
+.autocomplete-result {
+  list-style: none;
+  text-align: left;
+  padding: 4px 2px;
+  cursor: pointer;
+}
+
+.autocomplete-result.is-active,
+.autocomplete-result:hover {
+  background-color: #4aae9b;
+  color: white;
 }
 </style>
-

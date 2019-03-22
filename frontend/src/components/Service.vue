@@ -1,12 +1,10 @@
 <template>
   <div class="servicemy">
-    <div id="nav" class="flex bg-dark">
+    <b-nav id="nav" class="flex bg-dark">
       <b-dropdown
-        id="ddown-offset"
         offset="25"
         text="Modifica Account"
-        variant=" btn-outline-light btn-block"
-        class="m-2"
+        class="m-2 ddown-offset"
       >
         <b-dropdown-item
           onclick="document.getElementById('id01').style.display='block'"
@@ -33,11 +31,9 @@
       </b-dropdown>
 
       <b-dropdown
-        id="ddown-offset"
         offset="25"
         text="Gestione bilancio"
-        variant=" btn-outline-light btn-block"
-        class="m-2"
+        class="m-2 button ddown-offset"
       >
         <b-dropdown-item
           onclick="document.getElementById('id05').style.display='block'"
@@ -71,22 +67,18 @@
       </b-dropdown>
 
       <b-dropdown
-        id="ddown-offset"
         offset="25"
         text="Modifica opzioni"
-        variant=" btn-outline-light btn-block"
-        class="m-2"
+        class="m-2 ddown-offset"
         v-if="accesso === 'A' || accesso === 'B'"
       >
         <b-dropdown-item href="#">Area amministratore</b-dropdown-item>
       </b-dropdown>
 
       <b-dropdown
-        id="ddown-offset"
         offset="25"
         text="Visualizza file log"
-        variant=" btn-outline-light"
-        class="m-2"
+        class="m-2 ddown-offset"
         v-if="accesso === 'A' || accesso === 'B'"
       >
         <b-dropdown-item href="#">Registro attivita</b-dropdown-item>
@@ -96,10 +88,10 @@
         offset="25"
         text="Logout"
         variant="btn-block"
-        class="m-2 logout btn-outline-light btn-block"
+        class="m-2 logout btn-block"
         @click="logout()"
       >Logout</button>
-    </div>
+    </b-nav>
 
 <body>
     <div id="id01" class="modal">
@@ -217,6 +209,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 .flex {
   display: flex;
   justify-content: center;
@@ -226,7 +219,7 @@ export default {
   display: block;
   position: static;
 }
-#ddown-offset {
+.ddown-offset {
   height: 50px;
   margin: 0;
 }
@@ -281,11 +274,11 @@ button {
 }
 .logout {
   width: auto;
-  background: #888;
-  color:#fefefe;
+  background: #888 !important;
+  color:#fefefe !important;
 }
 .logout:hover {
-  background: rgba(136, 136, 136, 0.637);
-  color: white;
+  background: rgba(136, 136, 136, 0.637) !important;
+  color: white !important;
 }
 </style>

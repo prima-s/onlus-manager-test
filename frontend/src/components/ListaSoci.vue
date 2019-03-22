@@ -100,7 +100,6 @@ export default {
 button {
   position: absolute;
   padding: 14px 20px;
-  margin: 8px 25% ;
   border: none;
   cursor: pointer;
   width: 50% ;
