@@ -4,8 +4,22 @@
     <div class="container">
       <h1>Bilancio</h1>
       <hr>
-
-      <h5 class="text-center">Bilancio attuale: {{bilancio}}</h5>
+        <div>
+    <label for="range-1">
+      <b>Seleziona anno</b>
+      </label>
+    <b-form-input type="range" id="range-1" v-model="anno" min="2010" max="2019" />
+    <br>
+    <br>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <h4 class="text-center">Bilancio per l'anno {{anno}}</h4> 
+      </div>
+      <div class="col-md-4">
+      <h4>{{bilancio}} €</h4>
+      </div>
+      </div>
       <br>
 
   
@@ -15,7 +29,7 @@
       <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
       </div>
       <div class="col-md-6">
-     <button type="submit" @click="createPDF()" class="signupbtn btn-block">Scarica PDF</button>
+     <button type="submit" @click="savePDF()" class="signupbtn btn-block">Scarica PDF</button>
 			</div>
 </div>
    
@@ -30,6 +44,7 @@ export default {
       response: [],
       errors: [],
       bilancio: 0,
+      anno: 2018,
       success: false
     };
   },
@@ -64,12 +79,11 @@ export default {
         modal.style.display = "none";
       }
     },
-  createPDF () {
+  savePDF () {
     var doc = new jsPDF();
-    for (var i=0;i<this.soci.length;i++){
     doc.text(
-    'Il bilancio attuale è: ' + this.bilancio, 10, 10 + 10*i)
-    }
+    'Il bilancio attuale è: ' + this.bilancio, 10, 10 + 10)
+    
     doc.save('Bilancio' + '.pdf');
   },
     mouseOver: function() {
