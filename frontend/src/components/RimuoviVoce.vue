@@ -39,7 +39,7 @@
       <button
             type="submit"
             @click="rimuoviVoce()"
-            class="btn-success btn-block"
+            class="signupbtn btn-block"
           >Rimuovi</button>
 			</div>
 </div>
@@ -128,6 +128,7 @@ button {
   cursor: pointer;
   width: 100%;
   opacity: 0.9;
+  height: 60px;
 }
 
 button:hover {
@@ -138,8 +139,11 @@ button:hover {
 .cancelbtn {
   padding: 14px 20px;
   background-color: #f44336;
+  border-top-right-radius: 1rem;
 }
-
+.signupbtn {
+  border-top-left-radius: 1rem;
+}
 .container {
   padding: 16px;
 }

@@ -1,6 +1,8 @@
 <template>
   <div class="servicemy">
-    <b-nav id="nav" class="flex bg-dark">
+    <div class="row">
+      <div class="col-md-11 p-0">
+    <b-nav id="nav" class="flex-nav">
       <b-dropdown
         offset="25"
         text="Modifica Account"
@@ -78,15 +80,18 @@
         <b-dropdown-item href="#">Registro attivita</b-dropdown-item>
       </b-dropdown>
 
-      <button
+    </b-nav>
+    </div>
+    <div class="col-md-1 p-0">
+    <button
         offset="25"
         text="Logout"
         variant="btn-block"
         class="m-2 logout btn-block"
         @click="logout()"
       >Logout</button>
-    </b-nav>
-
+      </div>
+  </div>
 <body>
     <div id="id01" class="modal">
       <RegistraUtente/>
@@ -198,7 +203,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-.flex {
+.flex-nav {
   display: flex;
   justify-content: center;
 }
@@ -208,8 +213,11 @@ export default {
   position: static;
 }
 .ddown-offset {
-  height: 50px;
+  height: 60px;
   margin: 0;
+  font-weight: 700;
+  box-shadow: 0px 1px 5px;
+  border-radius: 0.25rem;
 }
 .fa-fw {
   width: 2em;
@@ -261,12 +269,18 @@ button {
   margin: 0 !important;
 }
 .logout {
-  width: auto;
-  background: #888 !important;
+  background: rgb(100, 99, 99) !important;
   color:#fefefe !important;
+  height: 100% !important;
+  padding: 0 !important;
+  font-weight: 700;
 }
 .logout:hover {
-  background: rgba(136, 136, 136, 0.637) !important;
+  background: rgba(80, 80, 80, 0.637) !important;
   color: white !important;
+}
+
+.nav {
+  background: #6ca78c;
 }
 </style>

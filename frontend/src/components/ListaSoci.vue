@@ -20,7 +20,7 @@
       <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
       </div>
       <div class="col-md-6">
-      <button @click="createPDF()" class="btn-block">Download PDF</button>
+      <button @click="createPDF()" class="signupbtn btn-block">Download PDF</button>
 			</div>
 </div>
 
@@ -110,6 +110,7 @@ button {
   cursor: pointer;
   width: 100%;
   opacity: 0.9;
+  height: 60px;
 }
 
 button:hover {
@@ -119,8 +120,11 @@ button:hover {
 .cancelbtn {
   padding: 14px 20px;
   background-color: #f44336;
+  border-top-right-radius: 1rem;
 }
-
+.signupbtn {
+  border-top-left-radius: 1rem;
+}
 .close {
   position: absolute;
   right: 35px;

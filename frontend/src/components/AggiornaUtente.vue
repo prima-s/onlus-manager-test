@@ -80,7 +80,6 @@
             value="amministratore"
             v-model="user.Ruolo"
             name="checkbox"
-            id="checkbox1"
           >
           <label for="checkbox1">Amministratore</label>
         </div>
@@ -90,7 +89,6 @@
             value="presidente"
             v-model="user.Ruolo"
             name="checkbox"
-            id="checkbox2"
           >
           <label for="checkbox2">Presidente</label>
         </div>
@@ -100,7 +98,6 @@
             value="tesoriere"
             v-model="user.Ruolo"
             name="checkbox"
-            id="checkbox3"
           >
           <label for="checkbox3">Tesoriere</label>
         </div>
@@ -110,12 +107,11 @@
             value="consigliere"
             v-model="user.Ruolo"
             name="checkbox"
-            id="checkbox4"
           >
           <label for="checkbox4">Consigliere</label>
         </div>
         <div class="funkyradio-danger col-md-2">
-          <input type="checkbox" name="checkbox" id="checkbox5" disabled="true" checked>
+          <input type="checkbox" name="checkbox" disabled="true" checked>
           <label for="checkbox5">Socio</label>
         </div>
       </div>
@@ -209,7 +205,6 @@
       <textarea
         type="text"
         v-model="user.note"
-        id="message"
         name="message"
         rows="2"
         class="form-control md-textarea"
@@ -222,7 +217,7 @@
         <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
       </div>
       <div class="col-md-6">
-        <button @click="createUser()" class="btn-block">Registra</button>
+        <button @click="createUser()" class="signupbtn btn-block">Registra</button>
       </div>
     </div>
   </form>
@@ -450,6 +445,7 @@ button {
   cursor: pointer;
   width: 100%;
   opacity: 0.9;
+  height: 60px;
 }
 
 button:hover {
@@ -460,12 +456,10 @@ button:hover {
 .cancelbtn {
   padding: 14px 20px;
   background-color: #f44336;
+  border-top-right-radius: 1rem;
 }
-
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn,
 .signupbtn {
-  width: 100%;
+  border-top-left-radius: 1rem;
 }
 .container {
   padding: 16px;

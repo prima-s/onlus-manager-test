@@ -26,7 +26,7 @@
       <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
       </div>
       <div class="col-md-6">
-       <button type="submit" @click="addBilancio()" class="btn-success btn-block">Inserisci</button>
+       <button type="submit" @click="addBilancio()" class="signupbtn btn-block">Inserisci</button>
 			</div>
 </div>
    
@@ -91,6 +91,7 @@ button {
   cursor: pointer;
   width: 100%;
   opacity: 0.9;
+  height: 60px;
 }
 
 button:hover {
@@ -101,6 +102,10 @@ button:hover {
 .cancelbtn {
   padding: 14px 20px;
   background-color: #f44336;
+  border-top-right-radius: 1rem;
+}
+.signupbtn {
+  border-top-left-radius: 1rem;
 }
 
 .container {

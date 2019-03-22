@@ -66,7 +66,7 @@
       <button
             type="submit"
             @click="updatePassword()"
-            :class="{'btn-success btn-block' : passwordOk, 'disabled' : !passwordOk}"
+            :class="{'signupbtn btn-block' : passwordOk, 'signupbtn disabled' : !passwordOk}"
             value="aggiorna"
             :disabled="passwordOk === false"
           >Aggiorna</button>
@@ -170,6 +170,7 @@ button {
   cursor: pointer;
   width: 100%;
   opacity: 0.9;
+  height: 60px;
 }
 
 button:hover {
@@ -180,8 +181,11 @@ button:hover {
 .cancelbtn {
   padding: 14px 20px;
   background-color: #f44336;
+  border-top-right-radius: 1rem;
 }
-
+.signupbtn {
+  border-top-left-radius: 1rem;
+}
 .disabled {
   opacity: 0.3;
 }
