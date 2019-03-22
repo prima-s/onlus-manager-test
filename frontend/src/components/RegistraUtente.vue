@@ -198,20 +198,19 @@
         rows="2"
         class="form-control md-textarea"
       ></textarea>
-      <div class="row">
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
-        </div>
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <button
-            type="submit"
-            @click="createUser()"
-            class="btn-success btn-block"
-            value="Sign In"
-          >Registra</button>
-        </div>
+
+</div>
+<br>
+<div class="row">
+      <div class="col-md-6">
+      <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
       </div>
-    </div>
+      <div class="col-md-6">
+      <button @click="createUser()" class="btn-block">Registra</button>
+			</div>
+</div>
+
+    
   </form>
 </template>
 

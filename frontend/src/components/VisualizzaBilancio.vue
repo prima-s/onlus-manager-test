@@ -8,20 +8,17 @@
       <h5 class="text-center">Bilancio attuale: {{bilancio}}</h5>
       <br>
 
-      <div class="row">
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <button @click="closeAll()" class="cancelbtn btn-block">Indietro</button>
-        </div>
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <button type="submit" @click="addBilancio()" class="btn-success btn-block">Scarica PDF</button>
-        </div>
+  
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+      <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
       </div>
-    </div>
-    <div v-if="success">
-      <h3>
-        <strong>{{voce}}</strong> è stata inserita tra le voci di bilancio.
-      </h3>
-    </div>
+      <div class="col-md-6">
+     <button type="submit" @click="addBilancio()" class="btn-success btn-block">Scarica PDF</button>
+			</div>
+</div>
+   
   </form>
 </template>
 

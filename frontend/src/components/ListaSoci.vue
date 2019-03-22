@@ -15,9 +15,14 @@
 
 		<br/><br/>
 
-            <button @click="createPDF()" class="cancelbtn btn-block">Download PDF</button>
-			<button @click="closeAll()" class="cancelbtn btn-block">Cancel</button>
-
+<div class="row">
+      <div class="col-md-6">
+      <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
+      </div>
+      <div class="col-md-6">
+      <button @click="createPDF()" class="btn-block">Download PDF</button>
+			</div>
+</div>
 
 
 
@@ -98,13 +103,15 @@ export default {
 </script>
 <style scoped>
 button {
-  position: absolute;
+  background-color: #4caf50;
+  color: white;
   padding: 14px 20px;
   border: none;
   cursor: pointer;
-  width: 50% ;
+  width: 100%;
   opacity: 0.9;
 }
+
 button:hover {
   opacity: 1;
 }
@@ -113,12 +120,7 @@ button:hover {
   padding: 14px 20px;
   background-color: #f44336;
 }
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn{
-  position: relative;
-  padding-left:30;
-  width: 50%;
-}
+
 .close {
   position: absolute;
   right: 35px;

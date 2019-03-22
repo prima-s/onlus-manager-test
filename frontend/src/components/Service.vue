@@ -41,12 +41,6 @@
           @click="closeAll()"
         >Visualizza bilancio</b-dropdown-item>
         <b-dropdown-item
-          onclick="document.getElementById('id06').style.display='block'"
-          style="width:auto;"
-          @click="closeAll()"
-          v-if="accesso === 'A' || accesso === 'B'"
-        >Nuova voce di bilancio</b-dropdown-item>
-        <b-dropdown-item
           onclick="document.getElementById('id07').style.display='block'"
           style="width:auto;"
           @click="closeAll()"
@@ -109,9 +103,6 @@
     <div id="id05" class="modal">
       <VisualizzaBilancio/>
     </div>
-    <div id="id06" class="modal">
-      <AggiungiVoce/>
-    </div>
     <div id="id07" class="modal">
       <RimuoviVoce/>
     </div>
@@ -132,7 +123,6 @@ import CambiaPassword from "./CambiaPassword";
 import AggiornaUtente from "./AggiornaUtente";
 import ListaSoci from "./ListaSoci";
 import VisualizzaBilancio from "./VisualizzaBilancio";
-import AggiungiVoce from "./AggiungiVoce";
 import AggiungiVoceBilancio from "./AggiungiVoceBilancio";
 import InserisciImportoBilancio from "./InserisciImportoBilancio";
 import RimuoviVoce from "./RimuoviVoce";
@@ -148,12 +138,11 @@ export default {
       modal: "id03",
       modal: "id04",
       modal: "id05",
-      modal: "id06",
       modal: "id07",
       modal: "id08",
       modal: "id09",
       accesso: null,
-      all: ["id01", "id02", "id03", "id04", "id05", "id06", "id07", "id08", "id09"]
+      all: ["id01", "id02", "id03", "id04", "id05", "id07", "id08", "id09"]
     };
   },
   created() {
@@ -165,7 +154,6 @@ export default {
     AggiornaUtente,
     ListaSoci,
     VisualizzaBilancio,
-    AggiungiVoce,
     AggiungiVoceBilancio,
     InserisciImportoBilancio,
     RimuoviVoce

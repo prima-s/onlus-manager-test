@@ -72,20 +72,23 @@
         v-model="voce.noteVoce"
       ></textarea>
 
-      <div class="row">
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
-        </div>
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <button
+    
+   
+
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+      <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
+      </div>
+      <div class="col-md-6">
+     <button
             type="submit"
             @mouseenter="checkImporto()"
             @click="inserisciVoce()"
             class="btn-success btn-block"
           >Inserisci</button>
-        </div>
-      </div>
-    </div>
+			</div>
+</div>
   </form>
 </template>
 
@@ -114,11 +117,36 @@ export default {
     AXIOS.get(`/voci`)
       .then(response => {
         this.fetchedResults = response.data;
+        console.log("created");
       })
       .catch(e => {
         this.errors.push(e);
       });
   },
+  beforeMount(){
+console.log("before mount");
+  },
+  mounted(){
+console.log("mounted");
+  },
+  beforeUpdate(){
+console.log("before update");
+  },
+  updated(){
+console.log("updated");
+  },
+  activated(){
+console.log("activated");
+  },
+  deactivated(){
+console.log("deactivated");
+  },
+  beforeDestroy(){
+console.log("before destroyed :(");
+  },
+   destroyed() {
+      console.log("I've been destroyed :(");
+    },
   methods: {
     onChange() {
       if (this.voce.nomeVoce.length < 3) {

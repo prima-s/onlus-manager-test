@@ -28,21 +28,21 @@
       </div>
 
 <br>
-<br>
 
-      <div class="row">
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
-        </div>
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <button
+    </div>
+
+     <div class="row">
+      <div class="col-md-6">
+      <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
+      </div>
+      <div class="col-md-6">
+      <button
             type="submit"
             @click="rimuoviVoce()"
             class="btn-success btn-block"
           >Rimuovi</button>
-        </div>
-      </div>
-    </div>
+			</div>
+</div>
   </form>
 </template>
 
