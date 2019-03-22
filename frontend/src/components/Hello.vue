@@ -25,7 +25,7 @@
               name="password"
               type="password"
               v-model="service.password"
-              @keydown.enter.prevent="addCategory"
+              @input="validator()"
               class="form-control input-sm chat-input"
               placeholder="password"
               required
@@ -38,8 +38,8 @@
                   type="login"
                   href
                   class="btn btn-primary btn-md"
-                  @mouseenter="validator()"
                   @click="startchecker()"
+                  :disabled="checking === false"
                 >
                   Login
                   <i class="fa fa-sign-in"></i>
@@ -78,7 +78,7 @@ export default {
 
   data() {
     return {
-      checking: null,
+      checking: false,
       accesso: null,
       response: [],
       errors: [],
@@ -105,6 +105,7 @@ export default {
       if (this.checking === true) {
         window.location.href = "/#/callservice?livello=" + this.accesso;
       } else {
+        this.params = null;
         window.location.href = "/#/";
       }
     },
