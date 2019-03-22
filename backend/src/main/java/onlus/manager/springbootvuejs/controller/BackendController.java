@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -33,13 +34,7 @@ public class BackendController {
     @Autowired
     private BilancioService bilancioService;
 
-    private String[] vociBilancio = new String[] {
-     "Tesseramento", "Donazione", "Affitto sedi",
-    "Rimborso spese attività", "Quota mensile attività",
-    "Assicurazione", "Acquisto materiali"
-    };
-    private List<String> listaVociBilancio = Arrays.asList(vociBilancio);
-    
+    private Bilancio b = new Bilancio();
 
     @RequestMapping(path = "/restlogin", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
@@ -102,9 +97,29 @@ public class BackendController {
     @RequestMapping(path="/voci", method = RequestMethod.GET)
     public @ResponseBody
     List<String> getVoci() {
-        return listaVociBilancio;
+        //b = new Bilancio();
+        return b.getTipoVoci();
     }
 
+    @RequestMapping(path="/aggiungiVoce", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public void addVoce(@RequestParam String voce) {
+        LOG.info("Aggiunta voce: " + voce + " alle voci di bilancio di default");
+        //b = new Bilancio();
+        System.out.println(b.getTipoVoci());
+        b.getTipoVoci().add(voce);
+        System.out.println(b.getTipoVoci());
+    }
+
+    @RequestMapping(path="/rimuoviVoce", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public void removeVoce(@RequestParam String voce) {
+        LOG.info("Rimossa voce: " + voce );
+        //b = new Bilancio();
+        System.out.println(b.getTipoVoci());
+        b.getTipoVoci().remove(voce);
+        System.out.println(b.getTipoVoci());
+    }
 
     @RequestMapping(path="/inserisciVoce", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
@@ -114,6 +129,9 @@ public class BackendController {
         BigDecimal importo = new BigDecimal(importoVoce);
         Voce v = new Voce(nomeVoce, importo, date, noteVoce);
         bilancioService.aggiungiVoceInBilancio(v);
+        if (!b.getTipoVoci().contains(nomeVoce)) {
+            addVoce(nomeVoce);
+        }
     }
 
     @RequestMapping(path="/inserisciBilancio", method = RequestMethod.POST)
@@ -123,6 +141,10 @@ public class BackendController {
         BigDecimal imp = new BigDecimal(importo);
         LOG.info("Inserito nuovo bilancio con importo pari a " + imp );
         bilancioService.modificaBilancio(imp);
+        //TODO
+        // creare una call al controller dalla vue di inserisciBilancio che passi
+        // anche la data
+        // poi nel bilancio se questa data esiste si calcolerà la somma delle voci solo da tale data
     }
 
     @RequestMapping(path="/bilancio", method = RequestMethod.GET)
