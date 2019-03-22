@@ -1,40 +1,38 @@
 package onlus.manager.springbootvuejs.hibernate.domain;
 
-import java.math.BigDecimal;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Bilancio {
 	
 	private ArrayList<Voce> voci;
+	private ArrayList<String> tipoVoci;
 	
 
 	public Bilancio() {
-		voci =new ArrayList<>();
+		voci = new ArrayList<>();
+		tipoVoci = new ArrayList<>();
+		tipoVoci.add("Tesseramento");
+		tipoVoci.add("Donazione");
+		tipoVoci.add("Affitto sedi");
+		tipoVoci.add("Rimborso spese attività");
+		tipoVoci.add("Quota mensile attività");
+		tipoVoci.add("Assicurazione");
+		tipoVoci.add("Acquisto materiali");
 	}
-	
-	public void aggiungiVoce(Voce v) {
-		voci.add(v);
+
+	/**
+	 * @return the voci
+	 */
+	public ArrayList<Voce> getVoci() {
+		return voci;
 	}
-	
-	public BigDecimal getBilancioAnnuale(LocalDate data) {
-		BigDecimal somma = new BigDecimal(0); 
-		for (Voce voce : voci) {
-			if (voce.getDataRiferimento().equals(data));
-			somma.add(voce.getSommaAssociata());
-		}
-		return somma;
+
+	/**
+	 * @return the tipoVoci
+	 */
+	public ArrayList<String> getTipoVoci() {
+		return tipoVoci;
 	}
-	
-	public BigDecimal getBilancioTotale() {
-		BigDecimal somma = new BigDecimal(0); 
-		for (Voce voce : voci) {
-			somma =	somma.add(voce.getSommaAssociata());
-		}
-		return somma;
-	}
-	
 	
 
 }
