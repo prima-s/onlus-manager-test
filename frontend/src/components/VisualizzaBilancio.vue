@@ -4,35 +4,53 @@
     <div class="container">
       <h1>Bilancio</h1>
       <hr>
-        <div>
-    <label for="range-1">
-      <b>Seleziona anno</b>
-      </label>
-    <b-form-input type="range" id="range-1" v-model="anno" min="2010" max="2019" />
-    <br>
-    <br>
-  </div>
-  <div class="row">
-    <div class="col-md-8">
-      <h4 class="text-center">Bilancio per l'anno {{anno}}</h4> 
+      <div>
+        <label for="range-1">
+          <b>Seleziona anno</b>
+        </label>
+        <input
+          type="range"
+          class="custom-range"
+          id="range-1"
+          v-model="annoCorrente"
+          :min="this.minAnno"
+          :max="this.maxAnno"
+          @input="updateBilancioAnnuale()"
+        >
+        <br>
+        <br>
       </div>
-      <div class="col-md-4">
-      <h4>{{bilancio}} €</h4>
-      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <h4 class="text-center">Bilancio per l'anno {{annoCorrente}}</h4>
+        </div>
+        <div class="col-md-4">
+          <h4>{{bilancio}} €</h4>
+        </div>
       </div>
       <br>
 
-  
+      <button type="submit" @click="showBilancioTotale()" class="btn-block">Mostra Bilancio Totale</button>
+      <br>
+      <div class="row" v-if="totaleTrue">
+        <div class="col-md-8">
+          <h4 class="text-center">Bilancio Totale</h4>
+        </div>
+        <div class="col-md-4">
+          <h4>{{bilancioTotale}} €</h4>
+        </div>
+      </div>
     </div>
+
+    <br>
     <div class="row">
       <div class="col-md-6">
-      <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
+        <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
       </div>
       <div class="col-md-6">
-     <button type="submit" @click="savePDF()" class="signupbtn btn-block">Scarica PDF</button>
-			</div>
-</div>
-   
+        <button type="submit" @click="savePDF()" class="signupbtn btn-block">Scarica PDF</button>
+      </div>
+    </div>
   </form>
 </template>
 
@@ -44,12 +62,18 @@ export default {
       response: [],
       errors: [],
       bilancio: 0,
-      anno: 2018,
-      success: false
+      bilancioTotale: 0,
+      totaleTrue: false,
+      annoCorrente: 2018,
+      success: false,
+      minAnno: 2010,
+      maxAnno: 2019
     };
   },
   created() {
-    AXIOS.get(`/bilancio`)
+    var params = new URLSearchParams();
+    params.append("anno", this.annoCorrente);
+    AXIOS.post(`/bilancio`, params)
       .then(response => {
         // JSON responses are automatically parsed.
         this.bilancio = response.data;
@@ -59,12 +83,40 @@ export default {
         this.errors.push(e);
       });
   },
-   mounted() {
-    let recaptchaScript = document.createElement('script');
-    recaptchaScript.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js');
+  mounted() {
+    let recaptchaScript = document.createElement("script");
+    recaptchaScript.setAttribute(
+      "src",
+      "https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
+    );
     document.head.appendChild(recaptchaScript);
-    },
+  },
   methods: {
+    showBilancioTotale() {
+      AXIOS.get(`/bilancioTotale`)
+        .then(response => {
+          // JSON responses are automatically parsed.
+          this.bilancioTotale = response.data;
+          this.totaleTrue = true;
+          console.log(response.data);
+        })
+        .catch(e => {
+          this.errors.push(e);
+        });
+    },
+    updateBilancioAnnuale() {
+      var params = new URLSearchParams();
+      params.append("anno", this.annoCorrente);
+      AXIOS.post(`/bilancio`, params)
+        .then(response => {
+          // JSON responses are automatically parsed.
+          this.bilancio = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          this.errors.push(e);
+        });
+    },
     closeAll() {
       for (
         var i = 0;
@@ -79,13 +131,12 @@ export default {
         modal.style.display = "none";
       }
     },
-  savePDF () {
-    var doc = new jsPDF();
-    doc.text(
-    'Il bilancio attuale è: ' + this.bilancio, 10, 10 + 10)
-    
-    doc.save('Bilancio' + '.pdf');
-  },
+    savePDF() {
+      var doc = new jsPDF();
+      doc.text("Il bilancio attuale è: " + this.bilancio, 10, 10 + 10);
+
+      doc.save("Bilancio" + ".pdf");
+    },
     mouseOver: function() {
       this.active = !this.active;
     }
@@ -129,8 +180,6 @@ hr {
   margin-bottom: 25px;
 }
 
-
-
 /* Clear floats */
 .clearfix::after {
   content: "";
@@ -159,5 +208,15 @@ hr {
 .testo:focus {
   background-color: #ddd;
   outline: none;
+}
+
+.custom-range::before {
+  content: attr(min);
+}
+.custom-range::after {
+  content: attr(max);
+}
+.custom-range {
+  height: 0;
 }
 </style>
