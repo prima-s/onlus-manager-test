@@ -147,10 +147,16 @@ public class BackendController {
         // poi nel bilancio se questa data esiste si calcolerà la somma delle voci solo da tale data
     }
 
-    @RequestMapping(path="/bilancio", method = RequestMethod.GET)
+    @RequestMapping(path="/bilancioTotale", method = RequestMethod.GET)
     public @ResponseBody
     BigDecimal getBilancio() {
         return bilancioService.visualizzaBilancioTotale();
+    }
+
+    @RequestMapping(path="/bilancio", method = RequestMethod.POST)
+    public @ResponseBody
+    BigDecimal getBilancioAnnuale(@RequestParam int anno) {
+        return bilancioService.visualizzaBilancioAnnuale(anno);
     }
 
 }
