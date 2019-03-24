@@ -81,7 +81,7 @@ public class BilancioServiceImpl implements BilancioService {
 
     public BigDecimal visualizzaBilancioAnnuale(int anno) {
         BigDecimal somma = BigDecimal.ZERO;
-        List<Voce> voci = voceRepository.findAll();
+        List<Voce> voci = visualizzaVociInBilancio();
         for (Voce voce : voci) {
             if(anno == voce.getAnno()){
                 somma = somma.add(voce.getSommaAssociata());
