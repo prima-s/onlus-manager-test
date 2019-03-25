@@ -20,13 +20,48 @@
         <br>
         <br>
       </div>
-      <div class="row">
+      <div class="row" id="listaVoci">
         <div class="col-md-8">
           <h4 class="text-center">Bilancio per l'anno {{annoCorrente}}</h4>
         </div>
         <div class="col-md-4">
           <h4>{{bilancio}} €</h4>
         </div>
+      </div>
+
+      <br>
+
+      <div v-if="rows > 0">
+        <div class="row">
+          <div class="col-md-12">
+            <div>
+              <b-table
+                striped
+                responsive
+                hover
+                id="vociTable"
+                :items="voci"
+                :fields="fields"
+                :per-page="perPage"
+                :current-page="currentPage"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <b-pagination
+              v-model="currentPage"
+              :total-rows="rows"
+              :per-page="perPage"
+              aria-controls="vociTable"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="noData" v-else>
+        <b>Nessuna voce presente</b>
       </div>
       <br>
 
@@ -67,7 +102,27 @@ export default {
       annoCorrente: 2018,
       success: false,
       minAnno: 2010,
-      maxAnno: 2019
+      maxAnno: 2019,
+      voci: [],
+      fields: [
+        {
+          key: "nomeVoce",
+          label: "Nome Voce",
+          sortable: false
+        },
+        {
+          key: "sommaAssociata",
+          label: "Importo",
+          sortable: true
+        },
+        {
+          key: "dataRiferimento",
+          label: "Data",
+          sortable: true
+        }
+      ],
+      perPage: 7,
+      currentPage: 1
     };
   },
   created() {
@@ -83,13 +138,38 @@ export default {
         this.errors.push(e);
       });
   },
-  mounted() {
-    let recaptchaScript = document.createElement("script");
-    recaptchaScript.setAttribute(
-      "src",
-      "https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
-    );
-    document.head.appendChild(recaptchaScript);
+  beforeMount() {
+    var params = new URLSearchParams();
+    params.append("anno", this.annoCorrente);
+    AXIOS.post(`/vociBilancioAnnuale`, params)
+      .then(response => {
+        // JSON responses are automatically parsed.
+        this.voci = response.data;
+        console.log(response.data);
+      })
+      .catch(e => {
+        this.errors.push(e);
+      });
+  },
+  watch: {
+    annoCorrente(value) {
+      //var instance = this;
+      var params = new URLSearchParams();
+      params.append("anno", this.annoCorrente);
+      AXIOS.post(`/vociBilancioAnnuale`, params)
+        .then(response => {
+          this.voci = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          this.errors.push(e);
+        });
+    }
+  },
+  computed: {
+    rows() {
+      return this.voci.length;
+    }
   },
   methods: {
     showBilancioTotale() {
@@ -133,9 +213,27 @@ export default {
     },
     savePDF() {
       var doc = new jsPDF();
-      doc.text("Il bilancio attuale è: " + this.bilancio, 10, 10 + 10);
+      let title = "BILANCIO PER L'ANNO " + this.annoCorrente + "\n";
+      let total = "Totale: " + this.bilancio + "€\n";
+      let list = "";
+      let pdf = "";
 
-      doc.save("Bilancio" + ".pdf");
+      for (var i = 0; i < this.voci.length; i++) {
+        list +=
+          this.voci[i]["nomeVoce"] +
+          " - " +
+          this.voci[i]["sommaAssociata"] +
+          " - " +
+          this.voci[i]["dataRiferimento"] +
+          "\n";
+      }
+      pdf += title + "\n";
+      pdf += list + "\n";
+      pdf += total;
+      let splitList = doc.splitTextToSize(pdf, 180);
+      doc.text(splitList, 10, 10);
+
+      doc.save("Bilancio" + this.annoCorrente + ".pdf");
     },
     mouseOver: function() {
       this.active = !this.active;
@@ -146,6 +244,15 @@ export default {
 
 <style scoped>
 /* Set a style for all buttons */
+.pagination {
+  justify-content: center;
+}
+
+.noData {
+  color: rgba(99, 99, 99, 0.685);
+  text-align: center;
+}
+
 button {
   background-color: #4caf50;
   color: white;
