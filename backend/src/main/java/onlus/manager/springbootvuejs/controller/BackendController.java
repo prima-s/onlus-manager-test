@@ -159,4 +159,12 @@ public class BackendController {
         return bilancioService.visualizzaBilancioAnnuale(anno);
     }
 
+    @RequestMapping(path="/vociBilancioAnnuale", method = RequestMethod.POST)
+    public @ResponseBody
+    List<Voce> getVociAnnuale(@RequestParam int anno) {
+        List<Voce> voci = bilancioService.visualizzaVociTemporale(anno);
+        System.out.println(voci);
+        return voci;
+    }
+
 }
