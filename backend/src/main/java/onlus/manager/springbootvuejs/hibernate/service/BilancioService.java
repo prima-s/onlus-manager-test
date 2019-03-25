@@ -17,7 +17,7 @@ public interface BilancioService {
     BigDecimal visualizzaBilancioAnnuale(int anno);
     BigDecimal visualizzaBilancioTotale();
     List<Voce> visualizzaVociInBilancio();
-    List<Voce> visualizzaVociTemporale(LocalDate data);
+    List<Voce> visualizzaVociTemporale(int anno);
     public String aggiungiVoce(String voce);
     public String rimuoviVoce(String voce);
     public List<String> listaTipologieVoci();

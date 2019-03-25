@@ -3,6 +3,7 @@ package onlus.manager.springbootvuejs.hibernate.service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import onlus.manager.springbootvuejs.hibernate.repository.VoceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,12 +45,7 @@ public class BilancioServiceImpl implements BilancioService {
     @Override
     public void salvaBilancio(List<Voce> bilancio) {
        // List<Voce> bil = bilancioRepository.saveAll(bilancio);
-
     }
-
-   /* public List<Voce> salvaBilancio() {
-        return voceRepository.findAll();
-    }*/
 
     @Override
     public BigDecimal visualizzaBilancioTotale() {
@@ -67,8 +63,9 @@ public class BilancioServiceImpl implements BilancioService {
     }
 
     @Override
-    public List<Voce> visualizzaVociTemporale(LocalDate data){
-        return null;
+    public List<Voce> visualizzaVociTemporale(int anno){
+        List<Voce> voci = visualizzaVociInBilancio();
+        return voci.stream().filter(voce -> anno == voce.getAnno()).collect(Collectors.toList());
     }
 
     @Override
@@ -89,18 +86,6 @@ public class BilancioServiceImpl implements BilancioService {
         }
         return somma;
     }
-/*
-    public BigDecimal visualizzaBilancioTotale() {
-        BigDecimal somma = new BigDecimal(0);
-        List<Voce> voci = voceRepository.findAll();
-        for (Voce voce : voci) {
-            somma = somma.add(voce.getSommaAssociata());
-        }
-        return somma;
-    }
-
-    public Voce modificaVoceInBilancio(Voce voce) {
-        return voceRepository.save(voce);*/
 
     @Override
     public String aggiungiVoce(String voce) {
