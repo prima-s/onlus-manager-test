@@ -7,6 +7,7 @@
 
       <label for="nome">
         <b>Nome Voce</b>
+        <p>(Inserendo un nome non presente nella lista dei suggerimenti questo verrà automaticamente aggiunto alla lista per le prossime operazioni di inserimento voce)</p>
       </label>
       <br>
       <div class="autocomplete">
@@ -14,12 +15,12 @@
           type="text"
           v-model="voce.nomeVoce"
           placeholder="Nome voce"
-          @input="onChange()"
+          @input="onChange"
           required
         >
         <ul v-show="isOpen" class="autocomplete-results">
           <li
-            v-for="(result, i) in results"
+            v-for="(result, i) in filteredVoci"
             :key="i"
             @click="setResult(result)"
             class="autocomplete-result"
@@ -71,24 +72,20 @@
         name="note"
         v-model="voce.noteVoce"
       ></textarea>
-
-    
-   
-
     </div>
     <div class="row">
       <div class="col-md-6">
-      <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
+        <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
       </div>
       <div class="col-md-6">
-     <button
-            type="submit"
-            @mouseenter="checkImporto()"
-            @click="inserisciVoce()"
-            class="signupbtn btn-block"
-          >Inserisci</button>
-			</div>
-</div>
+        <button
+          type="submit"
+          @mouseenter="checkImporto()"
+          @click="inserisciVoce()"
+          class="signupbtn btn-block"
+        >Inserisci</button>
+      </div>
+    </div>
   </form>
 </template>
 
@@ -123,47 +120,18 @@ export default {
         this.errors.push(e);
       });
   },
-  beforeMount(){
-console.log("before mount");
+  computed: {
+    filteredVoci() {
+      let filter = new RegExp(this.voce.nomeVoce, "i");
+      return this.fetchedResults.filter(el => el.match(filter));
+    }
   },
-  mounted(){
-console.log("mounted");
-  },
-  beforeUpdate(){
-console.log("before update");
-  },
-  updated(){
-console.log("updated");
-  },
-  activated(){
-console.log("activated");
-  },
-  deactivated(){
-console.log("deactivated");
-  },
-  beforeDestroy(){
-console.log("before destroyed :(");
-  },
-   destroyed() {
-      console.log("I've been destroyed :(");
-    },
   methods: {
     onChange() {
-      if (this.voce.nomeVoce.length < 3) {
-        this.results = this.fetchedResults;
-      }
-
       this.isOpen = true;
-      this.filterResults();
-      if (this.results.length < 1) {
+      if (this.filteredVoci.length < 1) {
         this.isOpen = false;
       }
-    },
-    filterResults() {
-      this.results = this.results.filter(
-        item =>
-          item.toLowerCase().indexOf(this.voce.nomeVoce.toLowerCase()) > -1
-      );
     },
     setResult(result) {
       this.voce.nomeVoce = result;
@@ -217,7 +185,6 @@ console.log("before destroyed :(");
 </script>
 
 <style scoped>
-
 .container {
   padding: 16px;
 }

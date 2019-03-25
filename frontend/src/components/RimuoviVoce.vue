@@ -4,22 +4,16 @@
     <div class="container">
       <h1>Rimuovi Voce</h1>
       <hr>
-<br>
+      <br>
       <label for="nome">
         <b>Nome Voce (seleziona la voce che desideri rimuovere da quelle di default)</b>
       </label>
       <br>
       <div class="autocomplete">
-        <input
-          type="text"
-          v-model="nomeVoce"
-          placeholder="Nome voce"
-          @input="onChange()"
-          required
-        >
+        <input type="text" v-model="nomeVoce" placeholder="Nome voce" @input="onChange()" required>
         <ul v-show="isOpen" class="autocomplete-results">
           <li
-            v-for="(result, i) in results"
+            v-for="(result, i) in filteredVoci"
             :key="i"
             @click="setResult(result)"
             class="autocomplete-result"
@@ -27,35 +21,29 @@
         </ul>
       </div>
 
-<br>
-
+      <br>
     </div>
 
-     <div class="row">
+    <div class="row">
       <div class="col-md-6">
-      <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
+        <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
       </div>
       <div class="col-md-6">
-      <button
-            type="submit"
-            @click="rimuoviVoce()"
-            class="signupbtn btn-block"
-          >Rimuovi</button>
-			</div>
-</div>
+        <button type="submit" @click="rimuoviVoce()" class="signupbtn btn-block">Rimuovi</button>
+      </div>
+    </div>
   </form>
 </template>
 
 <script scoped>
 import { AXIOS } from "./http-common";
 export default {
-
   data() {
     return {
       response: [],
       errors: [],
-      nomeVoce: '',
-		 results: this.fetchedResults,
+      nomeVoce: "",
+      results: this.fetchedResults,
       fetchedResults: [],
       isOpen: false
     };
@@ -69,38 +57,37 @@ export default {
         this.errors.push(e);
       });
   },
+  computed: {
+    filteredVoci() {
+      let filter = new RegExp(this.nomeVoce, "i");
+      return this.fetchedResults.filter(el => el.match(filter));
+    }
+  },
   methods: {
-      onChange() {
-      if (this.nomeVoce.length < 3) {
-        this.results = this.fetchedResults;
-      }
-
+    onChange() {
       this.isOpen = true;
-      this.filterResults();
-      if (this.results.length < 1) {
+      if (this.filteredVoci.length < 1) {
         this.isOpen = false;
       }
-    },
-    filterResults() {
-      this.results = this.results.filter(
-        item =>
-          item.toLowerCase().indexOf(this.nomeVoce.toLowerCase()) > -1
-      );
     },
     setResult(result) {
       this.nomeVoce = result;
       this.isOpen = false;
     },
-       closeAll(){
-      for(var i=0;i<document.getElementsByClassName('modal').length;i++){
-        document.getElementsByClassName('modal')[i].style.display='none';
+    closeAll() {
+      for (
+        var i = 0;
+        i < document.getElementsByClassName("modal").length;
+        i++
+      ) {
+        document.getElementsByClassName("modal")[i].style.display = "none";
       }
     },
-    
+
     // Fetches posts when the component is created.
     rimuoviVoce() {
-     var params = new URLSearchParams();
-          params.append("voce", this.nomeVoce);
+      var params = new URLSearchParams();
+      params.append("voce", this.nomeVoce);
 
       AXIOS.post(`/rimuoviVoce`, params)
         .then(response => {
@@ -113,7 +100,6 @@ export default {
         });
     }
   }
-  
 };
 </script>
 
