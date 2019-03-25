@@ -54,6 +54,7 @@
             type="number"
             class="testo"
             placeholder="Importo"
+            step="0.01"
             name="importo"
             v-model="voce.importoVoce"
             required
