@@ -105,7 +105,6 @@ public class BackendController {
     @ResponseStatus(HttpStatus.OK)
     public void addVoce(@RequestParam String voce) {
         LOG.info("Aggiunta voce: " + voce + " alle voci di bilancio di default");
-        //b = new Bilancio();
         System.out.println(b.getTipoVoci());
         b.getTipoVoci().add(voce);
         System.out.println(b.getTipoVoci());
@@ -115,7 +114,6 @@ public class BackendController {
     @ResponseStatus(HttpStatus.OK)
     public void removeVoce(@RequestParam String voce) {
         LOG.info("Rimossa voce: " + voce );
-        //b = new Bilancio();
         System.out.println(b.getTipoVoci());
         b.getTipoVoci().remove(voce);
         System.out.println(b.getTipoVoci());
@@ -123,7 +121,7 @@ public class BackendController {
 
     @RequestMapping(path="/inserisciVoce", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public void inserisciVoce(@RequestParam String nomeVoce, @RequestParam int importoVoce, @RequestParam String dataVoce, @RequestParam String noteVoce ) {
+    public void inserisciVoce(@RequestParam String nomeVoce, @RequestParam String importoVoce, @RequestParam String dataVoce, @RequestParam String noteVoce ) {
         LOG.info("Inserita voce in bilancio: " + nomeVoce + ", importo: " + importoVoce + ", data: " + dataVoce + ", note: " + noteVoce );
         LocalDate date = LocalDate.parse(dataVoce);
         BigDecimal importo = new BigDecimal(importoVoce);
