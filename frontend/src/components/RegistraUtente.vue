@@ -49,8 +49,12 @@
             maxlength="16"
             placeholder="xxxxxxxxxxxxxxxxxx"
             name="CF"
+            @input="reCheckCodFisc"
+            @blur="checkCodFisc"
             required
           >
+          <br>
+          <p :class="{'notCorrect' : codFiscOk == false}">{{codFiscMessage}}</p>
         </div>
       </div>
 
@@ -107,48 +111,32 @@
       <label for="indirizzo">
         <b>Indirizzo*</b>
       </label>
-      <div style="width:100%">
-        <input
-          type="text"
-          v-model="user.indirizzo"
-          class="ind"
-          placeholder="Via/Piazza, n° civico"
-          name="indirizzo"
-          required
-        >
-        <input
-          type="text"
-          v-model="user.citta"
-          style="width:15%;"
-          class="ind"
-          placeholder=" Citta"
-          name="citta"
-          required
-        >
-        <input
-          type="text"
-          v-model="user.cap"
-          style="width:10%;"
-          class="ind"
-          placeholder=" CAP"
-          name="cap"
-          required
-        >
-        <input
-          type="text"
-          v-model="user.nazione"
-          style="width:20%;"
-          class="ind"
-          placeholder="Nazione"
-          name="nazione"
-          required
-        >
+      <div class="row">
+        <div class="col-md-4">
+          <input
+            type="text"
+            v-model="user.indirizzo"
+            placeholder="Via/Piazza, n° civico"
+            name="indirizzo"
+            required
+          >
+        </div>
+        <div class="col-md-3">
+          <input type="text" v-model="user.citta" placeholder=" Città" name="citta" required>
+        </div>
+        <div class="col-md-2">
+          <input type="text" v-model="user.cap" placeholder=" CAP" name="cap" required>
+        </div>
+        <div class="col-md-3">
+          <input type="text" v-model="user.nazione" placeholder="Nazione" name="nazione" required>
+        </div>
       </div>
       <hr>
       <label for="email">
         <b>Email*</b>
       </label>
-      <div style="width:100%">
+      <div class="row">
+        <div class="col-md-6">
         <input
           type="email"
           v-model="user.email"
@@ -157,6 +145,8 @@
           name="email"
           required
         >
+        </div>
+         <div class="col-md-6">
         <input
           type="email"
           v-model="user.email2"
@@ -164,11 +154,14 @@
           placeholder="secondaEmail@ccc.com"
           name="email2"
         >
+        </div>
       </div>
+      <br>
       <label for="numeri">
         <b>Numeri di Telefono</b>
       </label>
-      <div style="width:100%">
+      <div class="row">
+         <div class="col-md-6">
         <input
           type="text"
           v-model="user.fisso"
@@ -176,6 +169,8 @@
           placeholder="Numero Fisso"
           name="fisso"
         >
+         </div>
+          <div class="col-md-6">
         <input
           type="text"
           v-model="user.cellulare"
@@ -184,6 +179,7 @@
           name="cellulare"
           required
         >
+          </div>
       </div>
       <hr>
       <label>
@@ -236,6 +232,8 @@ export default {
         note: "",
         Ruolo: []
       },
+      codFiscOk: null,
+      codFiscMessage: null,
       showResponse: false,
       retrievedUser: {},
       showRetrievedUser: false
@@ -251,8 +249,46 @@ export default {
         document.getElementsByClassName("modal")[i].style.display = "none";
       }
     },
-
-    // Fetches posts when the component is created.
+    checkCodFisc() {
+      let TAX_CODE_LENGTH = 16;
+      let REGEXP_STRING_FOR_LASTNAME = "[A-Za-z]{3}";
+      let REGEXP_STRING_FOR_FIRSTNAME = "[A-Za-z]{3}";
+      let REGEXP_STRING_FOR_BIRTHDATE_YEAR = "[0-9LlMmNnPpQqRrSsTtUuVv]{2}";
+      let REGEXP_STRING_FOR_BIRTHDATE_MONTH = "[AaBbCcDdEeHhLlMmPpRrSsTt]{1}";
+      let REGEXP_STRING_FOR_BIRTHDATE_DAY_GENDER_PART_1 =
+        "[0-7LlMmNnPpQqRrSsTtUuVv]{1}";
+      let REGEXP_STRING_FOR_BIRTHDATE_DAY_GENDER_PART_2 =
+        "[0-9LlMmNnPpQqRrSsTtUuVv]{1}";
+      let REGEXP_STRING_FOR_BIRTHTOWN_PART_1 = "[A-Za-z]{1}";
+      let REGEXP_STRING_FOR_BIRTHTOWN_PART_2 = "[0-9LlMmNnPpQqRrSsTtUuVv]{3}";
+      let REGEXP_STRING_FOR_CIN = "[A-Za-z]{1}";
+      let REGEXP = new RegExp(
+        "^" +
+          REGEXP_STRING_FOR_LASTNAME +
+          REGEXP_STRING_FOR_FIRSTNAME +
+          REGEXP_STRING_FOR_BIRTHDATE_YEAR +
+          REGEXP_STRING_FOR_BIRTHDATE_MONTH +
+          REGEXP_STRING_FOR_BIRTHDATE_DAY_GENDER_PART_1 +
+          REGEXP_STRING_FOR_BIRTHDATE_DAY_GENDER_PART_2 +
+          REGEXP_STRING_FOR_BIRTHTOWN_PART_1 +
+          REGEXP_STRING_FOR_BIRTHTOWN_PART_2 +
+          REGEXP_STRING_FOR_CIN +
+          "$"
+      );
+      let codFisc = this.user.cf;
+      if (codFisc.length === 16 && REGEXP.test(codFisc)) {
+        this.codFiscOk = true;
+        this.codFiscMessage = null;
+      } else {
+        this.codFiscOk = false;
+        this.codFiscMessage = "Codice fiscale non valido";
+      }
+    },
+    reCheckCodFisc() {
+      if (this.codFiscOk === false) {
+        this.checkCodFisc();
+      }
+    },
     createUser() {
       var params = new URLSearchParams();
       params.append("nome", this.user.nome);
@@ -324,44 +360,12 @@ hr {
     width: 100%;
   }
 }
-.ind {
-  margin: 5px 10px 22px 0;
-  width: 45%;
-  padding: 15px;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
-  outline: none;
-}
-.anagrafica {
-  margin: 5px 10px 22px 0;
-  width: 48%;
-  padding: 15px;
-  display: inline-block;
-  border: none;
-  border: none;
-  background: #f1f1f1;
-}
-.anagrafica:focus {
-  background-color: #ddd;
-  outline: none;
-}
-.numeri {
-  margin: 5px 10px 22px 0 !important;
-  width: 48% !important;
-  padding: 15px !important;
-  display: inline-block !important;
-  border: none !important;
-  border: none !important;
-  background: #f1f1f1 !important;
-}
-.numeri:focus {
-  background-color: #ddd;
-  outline: none;
-}
-input:focus {
-  background-color: #ddd;
-  outline: none;
+
+.notCorrect {
+  padding: 3px;
+  background: orangered;
+  color: #f1f1f1;
+  text-align: center;
 }
 </style>
 
