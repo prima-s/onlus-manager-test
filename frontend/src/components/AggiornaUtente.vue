@@ -10,11 +10,17 @@
     <div class="container">
       <h1>Aggiorna dati socio</h1>
       <hr>
-
       <div class="container h-100">
         <div class="d-flex justify-content-center h-100">
           <div class="searchbar">
-            <input class="search_input" type="text" name placeholder="Search...">
+            <input
+              class="search_input"
+              type="text"
+              name
+              placeholder="Ricerca socio per cognome..."
+              v-model="cognome"
+              @input="searchByCognome"
+            >
             <a class="search_icon">
               <i class="fas fa-search"></i>
             </a>
@@ -65,8 +71,12 @@
             maxlength="16"
             placeholder="xxxxxxxxxxxxxxxxxx"
             name="CF"
+            @input="reCheckCodFisc"
+            @blur="checkCodFisc"
             required
           >
+          <br>
+          <p :class="{'notCorrect' : codFiscOk == false}">{{codFiscMessage}}</p>
         </div>
       </div>
 
@@ -75,19 +85,19 @@
       </label>
       <div class="funkyradio row">
         <div class="funkyradio-danger col-md-3">
-          <input type="checkbox" value="amministratore" v-model="user.Ruolo" name="checkbox">
+          <input type="checkbox" value="amministratore" v-model="user.ruolo" name="checkbox">
           <label for="checkbox1">Amministratore</label>
         </div>
         <div class="funkyradio-danger col-md-2">
-          <input type="checkbox" value="presidente" v-model="user.Ruolo" name="checkbox">
+          <input type="checkbox" value="presidente" v-model="user.ruolo" name="checkbox">
           <label for="checkbox2">Presidente</label>
         </div>
         <div class="funkyradio-danger col-md-2">
-          <input type="checkbox" value="tesoriere" v-model="user.Ruolo" name="checkbox">
+          <input type="checkbox" value="tesoriere" v-model="user.ruolo" name="checkbox">
           <label for="checkbox3">Tesoriere</label>
         </div>
         <div class="funkyradio-danger col-md-2">
-          <input type="checkbox" value="consigliere" v-model="user.Ruolo" name="checkbox">
+          <input type="checkbox" value="consigliere" v-model="user.ruolo" name="checkbox">
           <label for="checkbox4">Consigliere</label>
         </div>
         <div class="funkyradio-danger col-md-2">
@@ -99,48 +109,32 @@
       <label for="indirizzo">
         <b>Indirizzo*</b>
       </label>
-      <div style="width:100%">
-        <input
-          type="text"
-          v-model="user.indirizzo"
-          class="ind"
-          placeholder="Via/Piazza, n° civico"
-          name="indirizzo"
-          required
-        >
-        <input
-          type="text"
-          v-model="user.citta"
-          style="width:15%;"
-          class="ind"
-          placeholder=" Citta"
-          name="citta"
-          required
-        >
-        <input
-          type="text"
-          v-model="user.cap"
-          style="width:10%;"
-          class="ind"
-          placeholder=" CAP"
-          name="cap"
-          required
-        >
-        <input
-          type="text"
-          v-model="user.nazione"
-          style="width:20%;"
-          class="ind"
-          placeholder="Nazione"
-          name="nazione"
-          required
-        >
+      <div class="row">
+        <div class="col-md-4">
+          <input
+            type="text"
+            v-model="user.indirizzo"
+            placeholder="Via/Piazza, n° civico"
+            name="indirizzo"
+            required
+          >
+        </div>
+        <div class="col-md-3">
+          <input type="text" v-model="user.citta" placeholder=" Città" name="citta" required>
+        </div>
+        <div class="col-md-2">
+          <input type="text" v-model="user.cap" placeholder=" CAP" name="cap" required>
+        </div>
+        <div class="col-md-3">
+          <input type="text" v-model="user.nazione" placeholder="Nazione" name="nazione" required>
+        </div>
       </div>
       <hr>
       <label for="email">
         <b>Email*</b>
       </label>
-      <div style="width:100%">
+      <div class="row">
+        <div class="col-md-6">
         <input
           type="email"
           v-model="user.email"
@@ -149,6 +143,8 @@
           name="email"
           required
         >
+        </div>
+         <div class="col-md-6">
         <input
           type="email"
           v-model="user.email2"
@@ -156,11 +152,14 @@
           placeholder="secondaEmail@ccc.com"
           name="email2"
         >
+        </div>
       </div>
+      <br>
       <label for="numeri">
         <b>Numeri di Telefono</b>
       </label>
-      <div style="width:100%">
+       <div class="row">
+         <div class="col-md-6">
         <input
           type="text"
           v-model="user.fisso"
@@ -168,6 +167,8 @@
           placeholder="Numero Fisso"
           name="fisso"
         >
+         </div>
+          <div class="col-md-6">
         <input
           type="text"
           v-model="user.cellulare"
@@ -176,6 +177,7 @@
           name="cellulare"
           required
         >
+          </div>
       </div>
       <hr>
       <label>
@@ -203,6 +205,7 @@
   </form>
 </template>
 <script>
+import { AXIOS } from "./http-common";
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
@@ -211,6 +214,7 @@ export default {
     return {
       response: [],
       errors: [],
+      cognome: "",
       user: {
         nome: "",
         cognome: "",
@@ -224,8 +228,10 @@ export default {
         fisso: "",
         cellulare: "",
         note: "",
-        Ruolo: []
+        ruolo: []
       },
+      codFiscOk: null,
+      codFiscMessage: null,
       showResponse: false,
       retrievedUser: {},
       showRetrievedUser: false
@@ -242,12 +248,67 @@ export default {
         document.getElementsByClassName("modal")[i].style.display = "none";
       }
     },
-
-    callRestService() {
-      AXIOS.get(`/hello`)
+    checkCodFisc() {
+      let TAX_CODE_LENGTH = 16;
+      let REGEXP_STRING_FOR_LASTNAME = "[A-Za-z]{3}";
+      let REGEXP_STRING_FOR_FIRSTNAME = "[A-Za-z]{3}";
+      let REGEXP_STRING_FOR_BIRTHDATE_YEAR = "[0-9LlMmNnPpQqRrSsTtUuVv]{2}";
+      let REGEXP_STRING_FOR_BIRTHDATE_MONTH = "[AaBbCcDdEeHhLlMmPpRrSsTt]{1}";
+      let REGEXP_STRING_FOR_BIRTHDATE_DAY_GENDER_PART_1 =
+        "[0-7LlMmNnPpQqRrSsTtUuVv]{1}";
+      let REGEXP_STRING_FOR_BIRTHDATE_DAY_GENDER_PART_2 =
+        "[0-9LlMmNnPpQqRrSsTtUuVv]{1}";
+      let REGEXP_STRING_FOR_BIRTHTOWN_PART_1 = "[A-Za-z]{1}";
+      let REGEXP_STRING_FOR_BIRTHTOWN_PART_2 = "[0-9LlMmNnPpQqRrSsTtUuVv]{3}";
+      let REGEXP_STRING_FOR_CIN = "[A-Za-z]{1}";
+      let REGEXP = new RegExp(
+        "^" +
+          REGEXP_STRING_FOR_LASTNAME +
+          REGEXP_STRING_FOR_FIRSTNAME +
+          REGEXP_STRING_FOR_BIRTHDATE_YEAR +
+          REGEXP_STRING_FOR_BIRTHDATE_MONTH +
+          REGEXP_STRING_FOR_BIRTHDATE_DAY_GENDER_PART_1 +
+          REGEXP_STRING_FOR_BIRTHDATE_DAY_GENDER_PART_2 +
+          REGEXP_STRING_FOR_BIRTHTOWN_PART_1 +
+          REGEXP_STRING_FOR_BIRTHTOWN_PART_2 +
+          REGEXP_STRING_FOR_CIN +
+          "$"
+      );
+      let codFisc = this.user.cf;
+      if (codFisc.length === 16 && REGEXP.test(codFisc)) {
+        this.codFiscOk = true;
+        this.codFiscMessage = null;
+      } else {
+        this.codFiscOk = false;
+        this.codFiscMessage = "Codice fiscale non valido";
+      }
+    },
+    reCheckCodFisc() {
+      if (this.codFiscOk === false) {
+        this.checkCodFisc();
+      }
+    },
+    searchByCognome() {
+      var params = new URLSearchParams();
+      params.append('cognome', this.cognome);
+      AXIOS.post(`/cercaByCognome`, params)
         .then(response => {
-          // JSON responses are automatically parsed.
           this.response = response.data;
+          this.user.nome = response.data.nome;
+          this.user.cognome = response.data.cognome;
+          this.user.cf = response.data.codFisc;
+          this.user.indirizzo = response.data.indirizzo;
+          this.user.nazione = response.data.nazione;
+          this.user.cap = response.data.cap;
+          this.user.citta = response.data.citta;
+          this.user.email = response.data.email;
+          this.user.email = response.data.mail1;
+          this.user.email2 = response.data.mail2;
+          this.user.fisso = response.data.numFisso;
+          this.user.cellulare = response.data.numCellulare;
+          this.user.note = response.data.campoNote;
+          let ruoloArray = response.data.ruolo.split(" ");
+          this.user.ruolo = ruoloArray;
           console.log(response.data);
         })
         .catch(e => {
@@ -271,9 +332,10 @@ export default {
   margin-bottom: auto;
   margin-top: auto;
   height: 60px;
-  background-color: #353b48;
+  background-color: #353b48c0;
   border-radius: 30px;
   padding: 10px;
+  color: white;
 }
 
 .search_input {
@@ -286,7 +348,12 @@ export default {
   line-height: 40px;
   transition: width 0.4s linear;
 }
-
+.searchbar > .search_input:focus {
+  background-color: transparent;
+}
+.searchbar > .search_input::placeholder {
+  color: rgb(199, 194, 194);
+}
 .searchbar > .search_input {
   padding: 0 10px;
   width: 450px;
@@ -295,8 +362,8 @@ export default {
 }
 
 .searchbar > .search_icon {
-  background: white;
-  color: #e74c3c;
+  background: rgba(255, 255, 255, 0.657);
+  color: #e74c3c !important;
 }
 
 .search_icon {
@@ -307,7 +374,7 @@ export default {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  color: white;
+  color: #e74c3c !important;;
 }
 
 .container {
@@ -347,44 +414,11 @@ hr {
     width: 100%;
   }
 }
-.ind {
-  margin: 5px 10px 22px 0;
-  width: 45%;
-  padding: 15px;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
-  outline: none;
-}
-.anagrafica {
-  margin: 5px 10px 22px 0;
-  width: 48%;
-  padding: 15px;
-  display: inline-block;
-  border: none;
-  border: none;
-  background: #f1f1f1;
-}
-.anagrafica:focus {
-  background-color: #ddd;
-  outline: none;
-}
-.numeri {
-  margin: 5px 10px 22px 0 !important;
-  width: 48% !important;
-  padding: 15px !important;
-  display: inline-block !important;
-  border: none !important;
-  border: none !important;
-  background: #f1f1f1 !important;
-}
-.numeri:focus {
-  background-color: #ddd;
-  outline: none;
-}
-input:focus {
-  background-color: #ddd;
-  outline: none;
+.notCorrect {
+  padding: 3px;
+  background: orangered;
+  color: #f1f1f1;
+  text-align: center;
 }
 </style>
 

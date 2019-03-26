@@ -35,23 +35,17 @@
             @click="closeAll()"
           >Visualizza bilancio</b-dropdown-item>
           <b-dropdown-item
-            onclick="document.getElementById('id07').style.display='block'"
-            style="width:auto;"
-            @click="closeAll()"
-            v-if="accesso === 'A' || accesso === 'B'"
-          >Rimuovi voce di bilancio</b-dropdown-item>
-          <b-dropdown-item
             onclick="document.getElementById('id08').style.display='block'"
             style="width:auto;"
             @click="closeAll()"
             v-if="accesso === 'A' || accesso === 'B'"
           >Inserisci voce in bilancio</b-dropdown-item>
           <b-dropdown-item
-            onclick="document.getElementById('id09').style.display='block'"
+            onclick="document.getElementById('id07').style.display='block'"
             style="width:auto;"
             @click="closeAll()"
             v-if="accesso === 'A' || accesso === 'B'"
-          >Inserisci importo bilancio</b-dropdown-item>
+          >Rimuovi voce di bilancio</b-dropdown-item>
         </b-dropdown>
 
         <b-dropdown
@@ -188,9 +182,6 @@
     <div id="id08" class="modal">
       <AggiungiVoceBilancio/>
     </div>
-    <div id="id09" class="modal">
-      <InserisciImportoBilancio/>
-    </div>
   </body>
 </div>
 </template>
@@ -203,7 +194,6 @@ import AggiornaUtente from "./AggiornaUtente";
 import ListaSoci from "./ListaSoci";
 import VisualizzaBilancio from "./VisualizzaBilancio";
 import AggiungiVoceBilancio from "./AggiungiVoceBilancio";
-import InserisciImportoBilancio from "./InserisciImportoBilancio";
 import RimuoviVoce from "./RimuoviVoce";
 export default {
   name: "service",
@@ -219,10 +209,9 @@ export default {
       modal: "id05",
       modal: "id07",
       modal: "id08",
-      modal: "id09",
       accesso: null,
       adminTrue: false,
-      all: ["id01", "id02", "id03", "id04", "id05", "id07", "id08", "id09"]
+      all: ["id01", "id02", "id03", "id04", "id05", "id07", "id08"]
     };
   },
   created() {
@@ -235,7 +224,6 @@ export default {
     ListaSoci,
     VisualizzaBilancio,
     AggiungiVoceBilancio,
-    InserisciImportoBilancio,
     RimuoviVoce
   },
   methods: {
@@ -477,7 +465,7 @@ button:hover {
 .funkyradio input[type="checkbox"]:empty ~ label {
   position: relative;
   line-height: 2.5em;
-  text-indent: 3.25em;
+  text-indent: 45px;
   margin-top: 4px;
   cursor: pointer;
   -webkit-user-select: none;
