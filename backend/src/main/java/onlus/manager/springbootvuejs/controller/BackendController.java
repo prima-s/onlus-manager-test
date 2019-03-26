@@ -165,4 +165,10 @@ public class BackendController {
         return voci;
     }
 
+    @RequestMapping(path="/cercaByCognome", method = RequestMethod.POST)
+    public @ResponseBody
+    Socio getSocioByCognome(@RequestParam String cognome) {
+        return socioService.getSocio(cognome);
+    }
+
 }
