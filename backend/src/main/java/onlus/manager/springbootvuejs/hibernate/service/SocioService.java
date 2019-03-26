@@ -16,7 +16,7 @@ public interface SocioService {
     List<Socio> getAllSoci();
     void salvaListaSoci();
     void visualizzaFileLog();
-    Socio getSocio(Integer id);
+    Socio getSocio(String cognome);
     void inviaMailAmministratore(String indirizzoMail);
     void ModificaOpzioniApplicazione();
 }

@@ -37,8 +37,9 @@ public class SocioServiceImpl implements SocioService {
     }
 
     @Override
-    public Socio getSocio(Integer id) {
-        return socioRepository.getOne(id);
+    public Socio getSocio(String cognome) {
+        //return socioRepository.getOne(id);
+        return socioRepository.findByCognome(cognome);
     }
 
     @Override
