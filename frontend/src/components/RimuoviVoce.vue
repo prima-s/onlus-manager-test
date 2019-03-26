@@ -2,7 +2,7 @@
   <form class="modal-content" action>
     <span @click="closeAll()" class="close" title="Close Modal">&times;</span>
     <div class="container">
-      <h1>Rimuovi Voce</h1>
+      <h1>Rimuovi Voce Bilancio</h1>
       <hr>
       <br>
       <label for="nome">
