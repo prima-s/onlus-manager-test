@@ -22,7 +22,8 @@
       </div>
       <div class="row" id="listaVoci">
         <div class="col-md-8">
-          <h4 class="text-center">Bilancio per l'anno {{annoCorrente}}</h4>
+          <h4 :class="{'text-center consolidato' : consolidato, 'text-center provvisorio' : !consolidato}">Bilancio per l'anno {{annoCorrente}}
+          </h4>
         </div>
         <div class="col-md-4">
           <h4>{{bilancio}} €</h4>
@@ -100,9 +101,9 @@ export default {
       bilancioTotale: 0,
       totaleTrue: false,
       annoCorrente: 2018,
-      success: false,
-      minAnno: 2010,
-      maxAnno: 2019,
+      consolidato: true,
+      minAnno: 2014,
+      maxAnno: new Date().getFullYear(),
       voci: [],
       fields: [
         {
@@ -130,7 +131,6 @@ export default {
     params.append("anno", this.annoCorrente);
     AXIOS.post(`/bilancio`, params)
       .then(response => {
-        // JSON responses are automatically parsed.
         this.bilancio = response.data;
         console.log(response.data);
       })
@@ -138,12 +138,18 @@ export default {
         this.errors.push(e);
       });
   },
+  updated() {
+    if (this.annoCorrente == this.maxAnno) {
+        this.consolidato = false;
+      } else {
+        this.consolidato = true;
+      }
+  },
   beforeMount() {
     var params = new URLSearchParams();
     params.append("anno", this.annoCorrente);
     AXIOS.post(`/vociBilancioAnnuale`, params)
       .then(response => {
-        // JSON responses are automatically parsed.
         this.voci = response.data;
         console.log(response.data);
       })
@@ -153,7 +159,6 @@ export default {
   },
   watch: {
     annoCorrente(value) {
-      //var instance = this;
       var params = new URLSearchParams();
       params.append("anno", this.annoCorrente);
       AXIOS.post(`/vociBilancioAnnuale`, params)
@@ -175,7 +180,6 @@ export default {
     showBilancioTotale() {
       AXIOS.get(`/bilancioTotale`)
         .then(response => {
-          // JSON responses are automatically parsed.
           this.bilancioTotale = response.data;
           this.totaleTrue = true;
           console.log(response.data);
@@ -189,7 +193,6 @@ export default {
       params.append("anno", this.annoCorrente);
       AXIOS.post(`/bilancio`, params)
         .then(response => {
-          // JSON responses are automatically parsed.
           this.bilancio = response.data;
           console.log(response.data);
         })
@@ -302,15 +305,6 @@ hr {
   }
 }
 
-.testo {
-  width: 40%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
-}
-
 /* Add a background color when the inputs get focus */
 .testo:focus {
   background-color: #ddd;
@@ -325,5 +319,24 @@ hr {
 }
 .custom-range {
   height: 0;
+}
+.consolidato::after, .provvisorio::after {
+  position: absolute;
+  color: white;
+  padding: 5px;
+  border: 1px solid whitesmoke;
+  border-radius: 15px;
+  font-size: 14px;
+  top: 1px;
+  margin-left: 5px;
+}
+.consolidato::after {
+  content: "Approvato";
+  background-color: #74bd76;
+}
+.provvisorio::after {
+  content: "Provvisorio";
+  background-color: #be4f5e;
+  opacity: .7;
 }
 </style>
