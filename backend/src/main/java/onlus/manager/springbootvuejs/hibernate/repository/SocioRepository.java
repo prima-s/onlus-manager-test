@@ -7,4 +7,5 @@ import onlus.manager.springbootvuejs.hibernate.domain.Socio;
 
 @Repository
 public interface SocioRepository extends JpaRepository<Socio, Integer> {
+    Socio findByCognome(String cognome);
 }
