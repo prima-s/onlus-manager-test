@@ -64,7 +64,9 @@
         </div>
       </div>
     </div>
+    <p class="note">Il corretto funzionamento di questa applicazione web in tutte le sue funzionalità è garantito utilizzando il browser Chrome</p>
   </div>
+  
 </body>
 </template>
 
@@ -313,5 +315,16 @@ h5 {
   color: white;
   box-shadow: 0 1px 0 #cfcfcf;
   min-height: 450px;
+}
+
+.note {
+  font-size: 12px;
+  color: white;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  background: #575757ad;
+  width: 100%;
+  left: 0;
 }
 </style>

@@ -159,6 +159,9 @@
       </div>
     </form>
   </div>
+  <div class="bg" v-else>
+
+  </div>
 
   <body>
     <div id="id01" class="modal">
@@ -275,6 +278,7 @@ export default {
 .flex-nav {
   display: flex;
   justify-content: center;
+  max-height: 5em !important;
 }
 
 .test > .btn-group > .dropdown-menu:active {
@@ -314,6 +318,18 @@ a {
   box-sizing: border-box;
 }
 
+.bg {
+  height: 100vh;
+  width: 100% !important;
+  background-image: url(../assets/hands.jpg) !important;
+  transform: scale(1.17);
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: .2;
+  margin-top: 8vh;
+  padding: 0;
+}
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -502,17 +518,4 @@ button:hover {
   box-shadow: 0 0 0 3px #999;
 }
 
-.testo,
-input[type="password"],
-textarea[type="text"] {
-  padding: 15px;
-  background: #f1f1f1;
-}
-/* Add a background color when the inputs get focus */
-.testo:focus,
-input[type="password"]:focus,
-textarea[type="text"]:focus {
-  background-color: #ddd;
-  outline: none;
-}
 </style>
