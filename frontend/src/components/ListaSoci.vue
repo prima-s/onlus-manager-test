@@ -29,7 +29,10 @@
 </template>
 <script scoped>
 import { AXIOS } from "./http-common";
+import { closeMixin } from "./close-mixin";
+
 export default {
+  mixins: [closeMixin],
   data() {
     return {
       response: [],
@@ -64,15 +67,6 @@ export default {
       });
   },
   methods: {
-    closeAll() {
-      for (
-        var i = 0;
-        i < document.getElementsByClassName("modal").length;
-        i++
-      ) {
-        document.getElementsByClassName("modal")[i].style.display = "none";
-      }
-    },
     createPDF() {
       var doc = new jsPDF();
       let pdfName = "Lista Soci";

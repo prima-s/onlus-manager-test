@@ -191,6 +191,8 @@
 
 <script>
 import { AXIOS } from "./http-common";
+//import {closeMixin} from "./close-mixin";
+
 import RegistraUtente from "./RegistraUtente";
 import CambiaPassword from "./CambiaPassword";
 import AggiornaUtente from "./AggiornaUtente";
@@ -200,7 +202,7 @@ import AggiungiVoceBilancio from "./AggiungiVoceBilancio";
 import RimuoviVoce from "./RimuoviVoce";
 export default {
   name: "service",
-
+  //mixins: [closeMixin],
   data() {
     return {
       response: [],
@@ -229,16 +231,7 @@ export default {
     AggiungiVoceBilancio,
     RimuoviVoce
   },
-  methods: {
-    closeAll() {
-      for (
-        var i = 0;
-        i < document.getElementsByClassName("modal").length;
-        i++
-      ) {
-        document.getElementsByClassName("modal")[i].style.display = "none";
-      }
-    },
+   methods: {
     logout() {
       this.accesso = null;
       window.location.href = "/#/";

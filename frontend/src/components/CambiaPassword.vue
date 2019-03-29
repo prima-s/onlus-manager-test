@@ -78,7 +78,10 @@
 
 <script>
 import { AXIOS } from "./http-common";
+import { closeMixin } from "./close-mixin";
+
 export default {
+  mixins: [closeMixin],
   data() {
     return {
       response: [],
@@ -92,15 +95,6 @@ export default {
   },
 
   methods: {
-    closeAll() {
-      for (
-        var i = 0;
-        i < document.getElementsByClassName("modal").length;
-        i++
-      ) {
-        document.getElementsByClassName("modal")[i].style.display = "none";
-      }
-    },
     checkPasswordMatching() {
       if (
         this.newPassword !== this.repeatPassword ||
@@ -209,9 +203,6 @@ hr {
 .numeri:focus {
   background-color: #ddd;
   outline: none;
-}
-input[name="CF"] {
-  width: 50% !important;
 }
 </style>
 

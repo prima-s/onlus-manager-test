@@ -52,8 +52,6 @@
           <br>
           <input
             type="number"
-            class="testo"
-            placeholder="Importo"
             step="0.01"
             name="importo"
             v-model="voce.importoVoce"
@@ -61,19 +59,20 @@
           >
         </div>
       </div>
-
+  <br>
       <label for="note" style="padding-right:20px;">
         <b>Note</b>
       </label>
       <br>
       <textarea
         style="width:100%"
-        class="testo"
+        class="form-control"
         placeholder="Campo note"
         name="note"
         v-model="voce.noteVoce"
       ></textarea>
     </div>
+    <br>
     <div class="row">
       <div class="col-md-6">
         <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
@@ -92,7 +91,11 @@
 
 <script>
 import { AXIOS } from "./http-common";
+import { closeMixin } from "./close-mixin";
+import { filterVociMixin } from "./filterVociMixin";
+
 export default {
+  mixins: [closeMixin, filterVociMixin],
   data() {
     return {
       response: [],
@@ -105,48 +108,9 @@ export default {
       },
       importOk: false,
       success: false,
-      selected: "",
-      results: this.fetchedResults,
-      fetchedResults: [],
-      isOpen: false
     };
   },
-  created() {
-    AXIOS.get(`/voci`)
-      .then(response => {
-        this.fetchedResults = response.data;
-        console.log("created");
-      })
-      .catch(e => {
-        this.errors.push(e);
-      });
-  },
-  computed: {
-    filteredVoci() {
-      let filter = new RegExp(this.voce.nomeVoce, "i");
-      return this.fetchedResults.filter(el => el.match(filter));
-    }
-  },
-  methods: {
-    onChange() {
-      this.isOpen = true;
-      if (this.filteredVoci.length < 1) {
-        this.isOpen = false;
-      }
-    },
-    setResult(result) {
-      this.voce.nomeVoce = result;
-      this.isOpen = false;
-    },
-    closeAll() {
-      for (
-        var i = 0;
-        i < document.getElementsByClassName("modal").length;
-        i++
-      ) {
-        document.getElementsByClassName("modal")[i].style.display = "none";
-      }
-    },
+   methods: {
     checkImporto() {
       if (this.voce.importoVoce == 0 && this.importOk == false) {
         confirm(
@@ -171,16 +135,16 @@ export default {
         .catch(e => {
           this.errors.push(e);
         });
-    },
-    onclick: function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    },
-
-    mouseOver: function() {
-      this.active = !this.active;
     }
+    // onclick: function(event) {
+    //   if (event.target == modal) {
+    //     modal.style.display = "none";
+    //   }
+    // },
+
+    // mouseOver: function() {
+    //   this.active = !this.active;
+    // }
   }
 };
 </script>
@@ -207,21 +171,6 @@ hr {
   .signupbtn {
     width: 100%;
   }
-}
-
-.testo {
-  width: 100% !important;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
-}
-
-/* Add a background color when the inputs get focus */
-.testo:focus {
-  background-color: #ddd;
-  outline: none;
 }
 
 .autocomplete {

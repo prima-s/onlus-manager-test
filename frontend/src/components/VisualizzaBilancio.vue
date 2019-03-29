@@ -92,7 +92,10 @@
 
 <script>
 import { AXIOS } from "./http-common";
+import { closeMixin } from "./close-mixin";
+
 export default {
+  mixins: [closeMixin],
   data() {
     return {
       response: [],
@@ -199,15 +202,6 @@ export default {
         .catch(e => {
           this.errors.push(e);
         });
-    },
-    closeAll() {
-      for (
-        var i = 0;
-        i < document.getElementsByClassName("modal").length;
-        i++
-      ) {
-        document.getElementsByClassName("modal")[i].style.display = "none";
-      }
     },
     onclick: function(event) {
       if (event.target == modal) {

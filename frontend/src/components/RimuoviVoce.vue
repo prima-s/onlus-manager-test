@@ -10,7 +10,13 @@
       </label>
       <br>
       <div class="autocomplete">
-        <input type="text" v-model="nomeVoce" placeholder="Nome voce" @input="onChange()" required>
+        <input
+          type="text"
+          v-model="voce.nomeVoce"
+          placeholder="Nome voce"
+          @input="onChange()"
+          required
+        >
         <ul v-show="isOpen" class="autocomplete-results">
           <li
             v-for="(result, i) in filteredVoci"
@@ -37,61 +43,27 @@
 
 <script scoped>
 import { AXIOS } from "./http-common";
+import { closeMixin } from "./close-mixin";
+import { filterVociMixin } from "./filterVociMixin";
+
 export default {
+  mixins: [closeMixin, filterVociMixin],
   data() {
     return {
       response: [],
       errors: [],
-      nomeVoce: "",
-      results: this.fetchedResults,
-      fetchedResults: [],
-      isOpen: false
+      voce: {
+        nomeVoce: ""
+      }
     };
   },
-  created() {
-    AXIOS.get(`/voci`)
-      .then(response => {
-        this.fetchedResults = response.data;
-      })
-      .catch(e => {
-        this.errors.push(e);
-      });
-  },
-  computed: {
-    filteredVoci() {
-      let filter = new RegExp(this.nomeVoce, "i");
-      return this.fetchedResults.filter(el => el.match(filter));
-    }
-  },
   methods: {
-    onChange() {
-      this.isOpen = true;
-      if (this.filteredVoci.length < 1) {
-        this.isOpen = false;
-      }
-    },
-    setResult(result) {
-      this.nomeVoce = result;
-      this.isOpen = false;
-    },
-    closeAll() {
-      for (
-        var i = 0;
-        i < document.getElementsByClassName("modal").length;
-        i++
-      ) {
-        document.getElementsByClassName("modal")[i].style.display = "none";
-      }
-    },
-
-    // Fetches posts when the component is created.
     rimuoviVoce() {
       var params = new URLSearchParams();
-      params.append("voce", this.nomeVoce);
+      params.append("voce", this.voce.nomeVoce);
 
       AXIOS.post(`/rimuoviVoce`, params)
         .then(response => {
-          // JSON responses are automatically parsed.
           this.response = response.data;
           console.log(response.data);
         })
@@ -104,8 +76,6 @@ export default {
 </script>
 
 <style>
-/* Set a style for all buttons */
-
 button {
   background-color: #4caf50;
   color: white;
@@ -153,21 +123,6 @@ hr {
   .signupbtn {
     width: 100%;
   }
-}
-
-.testo {
-  width: 100% !important;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
-}
-
-/* Add a background color when the inputs get focus */
-.testo:focus {
-  background-color: #ddd;
-  outline: none;
 }
 
 .autocomplete {

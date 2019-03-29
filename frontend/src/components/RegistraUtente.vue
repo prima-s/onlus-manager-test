@@ -137,23 +137,23 @@
       </label>
       <div class="row">
         <div class="col-md-6">
-        <input
-          type="email"
-          v-model="user.email"
-          class="anagrafica"
-          placeholder="primaEmail@ccc.com"
-          name="email"
-          required
-        >
+          <input
+            type="email"
+            v-model="user.email"
+            class="anagrafica"
+            placeholder="primaEmail@ccc.com"
+            name="email"
+            required
+          >
         </div>
-         <div class="col-md-6">
-        <input
-          type="email"
-          v-model="user.email2"
-          class="anagrafica"
-          placeholder="secondaEmail@ccc.com"
-          name="email2"
-        >
+        <div class="col-md-6">
+          <input
+            type="email"
+            v-model="user.email2"
+            class="anagrafica"
+            placeholder="secondaEmail@ccc.com"
+            name="email2"
+          >
         </div>
       </div>
       <br>
@@ -161,25 +161,25 @@
         <b>Numeri di Telefono</b>
       </label>
       <div class="row">
-         <div class="col-md-6">
-        <input
-          type="text"
-          v-model="user.fisso"
-          class="anagrafica"
-          placeholder="Numero Fisso"
-          name="fisso"
-        >
-         </div>
-          <div class="col-md-6">
-        <input
-          type="text"
-          v-model="user.cellulare"
-          class="anagrafica"
-          placeholder="Numero cellulare*"
-          name="cellulare"
-          required
-        >
-          </div>
+        <div class="col-md-6">
+          <input
+            type="text"
+            v-model="user.fisso"
+            class="anagrafica"
+            placeholder="Numero Fisso"
+            name="fisso"
+          >
+        </div>
+        <div class="col-md-6">
+          <input
+            type="text"
+            v-model="user.cellulare"
+            class="anagrafica"
+            placeholder="Numero cellulare*"
+            name="cellulare"
+            required
+          >
+        </div>
       </div>
       <hr>
       <label>
@@ -210,9 +210,12 @@
 
 <script>
 import { AXIOS } from "./http-common";
+import { closeMixin } from "./close-mixin";
+import { checkCodFisc } from "./checkCodFiscMixin";
+
 export default {
   name: "user",
-
+  mixins: [closeMixin, checkCodFisc],
   data() {
     return {
       response: [],
@@ -232,63 +235,12 @@ export default {
         note: "",
         Ruolo: []
       },
-      codFiscOk: null,
-      codFiscMessage: null,
       showResponse: false,
       retrievedUser: {},
       showRetrievedUser: false
     };
   },
   methods: {
-    closeAll() {
-      for (
-        var i = 0;
-        i < document.getElementsByClassName("modal").length;
-        i++
-      ) {
-        document.getElementsByClassName("modal")[i].style.display = "none";
-      }
-    },
-    checkCodFisc() {
-      let TAX_CODE_LENGTH = 16;
-      let REGEXP_STRING_FOR_LASTNAME = "[A-Za-z]{3}";
-      let REGEXP_STRING_FOR_FIRSTNAME = "[A-Za-z]{3}";
-      let REGEXP_STRING_FOR_BIRTHDATE_YEAR = "[0-9LlMmNnPpQqRrSsTtUuVv]{2}";
-      let REGEXP_STRING_FOR_BIRTHDATE_MONTH = "[AaBbCcDdEeHhLlMmPpRrSsTt]{1}";
-      let REGEXP_STRING_FOR_BIRTHDATE_DAY_GENDER_PART_1 =
-        "[0-7LlMmNnPpQqRrSsTtUuVv]{1}";
-      let REGEXP_STRING_FOR_BIRTHDATE_DAY_GENDER_PART_2 =
-        "[0-9LlMmNnPpQqRrSsTtUuVv]{1}";
-      let REGEXP_STRING_FOR_BIRTHTOWN_PART_1 = "[A-Za-z]{1}";
-      let REGEXP_STRING_FOR_BIRTHTOWN_PART_2 = "[0-9LlMmNnPpQqRrSsTtUuVv]{3}";
-      let REGEXP_STRING_FOR_CIN = "[A-Za-z]{1}";
-      let REGEXP = new RegExp(
-        "^" +
-          REGEXP_STRING_FOR_LASTNAME +
-          REGEXP_STRING_FOR_FIRSTNAME +
-          REGEXP_STRING_FOR_BIRTHDATE_YEAR +
-          REGEXP_STRING_FOR_BIRTHDATE_MONTH +
-          REGEXP_STRING_FOR_BIRTHDATE_DAY_GENDER_PART_1 +
-          REGEXP_STRING_FOR_BIRTHDATE_DAY_GENDER_PART_2 +
-          REGEXP_STRING_FOR_BIRTHTOWN_PART_1 +
-          REGEXP_STRING_FOR_BIRTHTOWN_PART_2 +
-          REGEXP_STRING_FOR_CIN +
-          "$"
-      );
-      let codFisc = this.user.cf;
-      if (codFisc.length === 16 && REGEXP.test(codFisc)) {
-        this.codFiscOk = true;
-        this.codFiscMessage = null;
-      } else {
-        this.codFiscOk = false;
-        this.codFiscMessage = "Codice fiscale non valido";
-      }
-    },
-    reCheckCodFisc() {
-      if (this.codFiscOk === false) {
-        this.checkCodFisc();
-      }
-    },
     createUser() {
       var params = new URLSearchParams();
       params.append("nome", this.user.nome);
