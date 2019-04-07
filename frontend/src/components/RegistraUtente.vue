@@ -1,5 +1,6 @@
 <template>
-  <form class="modal-content" action>
+<div class="modal-content">
+  <form action :class="{ '' : (!success && !error), 'opac' : (success || error) }">
     <span @click="closeAll()" class="close" title="Close Modal">&times;</span>
     <div class="container">
       <h1>Registra nuovo socio</h1>
@@ -201,10 +202,25 @@
         <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
       </div>
       <div class="col-md-6">
-        <button @click="createUser()" class="signupbtn btn-block">Registra</button>
+        <button @click.prevent="createUser()" class="signupbtn btn-block">Registra</button>
       </div>
     </div>
   </form>
+
+  <transition name="formSuccess">
+  <div v-if="success" class="row">
+      <div class="col-md-12 text-center no-height">
+      <i style="transform: translateY(-50vh);" class="fas fa-check-circle"></i>
+      </div>
+    </div>
+    <div v-if="error" class="row">
+      <div class="col-md-12 text-center no-height">
+      <i style="transform: translateY(-50vh);" class="fas fa-times"></i>
+      </div>
+    </div>
+</transition>
+
+</div>
 </template>
 
 
@@ -237,10 +253,27 @@ export default {
       },
       showResponse: false,
       retrievedUser: {},
-      showRetrievedUser: false
+      showRetrievedUser: false,
+      success: false,
+      error: false
     };
   },
   methods: {
+    resetData() {
+      this.user.nome = "";
+      this.user.cognome = "";
+      this.user.cf = "";
+      this.user.indirizzo = "";
+      this.user.nazione = "";
+      this.user.cap = "";
+      this.user.citta = "";
+      this.user.email = "";
+      this.user.email2 = "";
+      this.user.fisso = "";
+      this.user.cellulare = "";
+      this.user.note = "";
+      this.user.Ruolo = [];
+    },
     createUser() {
       var params = new URLSearchParams();
       params.append("nome", this.user.nome);
@@ -260,14 +293,15 @@ export default {
 
       AXIOS.post(`/person`, params)
         .then(response => {
-          //JSON responses are automatically parsed.
           this.response = response.data;
-          console.log(response.data);
-
           this.showResponse = true;
+          this.success = true;
+          this.responseAfterSubmit();
+          this.resetData();
         })
         .catch(e => {
           this.errors.push(e);
+          this.error = true;
         });
     }
   }

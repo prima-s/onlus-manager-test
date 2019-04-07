@@ -191,7 +191,7 @@
 
 <script>
 import { AXIOS } from "./http-common";
-//import {closeMixin} from "./close-mixin";
+import {closeMixin} from "./close-mixin";
 
 import RegistraUtente from "./RegistraUtente";
 import CambiaPassword from "./CambiaPassword";
@@ -202,7 +202,7 @@ import AggiungiVoceBilancio from "./AggiungiVoceBilancio";
 import RimuoviVoce from "./RimuoviVoce";
 export default {
   name: "service",
-  //mixins: [closeMixin],
+  mixins: [closeMixin],
   data() {
     return {
       response: [],
@@ -509,6 +509,57 @@ button:hover {
 .funkyradio input[type="radio"]:focus ~ label:before,
 .funkyradio input[type="checkbox"]:focus ~ label:before {
   box-shadow: 0 0 0 3px #999;
+}
+
+.fa-check-circle::before {
+  color: green;
+  font-size: 7em;
+}
+.fa-times::before {
+  color: red;
+  font-size: 7em;
+}
+.errorMessage {
+  color: red;
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.opac {
+  opacity: .5;
+}
+.no-height {
+  height: 0px;
+}
+.middle {
+  margin-top: 15vh;
+}
+.formSuccess-enter {
+  
+}
+.formSuccess-enter-active {
+  animation: success 2s ease-in-out;
+}
+.formSuccess-leave {
+
+}
+.formSuccess-leave-active {
+  
+}
+@keyframes success {
+  0% {
+    opacity: 0;
+    transform: scale(.8);
+  } 
+  50% {
+    opacity: .8;
+    transform:  scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform:  scale(1);
+  }
 }
 
 </style>

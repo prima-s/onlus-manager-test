@@ -1,78 +1,93 @@
 <template>
-  <form class="modal-content" action>
-    <span @click="closeAll()" class="close" title="Close Modal">&times;</span>
-    <div class="container">
-      <h1>Cambia password</h1>
-      <hr>
-      <div class="row">
-        <div class="col-md-6">
-          <label for="password">
-            <b>Vecchia password*</b>
-          </label>
-          <div style="width:100%">
+  <div class="modal-content">
+    <form action :class="{ '' : (!success && !error), 'opac' : (success || error) }">
+      <span @click="closeAll()" class="close" title="Close Modal">&times;</span>
+      <div class="container">
+        <h1>Cambia password</h1>
+        <hr>
+        <div class="row">
+          <div class="col-md-6">
+            <label for="password">
+              <b>Vecchia password*</b>
+            </label>
+            <div style="width:100%">
+              <input
+                type="password"
+                class="testo"
+                placeholder="xxxxxxOLDxxxxxxxx"
+                name="oldPass"
+                v-model="oldPassword"
+                required
+              >
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label for="password">
+              <b>Nuova password*</b>
+            </label>
+            <br>
             <input
               type="password"
-              class="testo"
-              placeholder="xxxxxxOLDxxxxxxxx"
-              name="oldPass"
-              v-model="oldPassword"
+              placeholder="xxxxxxNEWxxxxxxxx"
+              name="newPass"
+              v-model="newPassword"
               required
             >
           </div>
+          <div class="col-md-6">
+            <label for="password">
+              <b>Ripeti password*</b>
+            </label>
+            <br>
+            <input
+              type="password"
+              placeholder="xxxxxxNEWxxxxxxxx"
+              name="repeatPass"
+              v-model="repeatPassword"
+              @input="activeButton()"
+              @mouseleave="checkPasswordMatching()"
+              required
+            >
+            <p :class="{'notMatching' : message != null}">{{message}}</p>
+          </div>
         </div>
+        <br>
       </div>
+
       <div class="row">
         <div class="col-md-6">
-          <label for="password">
-            <b>Nuova password*</b>
-          </label>
-          <br>
-          <input
-            type="password"
-            placeholder="xxxxxxNEWxxxxxxxx"
-            name="newPass"
-            v-model="newPassword"
-            required
-          >
+          <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
         </div>
         <div class="col-md-6">
-          <label for="password">
-            <b>Ripeti password*</b>
-          </label>
-          <br>
-          <input
-            type="password"
-            placeholder="xxxxxxNEWxxxxxxxx"
-            name="repeatPass"
-            v-model="repeatPassword"
-            @input="activeButton()"
-            @mouseleave="checkPasswordMatching()"
-            required
-          >
-          <p :class="{'notMatching' : message != null}">{{message}}</p>
-        </div>
-      </div>
-      <br>
-
-  
-
-    </div>
-   
-    <div class="row">
-      <div class="col-md-6">
-      <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
-      </div>
-      <div class="col-md-6">
-      <button
+          <button
             type="submit"
-            @click="updatePassword()"
+            @click.prevent="updatePassword()"
             :class="{'signupbtn btn-block' : passwordOk, 'signupbtn disabled' : !passwordOk}"
             value="aggiorna"
             :disabled="passwordOk === false"
           >Aggiorna</button>
-			</div>
-</div>
-  </form>
+        </div>
+      </div>
+    </form>
+
+    <transition name="formSuccess">
+      <div v-if="response === true" class="row">
+        <div class="col-md-12 text-center no-height">
+          <i style="transform: translateY(-35vh);" class="fas fa-check-circle"></i>
+        </div>
+      </div>
+
+      <div v-if="response === false" class="row">
+        <div class="col-md-12 text-center no-height flex-col">
+          <i style="transform: translateY(-35vh);" class="fas fa-times">
+            <div class="errorMessage">{{errorMessage}}</div>
+            </i>
+        </div>
+      </div>
+    </transition>
+  </div>
 </template>
 
 
@@ -90,11 +105,19 @@ export default {
       newPassword: "",
       repeatPassword: "",
       message: null,
-      passwordOk: false
+      passwordOk: false,
+      success: null,
+      error: null,
+      errorMessage: null
     };
   },
 
   methods: {
+    resetData() {
+      this.oldPassword = "";
+      this.newPassword = "";
+      this.repeatPassword = "";
+    },
     checkPasswordMatching() {
       if (
         this.newPassword !== this.repeatPassword ||
@@ -115,23 +138,25 @@ export default {
         this.passwordOk = true;
       }
     },
-    updatePassword() {
+    updatePassword(e) {
       var params = new URLSearchParams();
       params.append("oldPassword", this.oldPassword);
       params.append("newPassword", this.newPassword);
       AXIOS.post(`/aggiornaPassword`, params)
         .then(response => {
           this.response = response.data;
-          console.log(response.data);
+          if (this.response === false) {
+            this.errorMessage =
+              "La password '" + this.oldPassword + "' non è stata trovata!";
+          }
+          this.success = true;
+          this.responseAfterSubmit();
+          this.resetData();
         })
         .catch(e => {
+          this.error = true;
           this.errors.push(e);
         });
-    },
-    onclick: function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
     }
   }
 };
@@ -174,7 +199,6 @@ hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
 }
-
 
 /* Clear floats */
 .clearfix::after {

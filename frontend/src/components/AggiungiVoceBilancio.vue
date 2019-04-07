@@ -1,5 +1,6 @@
 <template>
-  <form class="modal-content" action>
+<div class="modal-content">
+  <form action :class="{ '' : (!success && !error), 'opac' : (success || error) }">
     <span @click="closeAll()" class="close" title="Close Modal">&times;</span>
     <div class="container">
       <h1>Inserisci Voce Bilancio</h1>
@@ -81,12 +82,29 @@
         <button
           type="submit"
           @mouseenter="checkImporto()"
-          @click="inserisciVoce()"
+          @click.prevent="inserisciVoce()"
           class="signupbtn btn-block"
         >Inserisci</button>
       </div>
+  
     </div>
   </form>
+
+<transition name="formSuccess">
+  <div v-if="success" class="row">
+      <div class="col-md-12 text-center no-height">
+      <i style="transform: translateY(-50vh);" class="fas fa-check-circle"></i>
+      </div>
+    </div>
+    <div v-if="error" class="row">
+      <div class="col-md-12 text-center no-height">
+      <i style="transform: translateY(-50vh);" class="fas fa-times"></i>
+      </div>
+    </div>
+</transition>
+
+
+    </div>
 </template>
 
 <script>
@@ -108,9 +126,16 @@ export default {
       },
       importOk: false,
       success: false,
+      error: false
     };
   },
    methods: {
+     resetData() {
+       this.voce.nomeVoce = "";
+       this.voce.dataVoce = "";
+       this.voce.importoVoce = 0;
+       this.voce.noteVoce = "";
+     },
     checkImporto() {
       if (this.voce.importoVoce == 0 && this.importOk == false) {
         confirm(
@@ -127,24 +152,17 @@ export default {
       params.append("noteVoce", this.voce.noteVoce);
       AXIOS.post(`/inserisciVoce`, params)
         .then(response => {
-          // JSON responses are automatically parsed.
           this.response = response.data;
           console.log(response.data);
           this.success = true;
+          this.responseAfterSubmit();
+          this.resetData();
         })
         .catch(e => {
+          this.error = true;
           this.errors.push(e);
         });
     }
-    // onclick: function(event) {
-    //   if (event.target == modal) {
-    //     modal.style.display = "none";
-    //   }
-    // },
-
-    // mouseOver: function() {
-    //   this.active = !this.active;
-    // }
   }
 };
 </script>

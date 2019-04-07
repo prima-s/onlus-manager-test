@@ -1,5 +1,6 @@
 <template>
-  <form class="modal-content">
+<div class="modal-content">
+  <form action :class="{ '' : (!success && !error), 'opac' : (success || error) }">
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
@@ -199,10 +200,25 @@
         <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
       </div>
       <div class="col-md-6">
-        <button @click="createUser()" class="signupbtn btn-block">Registra</button>
+        <button @click.prevent="createUser()" class="signupbtn btn-block">Registra</button>
       </div>
     </div>
   </form>
+
+  <transition name="formSuccess">
+  <div v-if="success" class="row">
+      <div class="col-md-12 text-center no-height">
+      <i style="transform: translateY(-50vh);" class="fas fa-check-circle"></i>
+      </div>
+    </div>
+    <div v-if="error" class="row">
+      <div class="col-md-12 text-center no-height">
+      <i style="transform: translateY(-50vh);" class="fas fa-times"></i>
+      </div>
+    </div>
+</transition>
+
+</div>
 </template>
 <script>
 import { AXIOS } from "./http-common";
@@ -233,10 +249,27 @@ export default {
       },
       showResponse: false,
       retrievedUser: {},
-      showRetrievedUser: false
+      showRetrievedUser: false,
+      success: false,
+      error: false
     };
   },
   methods: {
+     resetData() {
+      this.user.nome = "";
+      this.user.cognome = "";
+      this.user.cf = "";
+      this.user.indirizzo = "";
+      this.user.nazione = "";
+      this.user.cap = "";
+      this.user.citta = "";
+      this.user.email = "";
+      this.user.email2 = "";
+      this.user.fisso = "";
+      this.user.cellulare = "";
+      this.user.note = "";
+      this.user.Ruolo = [];
+    },
     searchByCognome() {
       var params = new URLSearchParams();
       params.append('cognome', this.cognome);
@@ -262,6 +295,36 @@ export default {
         })
         .catch(e => {
           this.errors.push(e);
+        });
+    },
+        createUser() {
+      var params = new URLSearchParams();
+      params.append("nome", this.user.nome);
+      params.append("cognome", this.user.cognome);
+      params.append("cf", this.user.cf);
+      params.append("indirizzo", this.user.indirizzo);
+      params.append("nazione", this.user.nazione);
+      params.append("cap", this.user.cap);
+      params.append("citta", this.user.citta);
+      params.append("email", this.user.email);
+      params.append("email2", this.user.email2);
+      params.append("fisso", this.user.fisso);
+      params.append("cellulare", this.user.cellulare);
+      params.append("note", this.user.note);
+      params.append("Ruolo", this.user.Ruolo);
+      console.log(this.user.Ruolo);
+
+      AXIOS.post(`/person`, params)
+        .then(response => {
+          this.response = response.data;
+          this.showResponse = true;
+          this.success = true;
+          this.responseAfterSubmit();
+          this.resetData();
+        })
+        .catch(e => {
+          this.errors.push(e);
+          this.error = true;
         });
     }
   }

@@ -1,5 +1,6 @@
 <template>
-  <form class="modal-content" action>
+<div class="modal-content">
+  <form action :class="{ '' : (!success && !error), 'opac' : (success || error) }">
     <span @click="closeAll()" class="close" title="Close Modal">&times;</span>
     <div class="container">
       <h1>Rimuovi Voce Bilancio</h1>
@@ -35,10 +36,26 @@
         <button @click="closeAll()" class="cancelbtn btn-block">Annulla</button>
       </div>
       <div class="col-md-6">
-        <button type="submit" @click="rimuoviVoce()" class="signupbtn btn-block">Rimuovi</button>
+        <button type="submit" @click.prevent="rimuoviVoce()" class="signupbtn btn-block">Rimuovi</button>
       </div>
     </div>
   </form>
+
+  <transition name="formSuccess">
+  <div v-if="success" class="row">
+      <div class="col-md-12 text-center no-height">
+      <i style="transform: translateY(-35vh);" class="fas fa-check-circle"></i>
+      </div>
+    </div>
+    <div v-if="error" class="row">
+      <div class="col-md-12 text-center no-height">
+      <i style="transform: translateY(-35vh);" class="fas fa-times"></i>
+      </div>
+    </div>
+</transition>
+
+
+    </div>
 </template>
 
 <script scoped>
@@ -54,10 +71,15 @@ export default {
       errors: [],
       voce: {
         nomeVoce: ""
-      }
+      },
+      success: false,
+      error: false
     };
   },
   methods: {
+    resetData() {
+       this.voce.nomeVoce = "";
+     },
     rimuoviVoce() {
       var params = new URLSearchParams();
       params.append("voce", this.voce.nomeVoce);
@@ -65,9 +87,12 @@ export default {
       AXIOS.post(`/rimuoviVoce`, params)
         .then(response => {
           this.response = response.data;
-          console.log(response.data);
+          this.success = true;
+          this.responseAfterSubmit();
+          this.resetData();
         })
         .catch(e => {
+          this.error = true;
           this.errors.push(e);
         });
     }
