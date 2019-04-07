@@ -132,19 +132,6 @@ public class BackendController {
         }
     }
 
-    @RequestMapping(path="/inserisciBilancio", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.OK)
-    public void inserisciBilancio(@RequestParam Integer importo) {
-        BigDecimal bil = getBilancio();
-        BigDecimal imp = new BigDecimal(importo);
-        LOG.info("Inserito nuovo bilancio con importo pari a " + imp );
-        bilancioService.modificaBilancio(imp);
-        //TODO
-        // creare una call al controller dalla vue di inserisciBilancio che passi
-        // anche la data
-        // poi nel bilancio se questa data esiste si calcolerà la somma delle voci solo da tale data
-    }
-
     @RequestMapping(path="/bilancioTotale", method = RequestMethod.GET)
     public @ResponseBody
     BigDecimal getBilancio() {
