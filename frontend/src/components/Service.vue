@@ -1,9 +1,16 @@
 <template>
 <div class="servicemy">
   <div class="row">
-    <div class="col-md-11 p-0">
-      <b-nav id="nav" class="flex-nav">
-        <b-dropdown offset="25" text="Modifica Account" class="m-2 ddown-offset">
+    <div class="col-md-12 p-0">
+      <div>
+        <b-navbar toggleable="lg" type="dark" variant="info">
+          <b-navbar-brand class="ml-1 logo" href="#">Onlus App</b-navbar-brand>
+
+          <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+          <b-collapse id="nav-collapse" is-nav>
+            <b-navbar-nav class="m-auto">
+               <b-dropdown offset="25" text="Modifica Account" class="m-2 ddown-offset">
           <b-dropdown-item
             onclick="document.getElementById('id01').style.display='block'"
             style="width:auto;"
@@ -28,7 +35,7 @@
           >Visualizza lista dei soci</b-dropdown-item>
         </b-dropdown>
 
-        <b-dropdown offset="25" text="Gestione bilancio" class="m-2 button ddown-offset">
+         <b-dropdown offset="25" text="Gestione bilancio" class="m-2 button ddown-offset">
           <b-dropdown-item
             onclick="document.getElementById('id05').style.display='block'"
             style="width:auto;"
@@ -63,16 +70,22 @@
           @click="openLog()"
           v-if="accesso === 'A' || accesso === 'B'"
         ></b-dropdown>
-      </b-nav>
-    </div>
-    <div class="col-md-1 p-0">
-      <button
-        offset="25"
-        text="Logout"
-        variant="btn-block"
-        class="logout btn-block"
-        @click="logout()"
-      >Logout</button>
+
+            
+            </b-navbar-nav>
+
+            <b-navbar-nav class="ml-auto">
+              <button
+                offset="25"
+                text="Logout"
+                variant="btn-block"
+                class="logout btn-block"
+                @click="logout()"
+              >Logout</button>
+            </b-navbar-nav>
+          </b-collapse>
+        </b-navbar>
+      </div>
     </div>
   </div>
 
@@ -82,7 +95,7 @@
         <span @click="closeAdmin()" class="close" title="Close Modal">&times;</span>
         <h1>Area Amministratore</h1>
         <hr>
-        
+
         <div class="row">
           <div class="col-md-6">
             <label for="nome">
@@ -101,12 +114,7 @@
               <b>Aggiungi ruolo</b>
             </label>
             <br>
-            <input
-              type="text"
-              class="testo anagrafica"
-              placeholder="Aggiungi ruolo"
-              name="cognome"
-            >
+            <input type="text" class="testo anagrafica" placeholder="Aggiungi ruolo" name="cognome">
           </div>
         </div>
 
@@ -141,13 +149,7 @@
           <b>Inserisci Logo</b>
         </label>
         <div style="width:100%">
-          <input
-            type="Upload"
-            class="ind"
-            placeholder="Inserisci logo"
-            name="logo"
-          >
-      
+          <input type="Upload" class="ind" placeholder="Inserisci logo" name="logo">
         </div>
 
         <hr>
@@ -159,9 +161,7 @@
       </div>
     </form>
   </div>
-  <div class="bg" v-else>
-
-  </div>
+  <div class="bg" v-else></div>
 
   <body>
     <div id="id01" class="modal">
@@ -191,7 +191,7 @@
 
 <script>
 import { AXIOS } from "./http-common";
-import {closeMixin} from "./close-mixin";
+import { closeMixin } from "./close-mixin";
 
 import RegistraUtente from "./RegistraUtente";
 import CambiaPassword from "./CambiaPassword";
@@ -231,7 +231,7 @@ export default {
     AggiungiVoceBilancio,
     RimuoviVoce
   },
-   methods: {
+  methods: {
     logout() {
       this.accesso = null;
       window.location.href = "/#/";
@@ -319,7 +319,7 @@ a {
   background-position: top;
   background-repeat: no-repeat;
   background-size: cover;
-  opacity: .2;
+  opacity: 0.2;
   margin-top: 8vh;
   padding: 0;
 }
@@ -354,16 +354,30 @@ button:focus {
   background: rgb(100, 99, 99) !important;
   color: #fefefe !important;
   height: 100% !important;
-  padding: 0 !important;
   font-weight: 700;
+  height: 100px !important;
 }
 .logout:hover {
   background: rgba(80, 80, 80, 0.637) !important;
   color: white !important;
 }
 
-.nav {
-  background: #6ca78c;
+.logo {
+  background-image: url(../assets/logo1.png);
+  transform: scale(2);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  color: transparent !important;
+}
+.navbar {
+  padding: 0 1rem;
+  background: #42b983 !important;
+}
+.navbar-toggler {
+  width: 100px;
+  padding-top: 2rem;
+  padding-bottom: 3rem;
 }
 /* The Close Button (x) */
 .close {
@@ -389,7 +403,6 @@ button:focus {
   color: #fff;
   background-color: #1800f19b;
 }
-
 </style>
 
 
@@ -527,7 +540,7 @@ button:hover {
   flex-direction: column;
 }
 .opac {
-  opacity: .5;
+  opacity: 0.5;
 }
 .no-height {
   height: 0px;
@@ -536,30 +549,26 @@ button:hover {
   margin-top: 15vh;
 }
 .formSuccess-enter {
-  
 }
 .formSuccess-enter-active {
   animation: success 2s ease-in-out;
 }
 .formSuccess-leave {
-
 }
 .formSuccess-leave-active {
-  
 }
 @keyframes success {
   0% {
     opacity: 0;
-    transform: scale(.8);
-  } 
+    transform: scale(0.8);
+  }
   50% {
-    opacity: .8;
-    transform:  scale(1.2);
+    opacity: 0.8;
+    transform: scale(1.2);
   }
   100% {
     opacity: 1;
-    transform:  scale(1);
+    transform: scale(1);
   }
 }
-
 </style>
