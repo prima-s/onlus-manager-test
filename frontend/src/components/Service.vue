@@ -571,4 +571,14 @@ button:hover {
     transform: scale(1);
   }
 }
+
+@media screen and (max-width: 769px) {
+  .cancelbtn {
+    border-top-right-radius: 0 !important;
+  }
+  .signupbtn {
+    border-top-left-radius: 0 !important;
+  }
+  
+}
 </style>
